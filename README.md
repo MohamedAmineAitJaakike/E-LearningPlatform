@@ -9,16 +9,16 @@ Ce projet GitHub contient le code source et les ressources nécessaires pour la 
 -**Gestion des Comptes** : Les utilisateurs peuvent modifier leurs profils et demander la suppression de leur compte à l'administrateur. Seul l'administrateur peut supprimer les comptes après avoir examiné la demande.
 -**Tableaux de Bord** : Des tableaux de bord sont disponibles pour l'administrateur, les professeurs et les étudiants, offrant une vue d'ensemble des personnes inscrites et des cours suivis.
 ## Technologies Utilisées :
- -**Langages** :  PHP, HTML, CSS, JavaScript 
- -**Base de Données**  : MySQL
- -**Port Utilisé pour la Base de Données** : 3308
+ - **Langages** :  PHP, HTML, CSS, JavaScript 
+ - **Base de Données**  : MySQL
+ - **Port Utilisé pour la Base de Données** : 3308
 ## Contribution :
 - Nous accueillons les contributions sous forme de suggestions d'amélioration, de rapports de bogues et de demandes de fonctionnalités. Pour contribuer, veuillez créer une branche depuis la branche principale, puis ouvrir une demande de fusion une fois les modifications terminées.
 
 ## Contributeurs :
--**AIT JAAKIKE MOHAMED AMINE**
--**BARHROUJ SAAD**
--**DEMBELE MOUSSA**
--**ANDRIAMIHANTA HERINIAVO FALY AIMERIC**
--**DAHMAN SALMA**
+- **AIT JAAKIKE MOHAMED AMINE**
+- **BARHROUJ SAAD**
+- **DEMBELE MOUSSA**
+- **ANDRIAMIHANTA HERINIAVO FALY AIMERIC**
+- **DAHMAN SALMA**
 
