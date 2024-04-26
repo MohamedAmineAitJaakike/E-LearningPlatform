@@ -3,7 +3,7 @@
 $localhost='localhost';
 $username='root';
 $password='';
-$db_name='platform';
+$db_name='my_platform';
 $db=mysqli_connect($localhost,$username,$password,$db_name);
 if(!$db){
    echo 'error in db connection:'.mysqli_connect_error();
@@ -13,7 +13,7 @@ if(!$_SESSION['name']){
     header('Location: login.php');
  }
  //get all cours from db
- $sql="SELECT * FROM cours ";
+ $sql="SELECT * FROM cours INNER JOIN users WHERE cours.userID=users.userID ";
  $query=mysqli_query($db,$sql);
  $cours=mysqli_fetch_all($query);
  //logout from home etudiant
@@ -33,7 +33,7 @@ if (isset($_GET['out']) && $_SERVER['REQUEST_METHOD']==='GET') {
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
@@ -95,7 +95,7 @@ if (isset($_GET['out']) && $_SERVER['REQUEST_METHOD']==='GET') {
         <div class="box">
     <div class="course-item">
          <div class="course-item-image">
-              <img src="./images/pic-1.jpg" width='100' alt="">
+              <img src="./users_images/<?php echo $cour[8] ?>" width='100' alt="">
          </div>
          <div class="course-item-text">
              <div class="cour-infos">
@@ -107,7 +107,7 @@ if (isset($_GET['out']) && $_SERVER['REQUEST_METHOD']==='GET') {
                  </div>
              </div>
              <div class="cour-prof">
-                <h4 class="prof-nom">pr.jourani</h4>
+                <h4 class="prof-nom"><?php echo $cour[5] ?></h4>
              </div>
          </div>
       </div>

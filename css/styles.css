@@ -4,11 +4,11 @@
    --main-color: #fc8021;
    --red: #e74c3c;
    --orange: #f39c12;
-   --light-color: #F0EBE3;
-   --light-bg: #F6F5F2;
+   --light-color: #93E1F0 ;
+   --light-bg: #93E1F0; 
    --black: #2c3e50;
    --under-black: #4f535793;
-   --white: #ffffff;
+   --white:  #CEF1F9;
    --border: .1rem solid rgba(0, 0, 0, .2);
 }
 
@@ -476,8 +476,9 @@ section {
 .course-item {
    display: flex;
    gap: 10px;
-   padding: 10px 6px;
+   padding: 10px 16px;
    background-color:var(--white);
+   border-radius: 7px;
 }
 
 .course-item-image {
