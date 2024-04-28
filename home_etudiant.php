@@ -1,151 +1,70 @@
 <?php
-//for connect
-$localhost='localhost';
-$username='root';
-$password='';
-$db_name='my_platform';
-$db=mysqli_connect($localhost,$username,$password,$db_name);
-if(!$db){
-   echo 'error in db connection:'.mysqli_connect_error();
-}
-session_start();
-if(!$_SESSION['name']){
+include('./includes/connection.inc.php');
+include('./includes/fn.inc.php');
+require_once'./includes/header.inc.php';
+include('./includes/side_profile.inc.php');
+if(session_status() === PHP_SESSION_NONE) session_start(); 
+if(!$_SESSION['userID']){
     header('Location: login.php');
- }
- //get all cours from db
- $sql="SELECT * FROM cours INNER JOIN users WHERE cours.userID=users.userID ";
- $query=mysqli_query($db,$sql);
- $cours=mysqli_fetch_all($query);
- //logout from home etudiant
-   //for logout system
-if (isset($_GET['out']) && $_SERVER['REQUEST_METHOD']==='GET') {
-      session_unset();
-      header('location: login.php');
- }
+}
+
+// Récupérer les cours depuis la base de données
+$sql = "SELECT module.titre AS titre_cours, utilisateurs.nom AS nom_proprietaire
+FROM courssuivis
+JOIN module ON courssuivis.idCours = module.IdParent
+JOIN utilisateurs ON module.proprietaire = utilisateurs.id
+WHERE courssuivis.idEtudiant = ?;";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $_SESSION["id"]);
+$stmt->execute();
+$result = $stmt->get_result();
+$cours = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/styles.css">
+   <!-- Mettez ici vos balises meta et titre -->
 </head>
 <body>
-
-<header class="header">
-   
-   <section class="flex">
-
-      <div class="left-content">
-          <a href="home.php" class="logo">en</a>
-          <form action="search.php" method="post" class="search-form">
-             <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-             <button type="submit" ><i class="fas fa-search"></i></button>
-          </form>
-      </div>
-      <nav class="navbar">
-         <a href="home_etudiant.php"><i class="fas fa-home"></i><span>home</span></a>
-         <a href="devoir.php"><i class="fa-solid fa-briefcase"></i><span>devoirs</span></a>
-         <a href="about.php"><i class="fas fa-question"></i><span>a propos</span></a>
-         <a href="contact.php"><i class="fas fa-headset"></i><span>contact</span></a>
-     </nav>
-
-      <div class="icons">
-         <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="search-btn" class="fas fa-search"></div>
-         <div id="toggle-btn" class="fas fa-sun"></div>
-      </div>
-   </section>
-
-</header>   
-
-<div class="side-bar">
-
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
-   </div>
-
-   <div class="profile">
-      <img src="./users_images/<?php echo $_SESSION['image'] ?>" class="image" alt="">
-      <h3 class="name"><?php echo $_SESSION['name'] ?></h3>
-      <p class="role"><?php echo $_SESSION['user'] ?></p>
-      <a href="profile.php" class='btn-container' ><button  class="btn main-btn">voir profile</button></a>
-      <div class="out">
-         <form method="GET">
-            <div class="center_div">
-               <button type='submit' name='out' class="btn delete-btn">logout</button>
-            </div> 
-         </form>
-      </div>
-   </div>
-
- <!-- //navar items -->
-</div>
-
 <section class="home-grid">
     <div class="sub-title">
         <h4 class='title-content'>Mes <span>cours</span></h4>
     </div>
-    <?php foreach ($cours as $cour) {?>
-        <div class="box">
-    <div class="course-item">
-         <div class="course-item-image">
-              <img src="./users_images/<?php echo $cour[8] ?>" width='100' alt="">
-         </div>
-         <div class="course-item-text">
-             <div class="cour-infos">
-                 <div class="cour-nom">
-                     <h4><?php echo $cour[2] ?></h4>
-                 </div>
-                 <div class="btn-incri">
-                     <button>inscrire</button>
-                 </div>
-             </div>
-             <div class="cour-prof">
-                <h4 class="prof-nom"><?php echo $cour[5] ?></h4>
-             </div>
-         </div>
-      </div>
-      <div class="inscription-box">
-         <div class="icon">
-             <i class="fa-regular fa-circle-xmark"></i>
-         </div>
-          <div class="pass-box">
-            <div class="sub-title">
-                <h4 class="title-content">inscription au cour: <span>dev web 1.</span></h4>
-            </div>
-               <div class="my-form-container">
-                 <form action="" method="post">
-                     <div class="my-form">
-                         <div class="input-pass">
-                             <input type="text" placeholder='tapez password...'>
-                          </div>
-                          <div class="btn-pass">
-                             <button class='sinscrir-btn'>s'inscrire</button>
-                          </div>
+    <?php if (!empty($cours)) { ?>
+        <?php foreach ($cours as $cour) {?>
+            <div class="box">
+                <div class="course-item">
+                     <!-- Si vous avez une image de cours, remplacez le chemin src -->
+                     <div class="course-item-image">
+                          <img src="./images/pic-1.jpg" width='100' alt="">
                      </div>
-                 </form>
-               </div>
-          </div>
-      </div>
-    </div>
-    <?php }?>
+                     <div class="course-item-text">
+                         <div class="cour-infos">
+                             <div class="cour-nom">
+                                 <h4><?php echo $cour['titre'] ?></h4>
+                             </div>
+                             <div class="btn-incri">
+                                 <button>inscrire</button>
+                             </div>
+                         </div>
+                         <div class="cour-prof">
+                            <h4 class="prof-nom">Nom du professeur</h4>
+                         </div>
+                     </div>
+                  </div>
+                  <div class="inscription-box">
+                     <div class="icon">
+                         <i class="fa-regular fa-circle-xmark"></i>
+                     </div>
+                      <div class="pass-box">
+                        <!-- Ici vous pouvez mettre des informations supplémentaires sur le cours -->
+                      </div>
+                  </div>
+            </div>
+        <?php }?>
+    <?php } else { ?>
+        <div class="sub-title"><center><p class='title-content'>Pas de cours disponibles pour le moment.</p></center></div>
+    <?php } ?>
 </section>
-
-<!-- <footer class="footer">
-
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
-
-</footer> -->
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-   
 </body>
 </html>

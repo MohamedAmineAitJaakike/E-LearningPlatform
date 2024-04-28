@@ -1,15 +1,9 @@
 <?php
 //for connect
-$localhost='localhost';
-$username='root';
-$password='';
-$db_name='my_platform';
-$db=mysqli_connect($localhost,$username,$password,$db_name);
-if(!$db){
-   echo 'error in db connection:'.mysqli_connect_error();
-}
+include("./includes/connection.inc.php");
+include("./includes/header.inc.php");
 //for signup
-session_start();
+if(session_status()==PHP_SESSION_NONE) session_start();
 if (isset($_POST['send'])) {
    $name=$_POST['name'];
    $email=$_POST['email'];
@@ -26,9 +20,13 @@ if (isset($_POST['send'])) {
         $_SESSION['userID']=$userID;
         $_SESSION['image']=$image_name;
         $_SESSION['user']=$userType;
-        $query=mysqli_query($db,"INSERT INTO users(userID,name, email, password, image, user)
-        VALUES ('$userID','$name', '$email', '$password', '$image_name', '$userType')");
-       if($query){
+        $query = $conn->prepare("INSERT INTO utilisateurs (nom, mail, password, image, role) VALUES (?, ?, ?, ?, ?)");
+         if (!$query) {
+            die("Erreur de préparation de la requête : " . $conn->error);
+         }
+         $query->bind_param("sssss", $name, $email, $password, $image_name, $userType);
+         $result = $query->execute();
+       if($result){
          move_uploaded_file($tmp_name,"$direction/$image_name");
           if($userType === 'etudiant'){
             header('Location: home_etudiant.php');
@@ -74,6 +72,7 @@ if (isset($_POST['send'])) {
        <select name="user_type" class='box'>
          <option value="professeur">professeur</option>
          <option value="etudiant">etudiant</option>
+         <option value="etudiant">administrateur</option>
        </select>
       <p>select profile <span>*</span></p>
       <input type="file" name='image'  required class="box">

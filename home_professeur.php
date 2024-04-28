@@ -1,17 +1,13 @@
  <?php
  //for connect
-$localhost='localhost';
-$username='root';
-$password='';
-$db_name='my_platform';
-$db=mysqli_connect($localhost,$username,$password,$db_name);
-if(!$db){
-   echo 'error in db connection:'.mysqli_connect_error();
-}
-session_start();
-if(!$_SESSION['name']){
+ include('./includes/connection.inc.php');
+ include('./includes/fn.inc.php');
+ require_once'./includes/header.inc.php';
+ include('./includes/side_profile.inc.php');
+ if(session_status() === PHP_SESSION_NONE) session_start(); 
+ if(!$_SESSION['userID']){
    header('Location: login.php');
-}
+ }
  if (isset($_POST['ajouter_course'])) {
  if(!empty($_POST['cour_name']) && !empty($_POST['cour_password'])){
    $cour_name=$_POST['cour_name'];
@@ -19,10 +15,10 @@ if(!$_SESSION['name']){
    $courID=rand(10,1000);
    $user_id=$_SESSION['userID'];
    
-   $sql="INSERT INTO cours(courID, userID, name, password)
+   $sql="INSERT INTO module(courID, userID, name, password)
          VALUES('$courID', $user_id, '$cour_name', '$cour_password')";
 
-   $query=mysqli_query($db,$sql) ;
+   $query=mysqli_query($conn,$sql) ;
       if($query){
         echo 'cour a ete ajoute avec succes';
    }
@@ -51,19 +47,19 @@ if (isset($_POST['ajouter_cousre_item'])) {
    }
   }
   //get all cours from db
-  $userID=$_SESSION['userID'];
-  $sql_cours="SELECT * FROM cours WHERE userID='$userID'";
-  $result=mysqli_query($db,$sql_cours);
-  $cours=mysqli_fetch_all($result);
-  //for logout system
-  if (isset($_GET['out']) && $_SERVER['REQUEST_METHOD']==='GET') {
-       session_unset();
-       header('location: login.php');
-  }
+    $userID = $_SESSION['userID'];
+
+    $sql_cours = "SELECT * FROM module WHERE id = ?";
+
+    $stmt = mysqli_prepare($conn, $sql_cours);
+    mysqli_stmt_bind_param($stmt, "i", $userID);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $cours = mysqli_fetch_all($result, MYSQLI_ASSOC);
   
 ?>
 <!-- head included in php file -->
-<?php include 'head.php'; ?>
+
 <!-- //home grid -->
 <section class="home-grid">
     <div class="statistics-container">
@@ -71,26 +67,6 @@ if (isset($_POST['ajouter_cousre_item'])) {
             <div class="statics-box">
                 <div class="icon">
                <i class="ri-graduation-cap-fill"></i>
-                </div>
-                <div class="static-name">
-                    <h4>cours</h4>
-                    <p class="static-value">+13</p>
-                </div>
-            </div>
-
-            <div class="statics-box">
-                <div class="icon">
-                <i class="ri-graduation-cap-fill"></i>
-                </div>
-                <div class="static-name">
-                    <h4>cours</h4>
-                    <p class="static-value">+13</p>
-                </div>
-            </div>
-
-            <div class="statics-box">
-                <div class="icon">
-                <i class="ri-graduation-cap-fill"></i>
                 </div>
                 <div class="static-name">
                     <h4>cours</h4>
@@ -118,13 +94,34 @@ if (isset($_POST['ajouter_cousre_item'])) {
       </div>
           <form method="POST" class="myform">
              <div class="input-pass">
-                 <input type="text" name='cour_name' class="box" placeholder='Entere le nom de cour...'>
+                 <input type="text" name='titre' class="box" placeholder='Intitule du cours...'>
              </div>
              <div class="input-pass">
-                 <input type="text" name='cour_password' class="box" placeholder='Entere le mot de pass de cour...'>
+                 <input type="text" name='presentation' class="box" placeholder='Presentation du cours...'>
              </div>
-             <button type='submit' name='ajouter_course' class='btn main-btn'>ajouter</button>
-          </form>
+             <div class="input-pass">
+                 <input type="text" name='mots_cles' class="box" placeholder='Mots cles se rapportant au cours...'>
+             </div>
+             <div class="input-pass">
+                 <input type="text" name='cible' class="box" placeholder='Public vise...'>
+             </div>
+             <div class="input-pass">
+                 <input type="text" name='prerequis' class="box" placeholder='Prerequis...'>
+             </div>
+             <div class="input-pass">
+                 <input type="text" name='Code_Cours' class="box" placeholder='Entrez le mot de pass du cours...'>
+             </div>
+             <div class="input-pass" style="display: flex; flex-direction: row;column-gap:30%;margin-left:15%;">
+                <div style="display: flex; align-items: center;">
+                    <label style="margin-right: 5px;"><input type="radio" name="progressif" value="progressif" style="transform: scale(0.4); margin-right: 5px;"> Visibilité Progressive</label>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <label style="margin-right: 5px;"><input type="radio" name="progressif" value="non_progressif" style="transform: scale(0.4); margin-right: 5px;"> Visibilité Non Progressive</label>
+                </div>
+            </div>
+
+             <center><button type='submit' name='ajouter_course' class='btn main-btn'>ajouter</button><center>
+         </form>
      </div>
      <div class="separator"></div>
      <div class="add-course-item">

@@ -1,3 +1,8 @@
+<?php
+include('./includes/connection.inc.php');
+include('./includes/fn.inc.php');
+require_once'./includes/header.inc.php';
+if(session_status() === PHP_SESSION_NONE) session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,74 +18,19 @@
    <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body>
+<body
 
-<header class="header">
-   
-   <section class="flex">
-
-      <a href="home.php" class="logo">Educa.</a>
-
-      <form action="search.php" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
-
-      <div class="icons">
-         <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="search-btn" class="fas fa-search"></div>
-         <div id="user-btn" class="fas fa-user"></div>
-         <div id="toggle-btn" class="fas fa-sun"></div>
-      </div>
-
-      <div class="profile">
-         <img src="images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">shaikh anas</h3>
-         <p class="role">studen</p>
-         <a href="profile.php" class="btn">view profile</a>
-         <div class="flex-btn">
-            <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">register</a>
-         </div>
-      </div>
-
-   </section>
-
-</header>   
-
-<div class="side-bar">
-
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
-   </div>
-
-   <div class="profile">
-      <img src="images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">shaikh anas</h3>
-      <p class="role">studen</p>
-      <a href="profile.php" class="btn">view profile</a>
-   </div>
-
-   <nav class="navbar">
-      <a href="home.php"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="about.php"><i class="fas fa-question"></i><span>about</span></a>
-      <a href="courses.php"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-      <a href="teachers.php"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-      <a href="contact.php"><i class="fas fa-headset"></i><span>contact us</span></a>
-   </nav>
-
-</div>
 
 <section class="user-profile">
 
-   <h1 class="heading">your profile</h1>
+   <center><h1 class="heading">Votre Profil</h1><center>
 
    <div class="info">
 
       <div class="user">
-         <img src="images/pic-1.jpg" alt="">
-         <h3>shaikh anas</h3>
-         <p>student</p>
+         <img src="./users_images/<?php echo $_SESSION['image'] ?>" class="image" alt="">
+         <h3 class="name"><?php echo $_SESSION['name'] ?></h3>
+         <p class="role"><?php echo $_SESSION['user'] ?></p>
          <a href="update.php" class="inline-btn">update profile</a>
       </div>
    
@@ -123,16 +73,6 @@
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
 
 
 

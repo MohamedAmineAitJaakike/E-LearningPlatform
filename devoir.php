@@ -3,7 +3,7 @@
 $localhost='localhost';
 $username='root';
 $password='';
-$db_name='my_platform';
+$db_name='platform';
 $db=mysqli_connect($localhost,$username,$password,$db_name);
 if(!$db){
    echo 'error in db connection:'.mysqli_connect_error();
