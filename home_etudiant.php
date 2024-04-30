@@ -66,7 +66,7 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
             
         <?php }?>
     <?php } else { ?>
-        <div class="sub-title"><center><p class='title-content'>Pas de cours disponibles pour le moment.</p></center></div>
+        <div class="sub-title"><center><p class='title-content'>Vous n'etes inscrit a auccun cours pour le moment.</p></center></div>
     <?php } ?>
 </section>
 </body>
