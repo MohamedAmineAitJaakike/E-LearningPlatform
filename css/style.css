@@ -112,6 +112,149 @@ section {
    color: rgb(255, 255, 255);
    font-size: 16px;
 }
+ /* Styles pour la mise en page des cours */
+ .all-courses {
+   padding: 50px 0;
+}
+
+.course-list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.course-card {
+   width: 300px;
+   border: 2px solid #ccc;
+   border-radius: 10px;
+   overflow: hidden;
+   background-color: #f3f3f3; /* Background uniquement pour les cartes */
+   margin: 20px;
+   padding: 20px;
+}
+
+.course-title {
+   font-size: 32px;
+   margin: 15px;
+   color: #333;
+   text-align: center; /* Centrer le titre */
+}
+
+.course-details {
+   font-size: 18px;
+   color: #555;
+}
+
+.course-info {
+   list-style-type: none;
+   padding: 0;
+}
+
+.course-info li {
+   margin-bottom: 10px;
+}
+
+.course-info li strong {
+   font-weight: bold;
+   margin-right: 5px;
+}
+/* Styles pour la mise en page des cours */
+.all-courses {
+  padding: 50px 0;
+  text-align: center; /* Ajout du centrage pour l'ensemble du contenu */
+}
+
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Espacement entre les cartes */
+}
+
+.course-card {
+  width: 300px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f3f3f3; /* Background uniquement pour les cartes */
+  padding: 20px;
+}
+
+.course-title {
+  font-size: 32px; /* Augmentation de la taille du titre */
+  font-weight: bold; /* Rendre le titre en gras */
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.course-details {
+  font-size: 18px;
+  color: #555;
+}
+
+.course-info {
+  list-style-type: none;
+  padding: 0;
+}
+
+.course-info li {
+  margin-bottom: 10px;
+}
+
+.course-info li strong {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.all-courses {
+  padding: 50px 0;
+  text-align: center; /* Ajout du centrage pour l'ensemble du contenu */
+}
+
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Espacement entre les cartes */
+}
+
+.course-card {
+  width: 300px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f3f3f3; /* Background uniquement pour les cartes */
+  padding: 20px;
+}
+
+.course-title {
+  font-size: 32px; /* Augmentation de la taille du titre */
+  font-weight: bold; /* Rendre le titre en gras */
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 2px solid #ccc; /* Ajout de la ligne séparatrice en bas du titre */
+  padding-bottom: 10px; /* Espacement sous le titre */
+}
+
+.course-details {
+  font-size: 18px;
+  color: #555;
+}
+
+.course-info {
+  list-style-type: none;
+  padding: 0;
+}
+
+.course-info li {
+  margin-bottom: 10px;
+}
+
+.course-info li strong {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
 
 /* Style for the underline when button is selected */
 .underline {
@@ -1590,6 +1733,28 @@ section {
    }
 
 }
+/* Styles pour la mise en page des étudiants par cours */
+.students-by-course {
+   padding: 50px 0;
+   text-align: center; /* Centrage du contenu */
+}
+
+.course-title {
+   font-size: 24px; /* Taille du titre du cours */
+   font-weight: bold; /* Mise en gras */
+   margin-bottom: 15px;
+   color: #333;
+}
+
+.students-list {
+   font-size: 18px;
+   color: #555;
+}
+
+.students-list p {
+   margin-bottom: 10px;
+}
+
 
 @media (max-width:991px) {
 
