@@ -13,7 +13,7 @@ $cours = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <!-- Code HTML pour afficher tous les cours -->
 <section class="all-courses">
     <div class="container">
-        <h2 style="text-align: center; font-size: 80px; color:white; box-shadow:0 0 11px black ;margin:50px;margin-left:80px">Tous les cours</h2>
+        <h2 style="text-align: center; font-size: 80px; color:#fc8021; box-shadow:0 0 11px black ;margin:50px;margin-left:80px">Tous les cours</h2>
         <div class="course-list">
             <?php foreach ($cours as $cour) { ?>
             <div class="course-card">
