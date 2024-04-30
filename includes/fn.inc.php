@@ -1,5 +1,28 @@
 <?php
 //include('connection.inc.php');
+function estDejaInscrit($conn, $idEtudiant, $idCours) {
+    $sql = "SELECT COUNT(*) AS total FROM courssuivis WHERE idEtudiant = ? AND idCours = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $idEtudiant, $idCours);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['total'] > 0;
+}
+
+function verificationCodeCours($conn,$codeCours){
+    $sql = "SELECT id FROM module WHERE BINARY Code_Cours = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $codeCours);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if($result->num_rows > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
 function valider($conn, $username, $password) {
     $errors = array();
     if (empty($username)) {
@@ -28,28 +51,31 @@ function check_user_pseudo($conn, $username) {
     $results = $stmt->get_result();
     return $results->num_rows > 0;
 }
-function check_user_email($conn, $email) {
-    $sql = "SELECT * FROM USERS WHERE EMAIL = ?";
+function check_user_exist($conn, $name, $prenom, $email, $password) {
+    $sql = "SELECT * FROM UTILISATEURS WHERE MAIL = ? AND NOM = ? AND PRENOM = ? AND PASSWORD = ?";
+    $hashed_password = hash('sha256', $password);
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("ssss", $email,$name,$prenom,$hashed_password);
     $stmt->execute();
     $results = $stmt->get_result();
     return $results->num_rows > 0;
 }
 
-function register($conn, $username, $password) {
+function register($conn, $name, $prenom, $email, $password, $image_name, $userType) {
     $hashed_password = hash('sha256', $password);
-    $sql = "INSERT INTO USERS (USERNAME, PASSWORD) VALUES (?, ?)";
+    $sql = "INSERT INTO utilisateurs (nom, prenom, mail, password, image, role) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $username, $hashed_password);
+    $stmt->bind_param("ssssss", $name, $prenom, $email, $hashed_password, $image_name, $userType);
     return $stmt->execute();
 }
+
 function login_user($conn, $username, $password)
 {
     //$hashed_password = hash('sha256', $password);
     $sql = "SELECT * FROM utilisateurs WHERE mail = ? AND PASSWORD = ?";
+    $hashed_password = hash('sha256', $password);
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss",$username,$password);
+    $stmt->bind_param("ss",$username,$hashed_password);
     $stmt->execute();
     $results = $stmt->get_result();
     return $results->fetch_assoc();
@@ -66,52 +92,14 @@ function save_reset_token($conn,$user_id,$token) {
     $stmt->bind_param("si",$token,$user_id);
     return $stmt->execute();
 }
-function get_user_tasks($conn,$user_id){
-    $sql = "SELECT * FROM TASKS WHERE USER_ID = ? ";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i",$user_id);
+function est_progressif($conn,$idCours,$nomCours){
+    $sql="SELECT est_progressif FROM module where id=? AND titre=?";
+    $stmt=$conn->prepare($sql);
+    $stmt->bind_param("is",$idCours,$nomCours);
     $stmt->execute();
-    return $stmt->get_result();
-}
-function get_task($conn,$task_id) {
-    $sql = "SELECT * FROM tasks WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i",$task_id);
-    $stmt->execute();
-
-    return $stmt->get_result();
-}
-function add_task($conn, $user_id, $task_title, $task_description, $task_date ) {
-    $sql = "INSERT INTO TASKS (`user_id`,`task_name`,`task_description`,`task_date`,`status`) 
-    VALUES (?,?,?,?,?)";
-    $s = 0;
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("isssi", $user_id,$task_title, $task_description, $task_date,$s);
-    return $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['est_progressif'];
 }
 
-function mark_task( $conn, $task_id ) {
-    $sql = "UPDATE TASKS SET status = 1 where id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $task_id);
-
-    return $stmt->execute();
-}
-
-function update_task( $conn, $task_id, $task_title, $task_description, $task_date ) {
-    $sql = "UPDATE TASKS SET 
-            task_name = ?, task_description = ?, task_date = ?
-            where id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $task_title,$task_description,$task_date,$task_id);
-
-    return $stmt->execute();
-}
-function delete_task( $conn, $task_id ) {
-    $sql = "DELETE FROM TASKS WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $task_id);
-
-    return $stmt->execute();
-}
 ?>
