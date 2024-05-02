@@ -26,7 +26,7 @@ $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
    <section class="flex">
       
       <div class="left-content">
-         <a href="../logout.php" class="logo">en</a>
+         <img src="./logo/logo.png" class='logo' width='50' alt="">
       </div>
 
       <?php if(isset($_SESSION['userID']) && !$is_lecture_page && !$is_index_page && !$is_login_page){ ?>
@@ -47,7 +47,8 @@ $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
       <?php } ?>
 
       <div class="icons">
-         <div id="menu-btn" class="ri-chat-1-line"></div>
+         
+         <a href="etudiants_messages.php" > <div id="menu-btn" class="ri-chat-1-line"></div></a>
          <div id="toggle-btn" class="ri-sun-line"></div>
       </div>
 

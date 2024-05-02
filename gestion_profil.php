@@ -81,7 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier_profil'])) {
         <p style="color: red;"><?php echo $error; ?></p>
     <?php } ?>
     
-    <form method="POST">
+   <section class="home-grid">
+   <form method="POST">
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" value="<?php echo htmlspecialchars($user['nom']); ?>"><br><br>
         
@@ -96,5 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifier_profil'])) {
         
         <button type="submit" name="modifier_profil">Modifier le profil</button>
     </form>
+    </section>
 </body>
 </html>

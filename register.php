@@ -16,15 +16,16 @@ if (isset($_POST['send'])) {
    $tmp_name=$_FILES['image']['tmp_name'];
    $direction='./users_images';
    if($password === $c_password){
-        $userID=rand(10,1000000);
+      $user_id=rand(10,10000000);
         $_SESSION['name']=$name;
+        $_SESSION['userID']=$user_id;
         $_SESSION['prenom']=$prenom;
         $_SESSION['email']=$email;
-        $_SESSION['userID']=$userID;
         $_SESSION['image']=$image_name;
         $_SESSION['user']=$userType;
         if(!check_user_exist($conn, $name, $prenom, $email, $password)){
          $result = register($conn, $name, $prenom, $email, $password, $image_name, $userType);
+
          if($result){
             move_uploaded_file($tmp_name,"$direction/$image_name");
             if($userType === 'etudiant'){
