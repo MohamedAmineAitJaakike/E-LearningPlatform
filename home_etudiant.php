@@ -47,7 +47,7 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
                              </div>
                              <div class="cour-infos" style="column-gap:2%;">
                                 <div class="center_div">
-                                        <a href="lecture.php?courID=<?php echo $cour['idCours']; ?>&nomCours=<?php echo $cour['titre_cours']; ?>">
+                                    <a href="lecture.php?courID=<?php echo $cour['idCours']; ?>&nomCours=<?php echo $cour['titre_cours']; ?>">
 
                                         <button class="btn main-btn">Lire cours</button>
                                     </a>

@@ -2,7 +2,7 @@
 $is_lecture_page = basename($_SERVER['PHP_SELF']) === 'lecture.php';
 $is_index_page = basename($_SERVER['PHP_SELF']) === 'index.php';
 $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
-
+$is_lectureP_page = basename($_SERVER['PHP_SELF']) === 'lectureProgressif.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,10 +26,12 @@ $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
    <section class="flex">
       
       <div class="left-content">
-         <a href="../logout.php" class="logo">en</a>
+         <a href="../logout.php" class="logo">
+            <img src="./logo/logo.png" class='logo' width='50' alt="">
+         </a>
       </div>
 
-      <?php if(isset($_SESSION['userID']) && !$is_lecture_page && !$is_index_page && !$is_login_page){ ?>
+      <?php if(isset($_SESSION['userID']) && !$is_lecture_page && !$is_index_page && !$is_login_page && !$is_lectureP_page){ ?>
             <form action="search.php" method="post" class="search-form">
                <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
                <button type="submit" ><i class="ri-search-line"></i></i></button>
@@ -47,7 +49,9 @@ $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
       <?php } ?>
 
       <div class="icons">
-         <div id="menu-btn" class="ri-chat-1-line"></div>
+         <?php if(!$is_index_page && !$is_login_page){ ?>
+            <a href="etudiants_messages.php" > <div id="menu-btn" class="ri-chat-1-line"></div></a>
+         <?php }?>
          <div id="toggle-btn" class="ri-sun-line"></div>
       </div>
 

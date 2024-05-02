@@ -530,6 +530,8 @@ section {
    gap: 10px;
    padding: 10px 6px;
    background-color:var(--white);
+   border-radius:10px;
+   margin-left:1%;
 }
 
 .course-item-image {

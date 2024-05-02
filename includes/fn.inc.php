@@ -102,4 +102,14 @@ function est_progressif($conn,$idCours,$nomCours){
     return $row['est_progressif'];
 }
 
+function getChapter($conn,$courID){
+    $sql = "SELECT * FROM chapitre WHERE IdModule = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $courID);
+    $stmt->execute();
+    return  $stmt->get_result();
+}
+function actif($conn){
+
+}
 ?>
