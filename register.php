@@ -23,22 +23,6 @@ if (isset($_POST['send'])) {
         $_SESSION['userID']=$userID;
         $_SESSION['image']=$image_name;
         $_SESSION['user']=$userType;
-<<<<<<< HEAD
-        $query = $conn->prepare("INSERT INTO utilisateurs (nom, prenom, mail, password, image, role) VALUES (?,?, ?, ?, ?, ?)");
-         if (!$query) {
-            die("Erreur de préparation de la requête : " . $conn->error);
-         }
-         $query->bind_param("ssssss", $name, $name, $email, $password, $image_name, $userType);
-         $result = $query->execute();
-       if($result){
-         move_uploaded_file($tmp_name,"$direction/$image_name");
-          if($userType === 'etudiant'){
-            header('Location: home_etudiant.php');
-          } 
-          else{
-            header('Location: home_professeur.php');
-          }
-=======
         if(!check_user_exist($conn, $name, $prenom, $email, $password)){
          $result = register($conn, $name, $prenom, $email, $password, $image_name, $userType);
          if($result){
@@ -53,7 +37,6 @@ if (isset($_POST['send'])) {
       }else{ echo "<center><h1 style=\"color:red;bottom:10%;\">Utilisateur existe Deja!<h1></center>";
          sleep(3);
       }
->>>>>>> 65a8bd1614d6364591f8a3b5d75c3b7e8d3f8c35
        }
     }
   

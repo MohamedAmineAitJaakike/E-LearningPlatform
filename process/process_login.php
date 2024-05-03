@@ -16,6 +16,9 @@ if (isset($_POST['send'])) {
         if ($user['role'] == 'professeur') {
             header('Location: ../home_professeur.php');
             exit;
+        } elseif ($user['role'] == 'professeur'){
+            header('Location: ../adminDashBoard.php');
+            exit;
         } else {
             header('Location: ../home_etudiant.php');
             exit;
