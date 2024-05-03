@@ -1,7 +1,7 @@
 <?php
 include('./includes/connection.inc.php');
 include('./includes/fn.inc.php');
-require_once'./includes/header.inc.php';
+require_once('./includes/header.inc.php');
 include('./includes/side_profile.inc.php');
 if(session_status() === PHP_SESSION_NONE) session_start(); 
 if(!$_SESSION['userID']){

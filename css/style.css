@@ -74,6 +74,7 @@ section {
    padding-left: 30rem;
    margin: 0 auto;
    max-width: 1300px;
+   min-height: max-content;
 }
 .heading {
    font-size: 2.5rem;
@@ -109,6 +110,118 @@ section {
 .delete-btn{
    background-color: var(--red);
 }
+/* ################################ ADMIN STYLES ##############################*/
+
+/*-----------------  style tabs ---------------------*/
+.items-btn{
+   border-radius: .5rem;
+   padding: .5rem 2rem;
+   text-align: center;
+   background-color: var(--light-color);
+}
+
+.active-item{
+   background-color: var(--white);
+   color: var(--main-color);
+}
+
+.ongletContent{
+   display: none;
+   background-color: var(--white);
+}
+.ongletBtn ~ div{padding-top: 2rem;}
+
+/*-------------------- style admin stat box ----------------*/
+.adminStat{
+   text-align: center;
+   flex-direction: column;
+   font-size: 1.8rem;
+   font-weight: bold;
+   color: var(--black);
+}
+
+.liste table thead tr th{ 
+   color: var(--black);
+   font-size: 1.4rem;
+   font-weight: bold;
+}
+.liste table tbody tr td{ color: var(--black); }
+
+.tab2Content{
+   display: grid;
+   grid-template-columns: 1.5fr .35rem 1fr;
+}
+hr{
+   background-color: var(--light-color);
+   height: 90%;
+   align-self: center;
+}
+
+/*------------------ Little profile aside the prof's list ------------------*/
+
+.identity img{
+   width: 6rem;
+   height: 6rem;
+   border-radius: 50%;
+}
+
+.courses{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 2rem;
+   max-height: 75vh;
+}
+
+.module{
+   flex-direction: column;
+   width: 45%;
+   text-wrap: wrap;
+}
+
+/*------------------ popUp style ------------------*/
+
+.popUp{
+   position: fixed;
+   top: 0;left: 0;
+   width: 100vw;
+   height: 98vh;
+   background-color: var(--under-black);
+   z-index: 999999;
+}
+
+.popUp .content{
+   position: relative;
+   width: 40%;
+   height: 20%;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--light-color);
+   border-radius: 2rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 2rem .5rem;
+}
+
+.popUp .content button{
+   border-radius: 1.5rem;
+   padding: 1.2rem 6rem;
+   text-align: center;
+   font-size: 1.6rem;
+}
+
+.popUp .content span{
+   font-size: 1.8rem;
+   color: var(--black);
+   margin-bottom: 1.2rem;
+   text-align: center;
+   padding: 0rem 1.5rem;
+}
+
 /* 
 .inline-btn,
 .inline-option-btn,
@@ -345,7 +458,7 @@ section {
 
 .side-bar {
    position: fixed;
-   top: 67px;
+   /* top: 67px; */
    left: 0;
    width: 30rem;
    height: 100vh;
@@ -531,6 +644,7 @@ section {
    text-transform: capitalize;
    color: var(--white);
 }
+
 .right-content .pro_table tbody tr:nth-child(even){
   background-color: var(--under-black);
 }
@@ -1490,10 +1604,6 @@ section {
 }
 
 
-
-
-
-
 .footer {
    background-color: var(--white);
    border-top: var(--border);
@@ -1513,8 +1623,6 @@ section {
 .footer span {
    color: var(--main-color);
 }
-
-
 
 @media (max-width:1200px) {
 

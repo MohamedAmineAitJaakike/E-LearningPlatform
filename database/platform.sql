@@ -151,11 +151,11 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 -- Adding foreign key constraints after table creation
 
 ALTER TABLE `chapitre`
-  ADD CONSTRAINT `FK_chapitre_IdModule` FOREIGN KEY (`IdModule`) REFERENCES `module` (`IdParent`);
+  ADD CONSTRAINT `FK_chapitre_IdModule` FOREIGN KEY (`IdModule`) REFERENCES `module` (`IdParent`) ON DELETE CASCADE;
 
 ALTER TABLE `courssuivis`
-  ADD CONSTRAINT `FK_courssuivis_idEtudiant` FOREIGN KEY (`idEtudiant`) REFERENCES `utilisateurs` (`id`),
-  ADD CONSTRAINT `FK_courssuivis_idCours` FOREIGN KEY (`idCours`) REFERENCES `module` (`IdParent`);
+  ADD CONSTRAINT `FK_courssuivis_idEtudiant` FOREIGN KEY (`idEtudiant`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_courssuivis_idCours` FOREIGN KEY (`idCours`) REFERENCES `module` (`IdParent`) ON DELETE CASCADE;
 
 ALTER TABLE `message`
   ADD CONSTRAINT `FK_message_idCours` FOREIGN KEY (`idCours`) REFERENCES `module` (`id`),
@@ -163,7 +163,7 @@ ALTER TABLE `message`
   ADD CONSTRAINT `FK_message_idRecepteur` FOREIGN KEY (`idRecepteur`) REFERENCES `utilisateurs` (`id`);
 
 ALTER TABLE `module`
-  ADD CONSTRAINT `FK_module_proprietaire` FOREIGN KEY (`proprietaire`) REFERENCES `utilisateurs` (`id`);
+  ADD CONSTRAINT `FK_module_proprietaire` FOREIGN KEY (`proprietaire`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE;
 
 COMMIT;
 

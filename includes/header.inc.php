@@ -13,8 +13,8 @@
     rel="stylesheet"
    />
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
-   <script defer src="../js/script.js"></script>
+   <link rel="stylesheet" href="./css/style.css">
+   <script defer src="./js/script.js"></script>
 </head>
 <body>
 
@@ -32,7 +32,7 @@
       <?php if(isset($_SESSION['userID'])){ ?>
          
             <nav class="navbar">
-               <a href="<?php echo $_SERVER['HTTP_REFERER']?>"><i class="ri-home-4-fill"></i></i><span>home</span></a>
+               <a href="index.php"> <i class="ri-home-4-fill"></i> <span>home</span></a>
                <a href="devoir.php"><i class="ri-briefcase-fill"></i><span>devoirs</span></a>
                <a href="about.php"><i class="ri-question-mark"></i><span>a propos</span></a>
                <a href="contact.php"><i class="ri-mail-fill"></i><span>contact</span></a>

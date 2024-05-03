@@ -20,11 +20,11 @@ if (isset($_POST['send'])) {
         $_SESSION['userID']=$userID;
         $_SESSION['image']=$image_name;
         $_SESSION['user']=$userType;
-        $query = $conn->prepare("INSERT INTO utilisateurs (nom, mail, password, image, role) VALUES (?, ?, ?, ?, ?)");
+        $query = $conn->prepare("INSERT INTO utilisateurs (nom, prenom, mail, password, image, role) VALUES (?,?, ?, ?, ?, ?)");
          if (!$query) {
             die("Erreur de préparation de la requête : " . $conn->error);
          }
-         $query->bind_param("sssss", $name, $email, $password, $image_name, $userType);
+         $query->bind_param("ssssss", $name, $name, $email, $password, $image_name, $userType);
          $result = $query->execute();
        if($result){
          move_uploaded_file($tmp_name,"$direction/$image_name");
