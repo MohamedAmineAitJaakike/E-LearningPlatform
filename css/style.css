@@ -76,6 +76,58 @@ section {
    max-width: 1300px;
    min-height: max-content;
 }
+/***8*/
+.blurred {
+   filter: blur(2px);
+}
+
+/* Style pour le message au milieu de la page */
+.message-container {
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: rgb(235, 234, 234);
+   padding: 40px;
+   border-radius: 10px;
+   box-shadow: 0 0 0 rgba(177, 172, 172, 0.2);
+   z-index: 1000;
+   
+}
+.button-container {
+   display: flex;
+   flex-direction: row;
+   gap: 10px; /* Add some space between buttons */
+}
+
+/* Style for the button */
+.custom-button {
+   background-color: transparent;
+   border: none;
+   padding: 0;
+   text-decoration: none; /* Remove default underline */
+}
+
+/* Style for the button text */
+.button-text {
+   color: rgb(255, 255, 255);
+   font-size: 16px;
+}
+
+/* Style for the underline when button is selected */
+.underline {
+   text-decoration: underline rgb(255, 127, 0);
+   text-decoration-thickness: 4px; 
+   text-underline-offset: 4px;
+}
+.dropdown-content{
+   display:flex;
+   flex-direction: column;
+   text-decoration: none;
+   row-gap:30px;
+}
+
+/***8*/
 .heading {
    font-size: 2.5rem;
    color: var(--black);
@@ -458,7 +510,7 @@ hr{
 
 .side-bar {
    position: fixed;
-   /* top: 67px; */
+   top: 10%;
    left: 0;
    width: 30rem;
    height: 100vh;
@@ -591,6 +643,8 @@ hr{
    gap: 10px;
    padding: 10px 6px;
    background-color:var(--white);
+   border-radius:10px;
+   margin-left:1%;
 }
 
 .course-item-image {

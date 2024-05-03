@@ -10,7 +10,7 @@
 <body>
     <div class="form-container" style="display:flex;flex-direction:column">
         <div class="sub-title">
-            <h1 class='title-content'>Bienvenue sur votre plateforme d'apprentissage <span>"EnL"</span></h1>
+            <h1 class='title-content'>Bienvenue sur votre plateforme d'apprentissage <span style="color:#fc8021;">"EnL"</span></h1>
         </div>
         <br>
         <br>

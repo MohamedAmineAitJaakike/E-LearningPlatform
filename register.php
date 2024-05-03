@@ -2,24 +2,28 @@
 //for connect
 include("./includes/connection.inc.php");
 include("./includes/header.inc.php");
+include("./includes/fn.inc.php");
 //for signup
 if(session_status()==PHP_SESSION_NONE) session_start();
 if (isset($_POST['send'])) {
    $name=$_POST['name'];
+   $prenom=$_POST['prenom'];
    $email=$_POST['email'];
    $password=$_POST['password'];
    $c_password=$_POST['c_password'];
    $userType=$_POST['user_type'];
-    $image_name=$_FILES['image']['name'];
-    $tmp_name=$_FILES['image']['tmp_name'];
-    $direction='./users_images';
+   $image_name=$_FILES['image']['name'];
+   $tmp_name=$_FILES['image']['tmp_name'];
+   $direction='./users_images';
    if($password === $c_password){
         $userID=rand(10,1000000);
         $_SESSION['name']=$name;
+        $_SESSION['prenom']=$prenom;
         $_SESSION['email']=$email;
         $_SESSION['userID']=$userID;
         $_SESSION['image']=$image_name;
         $_SESSION['user']=$userType;
+<<<<<<< HEAD
         $query = $conn->prepare("INSERT INTO utilisateurs (nom, prenom, mail, password, image, role) VALUES (?,?, ?, ?, ?, ?)");
          if (!$query) {
             die("Erreur de préparation de la requête : " . $conn->error);
@@ -34,10 +38,25 @@ if (isset($_POST['send'])) {
           else{
             header('Location: home_professeur.php');
           }
+=======
+        if(!check_user_exist($conn, $name, $prenom, $email, $password)){
+         $result = register($conn, $name, $prenom, $email, $password, $image_name, $userType);
+         if($result){
+            move_uploaded_file($tmp_name,"$direction/$image_name");
+            if($userType === 'etudiant'){
+               header('Location: home_etudiant.php');
+            } 
+            else{
+               header('Location: home_professeur.php');
+            }
+         }
+      }else{ echo "<center><h1 style=\"color:red;bottom:10%;\">Utilisateur existe Deja!<h1></center>";
+         sleep(3);
+      }
+>>>>>>> 65a8bd1614d6364591f8a3b5d75c3b7e8d3f8c35
        }
     }
   
-}
  
 ?>
 
@@ -60,8 +79,10 @@ if (isset($_POST['send'])) {
 <div class="form-container">
    <form  method="POST" enctype="multipart/form-data">
       <h3>register now</h3>
-      <p>your name <span>*</span></p>
+      <p>Votre nom <span>*</span></p>
       <input type="text" name="name" placeholder="enter your name" required  class="box">
+      <p>Votre prenom <span>*</span></p>
+      <input type="text" name="prenom" placeholder="entrez votre prenom" required  class="box">
       <p>your email <span>*</span></p>
       <input type="email" name="email" placeholder="enter your email" required  class="box">
       <p>your password <span>*</span></p>
@@ -76,7 +97,7 @@ if (isset($_POST['send'])) {
        </select>
       <p>select profile <span>*</span></p>
       <input type="file" name='image'  required class="box">
-      <button type='submit' name='send' class='btn main-btn'>submit</button>
+      <center><button type='submit' name='send' class='btn main-btn'>submit</button></center>
    </form>
 </div>
 <!-- custom js file link  -->
