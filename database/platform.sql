@@ -46,14 +46,11 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `mail` varchar(255) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
-
-INSERT INTO `admin` (`id`, `nom`, `prenom`, `mail`, `mot_de_passe`) VALUES
-(1, 'Admin', 'Platform', 'md@gmail.com', '111');
 
 -- --------------------------------------------------------
 
@@ -69,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `chapitre` (
   `accessible` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`IdChap`),
   KEY `IdModule` (`IdModule`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -85,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `courssuivis` (
   PRIMARY KEY (`id`),
   KEY `idEtudiant` (`idEtudiant`),
   KEY `idCours` (`idCours`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,7 +103,8 @@ CREATE TABLE IF NOT EXISTS `message` (
   KEY `idCours` (`idCours`),
   KEY `idExpediteur` (`idExpediteur`),
   KEY `idRecepteur` (`idRecepteur`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -128,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `module` (
   `proprietaire` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `proprietaire` (`proprietaire`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -146,9 +144,12 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `image` varchar(255) DEFAULT NULL,
   `role` enum('etudiant','professeur','administrateur') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Adding foreign key constraints after table creation
+ALTER TABLE `module`
+  ADD INDEX `idx_IdParent` (`IdParent`);
+
 
 ALTER TABLE `chapitre`
   ADD CONSTRAINT `FK_chapitre_IdModule` FOREIGN KEY (`IdModule`) REFERENCES `module` (`IdParent`);
