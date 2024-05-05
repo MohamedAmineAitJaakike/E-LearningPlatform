@@ -13,7 +13,7 @@
       <a href="profile.php" class='btn-container ' ><button  class="btn  main-btn">voir profile</button></a>
       <?php if($_SESSION['user'] == 'etudiant' && !$is_newCours_page){ ?>
          <div class="out">
-            <form method="GET" action="../nouveaux_cours.php">
+            <form method="GET" action="./nouveaux_cours.php">
                   <div class="btn-container">
                      <button type='submit' name='nouveaux_cours' class="btn main-btn">Inscriptions Cours</button>
                   </div> 
@@ -21,7 +21,7 @@
          </div>
       <?php } else if ($is_newCours_page){?>
          <div class="out">
-            <form method="GET" action="../home_etudiant.php">
+            <form method="GET" action="./home_etudiant.php">
                   <div class="btn-container">
                      <button type='submit' name='home_etudiant' class="btn main-btn">Retour aux Cours</button>
                   </div> 

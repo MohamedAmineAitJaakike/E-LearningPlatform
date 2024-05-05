@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $idCours = $_POST['id_cours'];
         $_SESSION['id_cours']= $idCours;
         $codeCours = $_POST['code_cours'];
-    
         // Vérifier si le code du cours est correct 
         $codeCoursCorrect = verificationCodeCours($conn,$codeCours);
         
@@ -20,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //checker si deja inscrit (a implementer)
             $stmt = $conn->prepare("INSERT INTO courssuivis (idEtudiant, idCours) VALUES (?, ?)");
             $stmt->bind_param("ii", $_SESSION["userID"], $idCours);
-            
+
             if ($stmt->execute()) {
                 // Redirection vers une page de succès
                 header("Location: ../home_etudiant.php");

@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
   mail varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   password varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   image varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  role enum('etudiant','professeur','administrateur') COLLATE utf8mb4_general_ci NOT NULL,
+  role enum('etudiant','professeur') COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

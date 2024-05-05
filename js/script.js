@@ -98,7 +98,7 @@ function toggleDropdowns() {
 }
 function confirmDesinscription(idCours) {
    if (confirm("Êtes-vous sûr de vouloir vous désinscrire de ce cours?")) {
-      window.location.href = "../process/process_desinscription.php?id_cours=" + idCours;
+      window.location.href = "process/process_desinscription.php?id_cours=" + idCours;
    } else {
       // L'utilisateur a annulé la désinscription, vous pouvez ajouter un traitement supplémentaire ici si nécessaire
    }

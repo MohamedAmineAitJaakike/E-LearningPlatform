@@ -5,12 +5,14 @@
     $coursesPop = $stmtOnModule->fetch_all(MYSQLI_ASSOC);
     
     //fetching famous prof
-    $sql = "select p.*, count(p.id) as nbSuiveur from utilisateurs as p 
-            join module as m on p.id = m.proprietaire
-            join courssuivis as cs on cs.idCours = m.IdParent
-            where p.role = 'professeur'
-            group by p.id
-            order by nbSuiveur desc limit 4";
+    $sql = "select curs.nom, curs.prenom, curs.mail,curs.image, count(curs.id) as nbSuiveur from 
+                (select p.*,cs.idEtudiant, count(p.id) as nbCoursSuivisParUnEtd from utilisateurs as p 
+                        join module as m on p.id = m.proprietaire
+                        join courssuivis as cs on cs.idCours = m.IdParent
+                        where p.role = 'professeur'
+                        group by p.id, cs.idEtudiant) as curs
+                group by curs.id
+                order by nbSuiveur desc limit 4";
     $stmtOnProf = $conn->query($sql);
     $profPop = $stmtOnProf->fetch_all(MYSQLI_ASSOC);
 
