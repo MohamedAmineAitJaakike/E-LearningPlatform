@@ -51,8 +51,9 @@ function check_user_pseudo($conn, $username) {
     $results = $stmt->get_result();
     return $results->num_rows > 0;
 }
-function check_user_exist($conn, $name, $prenom, $email, $password) {
-    $sql = "SELECT * FROM UTILISATEURS WHERE MAIL = ? AND NOM = ? AND PRENOM = ? AND PASSWORD = ?";
+function check_user_exist($conn, $name, $prenom, $email, $password, $userType) {
+    $table = ($userType == "administrateur")? "admin" : "UTILISATEURS";
+    $sql = "SELECT * FROM ". $table." WHERE MAIL = ? AND NOM = ? AND PRENOM = ? AND PASSWORD = ?";
     $hashed_password = hash('sha256', $password);
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssss", $email,$name,$prenom,$hashed_password);
@@ -62,17 +63,19 @@ function check_user_exist($conn, $name, $prenom, $email, $password) {
 }
 
 function register($conn, $name, $prenom, $email, $password, $image_name, $userType) {
+    $table = ($userType == "administrateur")? "admin" : "UTILISATEURS";
     $hashed_password = hash('sha256', $password);
-    $sql = "INSERT INTO utilisateurs (nom, prenom, mail, password, image, role) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO ".$table." (nom, prenom, mail, password, image, role) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssss", $name, $prenom, $email, $hashed_password, $image_name, $userType);
     return $stmt->execute();
 }
 
-function login_user($conn, $username, $password)
+function login_user($conn, $username, $password, $isAdmin = false)
 {
     //$hashed_password = hash('sha256', $password);
-    $sql = "SELECT * FROM utilisateurs WHERE mail = ? AND PASSWORD = ?";
+    $table = ($isAdmin)? "admin" : "utilisateurs";
+    $sql = "SELECT * FROM ". $table ." WHERE mail = ? AND password = ?";
     $hashed_password = hash('sha256', $password);
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss",$username,$hashed_password);

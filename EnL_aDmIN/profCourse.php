@@ -23,7 +23,7 @@
         foreach ($courses as $module) 
         {
     ?>
-            <div class="module statics-box" style="background-color: var(--light-color);">
+            <div class="module">
                 <h2><?= $module['titre']?></h2> 
                 <h4><?= $module['mots_cles']?></h4>
                 <?php 

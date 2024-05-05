@@ -2,10 +2,21 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : ven. 26 avr. 2024 à 23:11
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Host: 127.0.0.1:3308
+-- Generation Time: Apr 28, 2024 at 12:00 AM
+-- Server version: 8.2.0
+-- PHP Version: 8.1.26
+DROP DATABASE IF EXISTS platform;
+CREATE DATABASE platform;
+USE platform;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3308
+-- Generation Time: Apr 28, 2024 at 12:00 AM
+-- Server version: 8.2.0
+-- PHP Version: 8.1.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,109 +29,148 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `my_platform`
+-- Database: `platform`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cour`
+-- Table structure for table `admin`
 --
 
-CREATE TABLE `cour` (
-  `courID` int(11) NOT NULL,
-  `courParentID` int(11) NOT NULL,
-  `courName` varchar(255) DEFAULT NULL,
-  `content` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `cours`
---
-
-CREATE TABLE `cours` (
-  `courID` int(11) NOT NULL,
-  `userID` int(44) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `cours`
---
-
-INSERT INTO `cours` (`courID`, `userID`, `name`, `password`) VALUES
-(476, 70071, 'linux', '333'),
-(486, 70071, 'c avance', '1123'),
-(773, 121462, 'web developement', 'sss');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `users`
---
-
-CREATE TABLE `users` (
-  `userID` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `image` varchar(400) NOT NULL,
-  `user` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `image` varchar(255) DEFAULT NULL,
+  `role` varchar(255) DEFAULT 'administrateur',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `admin`
 --
 
-INSERT INTO `users` (`userID`, `name`, `email`, `password`, `image`, `user`) VALUES
-(34532, 'ilyass', 'ilyass2001@gmail.com', '222', 'newwtoken.png', 'etudiant'),
-(70071, 'amine', 'amine@gmail.com', 'ddd', 'creation rep.png', 'professeur'),
-(121462, 'saad barhrouj', 'saad.barhrouj2001@gmail.com', 'sss', 'saad3.png', 'professeur');
+INSERT INTO `admin` (`id`, `nom`, `prenom`, `mail`, `password`, `image`) VALUES
+(1, 'Admin', 'Platform', 'md@gmail.com', '111', '');
+
+-- decomment if database already exists
+-- alter table admin change column mot_de_passe password varchar(255) not null;
+-- alter table admin add column image varchar(255) default null;
+-- alter table admin add column role varchar(255) default 'administrateur';
+-- --------------------------------------------------------
 
 --
--- Index pour les tables déchargées
+-- Table structure for table `chapitre`
 --
 
---
--- Index pour la table `cour`
---
-ALTER TABLE `cour`
-  ADD PRIMARY KEY (`courID`),
-  ADD KEY `courParentID` (`courParentID`);
+DROP TABLE IF EXISTS `chapitre`;
+CREATE TABLE IF NOT EXISTS `chapitre` (
+  `IdChap` int NOT NULL AUTO_INCREMENT,
+  `IdModule` int DEFAULT NULL,
+  `contenu` varchar(255) NOT NULL,
+  `accessible` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`IdChap`),
+  KEY `IdModule` (`IdModule`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
 
 --
--- Index pour la table `cours`
---
-ALTER TABLE `cours`
-  ADD PRIMARY KEY (`courID`),
-  ADD KEY `userID` (`userID`);
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`);
-
---
--- Contraintes pour les tables déchargées
+-- Table structure for table `courssuivis`
 --
 
---
--- Contraintes pour la table `cour`
---
-ALTER TABLE `cour`
-  ADD CONSTRAINT `cour_ibfk_1` FOREIGN KEY (`courParentID`) REFERENCES `cours` (`courID`);
+DROP TABLE IF EXISTS `courssuivis`;
+CREATE TABLE IF NOT EXISTS `courssuivis` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idEtudiant` int DEFAULT NULL,
+  `idCours` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idEtudiant` (`idEtudiant`),
+  KEY `idCours` (`idCours`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
 
 --
--- Contraintes pour la table `cours`
+-- Table structure for table `message`
 --
-ALTER TABLE `cours`
-  ADD CONSTRAINT `cours_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`);
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE IF NOT EXISTS `message` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idCours` int NOT NULL,
+  `idExpediteur` int NOT NULL,
+  `idRecepteur` int NOT NULL,
+  `contenu` text NOT NULL,
+  `date_envoi` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `est_annonce` int DEFAULT NULL,
+  `est_lu` int DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `idCours` (`idCours`),
+  KEY `idExpediteur` (`idExpediteur`),
+  KEY `idRecepteur` (`idRecepteur`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `module`
+--
+
+DROP TABLE IF EXISTS `module`;
+CREATE TABLE IF NOT EXISTS `module` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `IdParent` int DEFAULT NULL,
+  `titre` varchar(255) NOT NULL,
+  `presentation` varchar(255) NOT NULL,
+  `mots_cles` varchar(255) NOT NULL,
+  `Code_Cours` varchar(255) NOT NULL,
+  `cible` varchar(255) NOT NULL,
+  `prerequis` varchar(255) NOT NULL,
+  `est_progressif` tinyint(1) DEFAULT NULL,
+  `proprietaire` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `proprietaire` (`proprietaire`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utilisateurs`
+--
+
+DROP TABLE IF EXISTS `utilisateurs`;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `role` enum('etudiant','professeur','administrateur') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Adding foreign key constraints after table creation
+
+ALTER TABLE `chapitre` ADD CONSTRAINT `FK_chapitre_IdModule` FOREIGN KEY (`IdModule`) REFERENCES `module` (`IdParent`) ON DELETE CASCADE;
+
+ALTER TABLE `courssuivis` ADD CONSTRAINT `FK_courssuivis_idEtudiant` FOREIGN KEY (`idEtudiant`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE;
+ALTER TABLE `courssuivis`  ADD CONSTRAINT `FK_courssuivis_idCours` FOREIGN KEY (`idCours`) REFERENCES `module` (`IdParent`) ON DELETE CASCADE;
+
+ALTER TABLE `message` ADD CONSTRAINT `FK_message_idCours` FOREIGN KEY (`idCours`) REFERENCES `module` (`id`) ON DELETE CASCADE;
+ALTER TABLE `message` ADD CONSTRAINT `FK_message_idExpediteur` FOREIGN KEY (`idExpediteur`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE;
+ALTER TABLE `message` ADD CONSTRAINT `FK_message_idRecepteur` FOREIGN KEY (`idRecepteur`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `module` ADD CONSTRAINT `FK_module_proprietaire` FOREIGN KEY (`proprietaire`) REFERENCES `utilisateurs` (`id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ 

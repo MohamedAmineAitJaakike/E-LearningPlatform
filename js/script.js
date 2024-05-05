@@ -147,3 +147,5 @@ function closeDetails() {
    var url = window.location.href.split('?')[0]; // Obtenir l'URL sans les paramètres
    window.location.href = url; // Rediriger vers l'URL sans le paramètre 'details'
 }
+
+/*----------------------------- ADMIN FUNCTIONS ---------------------------- */

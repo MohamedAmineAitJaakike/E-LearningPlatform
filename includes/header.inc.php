@@ -4,7 +4,11 @@ $is_index_page = basename($_SERVER['PHP_SELF']) === 'index.php';
 $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
 $is_register_page = basename($_SERVER['PHP_SELF']) === 'register.php';
 $is_lectureP_page = basename($_SERVER['PHP_SELF']) === 'lectureProgressif.php';
-$is_admin_dashBoard = basename($_SERVER['PHP_SELF']) === 'adminDashBoard.php';
+$is_admin_dashBoard = basename($_SERVER['PHP_SELF']) === 'adminDashboard.php';
+$is_adminLogin = basename($_SERVER['PHP_SELF']) === 'adminLogin.php';
+$is_admin_register = basename($_SERVER['PHP_SELF']) === 'admin_register.php';
+
+$workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +23,8 @@ $is_admin_dashBoard = basename($_SERVER['PHP_SELF']) === 'adminDashBoard.php';
     rel="stylesheet"
    />
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="./css/style.css">
-   <script defer src="./js/script.js"></script>
+   <link rel="stylesheet" href="<?= $workdir ?>/css/style.css">
+   <script defer src="<?= $workdir ?>/js/script.js"></script>
 </head>
 <body>
 
@@ -29,7 +33,7 @@ $is_admin_dashBoard = basename($_SERVER['PHP_SELF']) === 'adminDashBoard.php';
       
       <div class="left-content">
          <a href="../logout.php" class="logo">
-            <img src="./logo/logo.png" class='logo' width='50' alt="">
+            <img src="<?= $workdir ?>/logo/logo.png" class='logo' width='50' alt="">
          </a>
       </div>
 
@@ -39,7 +43,7 @@ $is_admin_dashBoard = basename($_SERVER['PHP_SELF']) === 'adminDashBoard.php';
                <button type="submit" ><i class="ri-search-line"></i></i></button>
             </form>
          <?php } ?>
-      <?php if(isset($_SESSION['userID']) && !$is_index_page && !$is_login_page && !$is_admin_dashBoard && !$is_register_page){ ?>
+      <?php if(isset($_SESSION['userID']) && !$is_index_page && !$is_login_page && !$is_admin_dashBoard && !$is_register_page && isset($_SESSION['user']) && $_SESSION['user'] != "administrateur"){ ?>
          
             <nav class="navbar">
                <a href="<?php echo (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:NULL?>"><i class="ri-home-4-fill"></i></i><span>home</span></a>
@@ -51,7 +55,7 @@ $is_admin_dashBoard = basename($_SERVER['PHP_SELF']) === 'adminDashBoard.php';
       <?php } ?>
 
       <div class="icons">
-         <?php if(!$is_index_page && !$is_login_page){ ?>
+         <?php if(!$is_index_page && !$is_login_page &&!$is_admin_dashBoard && isset($_SESSION['user']) && $_SESSION['user'] != "administrateur"){ ?>
             <a href="etudiants_messages.php" > <div id="menu-btn" class="ri-chat-1-line"></div></a>
          <?php }?>
          <div id="toggle-btn" class="ri-sun-line"></div>

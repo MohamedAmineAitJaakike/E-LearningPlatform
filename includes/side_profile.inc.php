@@ -29,7 +29,7 @@
          </div>
          <?php }?>
       <div class="out">
-         <form method="GET" action="../logout.php">
+         <form method="GET" action="./logout.php">
             <div class="btn-container">
                <button type='submit' name='out' class="btn delete-btn">Deconnexion</button>
             </div> 

@@ -151,7 +151,7 @@ section {
    padding: .8rem 3rem;
    text-align: center;
    margin-bottom: 1rem;
-   width: 260px !important;
+   width: 240px !important;
 }
 .main-btn{
    background-color: var(--main-color);
@@ -171,6 +171,12 @@ section {
    text-align: center;
    background-color: var(--light-color);
 }
+.items-btn span{
+   color: var(--white);
+   background-color: var(--red); 
+   padding: .1rem .64rem;
+   border-radius: 50%;
+}
 
 .active-item{
    background-color: var(--white);
@@ -180,6 +186,8 @@ section {
 .ongletContent{
    display: none;
    background-color: var(--white);
+   padding: 2rem 2rem;
+   border-radius: 0 4rem 4rem 4rem;
 }
 .ongletBtn ~ div{padding-top: 2rem;}
 
@@ -188,8 +196,18 @@ section {
    text-align: center;
    flex-direction: column;
    font-size: 1.8rem;
-   font-weight: bold;
    color: var(--black);
+   background-color: var(--light-bg);
+   border-radius: 1rem;
+   border: var(--border);
+   padding: 1.4rem 7rem;
+}
+
+.adminStat kk
+
+.adminStat center img{
+   background-color: rgba(247, 244, 244, 0.93);
+   border-radius: 20%;
 }
 
 .liste table thead tr th{ 
@@ -201,8 +219,15 @@ section {
 
 .tab2Content{
    display: grid;
-   grid-template-columns: 1.5fr .35rem 1fr;
+   grid-template-columns: minmax(40%, 1.5fr) .35rem 40%;
 }
+
+#tab1 fieldset legend {
+   font-size: 1.5rem;
+   font-weight: bold;
+   color: var(--black);
+}
+
 hr{
    background-color: var(--light-color);
    height: 90%;
@@ -210,11 +235,20 @@ hr{
 }
 
 /*------------------ Little profile aside the prof's list ------------------*/
-
+.identity{color: var(--black);}
 .identity img{
    width: 6rem;
    height: 6rem;
    border-radius: 50%;
+}
+
+.profPop{
+   background-color: var(--light-bg);
+   width: max-content;
+   max-width: 20%;
+   word-wrap: break-word;
+   border-radius: 2rem;
+   padding: 1rem 1.4rem;
 }
 
 .courses{
@@ -228,8 +262,13 @@ hr{
 
 .module{
    flex-direction: column;
-   width: 45%;
-   text-wrap: wrap;
+   max-width: 45%;
+   width: max-content;
+   background-color: var(--light-bg);
+   color: var(--black);
+   word-wrap: break-word;
+   padding: 1.2rem 3.5rem;
+   border-radius: 2rem;
 }
 
 /*------------------ popUp style ------------------*/
@@ -250,7 +289,7 @@ hr{
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   background-color: var(--light-color);
+   background-color: var(--light-bg);
    border-radius: 2rem;
    display: flex;
    flex-direction: column;
@@ -273,6 +312,50 @@ hr{
    text-align: center;
    padding: 0rem 1.5rem;
 }
+
+/*------------------ message style ------------------*/
+.message{
+   width: 95%;
+   background-color: var(--light-bg);
+   color: var(--black);
+   font-size: 1.5rem;
+   padding: 1.2rem 1.6rem;
+   margin: 0.6rem 0rem;
+   border-radius: 2rem;
+   position: relative;
+}
+
+.message span:last-child{
+   position: absolute;
+   bottom: 1.2rem; right: 1.6rem;
+   text-decoration: underline;
+   font-size: 1.7rem;
+   cursor: pointer;
+}
+
+.contentBox{
+   font-size: 1.4rem;
+   color: var(--black);
+   margin: .5rem 1.4rem;
+   padding: .6rem 1rem;
+   position: relative;
+   max-width: 90%;
+   width: fit-content;
+}
+
+.content{
+   width: max-content;
+   max-width: 90%;
+   word-wrap: break-word;
+   background-color: var(--light-bg);
+   padding: 1.2rem 1.5rem;
+   border-radius: 2rem;
+}
+.action{
+   position: absolute;
+   right: 2rem;
+}
+ 
 
 /* 
 .inline-btn,
