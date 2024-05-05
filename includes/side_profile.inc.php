@@ -7,7 +7,7 @@
    </div>
 
    <div class="profile">
-      <img src="../users_images/<?php echo $_SESSION['image'] ?>" class="image" alt="">
+      <img src="./users_images/<?php echo $_SESSION['image'] ?>" class="image" alt="">
       <h3 class="name"><?php echo $_SESSION['name']?></h3>
       <p class="role"><?php echo $_SESSION['user'] ?></p>
       <a href="profile.php" class='btn-container ' ><button  class="btn  main-btn">voir profile</button></a>
@@ -29,7 +29,7 @@
          </div>
          <?php }?>
       <div class="out">
-         <form method="GET" action="../logout.php">
+         <form method="GET" action="./logout.php">
             <div class="btn-container">
                <button type='submit' name='out' class="btn delete-btn">Deconnexion</button>
             </div> 

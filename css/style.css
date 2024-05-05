@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 :root {
-   --main-color: #ffa52f;
+   --main-color: #fc8021;
    --red: #e74c3c;
    --orange: #f39c12;
    --light-color: #F0EBE3;
@@ -74,6 +74,7 @@ section {
    padding-left: 30rem;
    margin: 0 auto;
    max-width: 1300px;
+   min-height: max-content;
 }
 /***8*/
 .blurred {
@@ -112,149 +113,6 @@ section {
    color: rgb(255, 255, 255);
    font-size: 16px;
 }
- /* Styles pour la mise en page des cours */
- .all-courses {
-   padding: 50px 0;
-}
-
-.course-list {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-}
-
-.course-card {
-   width: 300px;
-   border: 2px solid #ccc;
-   border-radius: 10px;
-   overflow: hidden;
-   background-color: #f3f3f3; /* Background uniquement pour les cartes */
-   margin: 20px;
-   padding: 20px;
-}
-
-.course-title {
-   font-size: 32px;
-   margin: 15px;
-   color: #333;
-   text-align: center; /* Centrer le titre */
-}
-
-.course-details {
-   font-size: 18px;
-   color: #555;
-}
-
-.course-info {
-   list-style-type: none;
-   padding: 0;
-}
-
-.course-info li {
-   margin-bottom: 10px;
-}
-
-.course-info li strong {
-   font-weight: bold;
-   margin-right: 5px;
-}
-/* Styles pour la mise en page des cours */
-.all-courses {
-  padding: 50px 0;
-  text-align: center; /* Ajout du centrage pour l'ensemble du contenu */
-}
-
-.course-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px; /* Espacement entre les cartes */
-}
-
-.course-card {
-  width: 300px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #f3f3f3; /* Background uniquement pour les cartes */
-  padding: 20px;
-}
-
-.course-title {
-  font-size: 32px; /* Augmentation de la taille du titre */
-  font-weight: bold; /* Rendre le titre en gras */
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.course-details {
-  font-size: 18px;
-  color: #555;
-}
-
-.course-info {
-  list-style-type: none;
-  padding: 0;
-}
-
-.course-info li {
-  margin-bottom: 10px;
-}
-
-.course-info li strong {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.all-courses {
-  padding: 50px 0;
-  text-align: center; /* Ajout du centrage pour l'ensemble du contenu */
-}
-
-.course-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px; /* Espacement entre les cartes */
-}
-
-.course-card {
-  width: 300px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #f3f3f3; /* Background uniquement pour les cartes */
-  padding: 20px;
-}
-
-.course-title {
-  font-size: 32px; /* Augmentation de la taille du titre */
-  font-weight: bold; /* Rendre le titre en gras */
-  margin-bottom: 15px;
-  color: #333;
-  border-bottom: 2px solid #ccc; /* Ajout de la ligne séparatrice en bas du titre */
-  padding-bottom: 10px; /* Espacement sous le titre */
-}
-
-.course-details {
-  font-size: 18px;
-  color: #555;
-}
-
-.course-info {
-  list-style-type: none;
-  padding: 0;
-}
-
-.course-info li {
-  margin-bottom: 10px;
-}
-
-.course-info li strong {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
 
 /* Style for the underline when button is selected */
 .underline {
@@ -293,10 +151,10 @@ section {
    padding: .8rem 3rem;
    text-align: center;
    margin-bottom: 1rem;
-   width: 260px !important;
+   width: 240px !important;
 }
 .main-btn{
-   background-color: var(--main-color) !important;
+   background-color: var(--main-color);
 }
 .normal-btn{
    background-color: var(--light-bg);
@@ -304,6 +162,203 @@ section {
 .delete-btn{
    background-color: var(--red);
 }
+/* ################################ ADMIN STYLES ##############################*/
+
+/*-----------------  style tabs ---------------------*/
+.items-btn{
+   border-radius: .5rem;
+   padding: .5rem 2rem;
+   text-align: center;
+   background-color: var(--light-color);
+}
+.items-btn span{
+   color: var(--white);
+   background-color: var(--red); 
+   padding: .1rem .64rem;
+   border-radius: 50%;
+}
+
+.active-item{
+   background-color: var(--white);
+   color: var(--main-color);
+}
+
+.ongletContent{
+   display: none;
+   background-color: var(--white);
+   padding: 2rem 2rem;
+   border-radius: 0 4rem 4rem 4rem;
+}
+.ongletBtn ~ div{padding-top: 2rem;}
+
+/*-------------------- style admin stat box ----------------*/
+.adminStat{
+   text-align: center;
+   flex-direction: column;
+   font-size: 1.8rem;
+   color: var(--black);
+   background-color: var(--light-bg);
+   border-radius: 1rem;
+   border: var(--border);
+   padding: 1.4rem 7rem;
+}
+
+.adminStat kk
+
+.adminStat center img{
+   background-color: rgba(247, 244, 244, 0.93);
+   border-radius: 20%;
+}
+
+.liste table thead tr th{ 
+   color: var(--black);
+   font-size: 1.4rem;
+   font-weight: bold;
+}
+.liste table tbody tr td{ color: var(--black); }
+
+.tab2Content{
+   display: grid;
+   grid-template-columns: minmax(40%, 1.5fr) .35rem 40%;
+}
+
+#tab1 fieldset legend {
+   font-size: 1.5rem;
+   font-weight: bold;
+   color: var(--black);
+}
+
+#tab1 fieldset{margin-bottom: 3rem;}
+
+hr{
+   background-color: var(--light-color);
+   height: 90%;
+   align-self: center;
+}
+
+/*------------------ Little profile aside the prof's list ------------------*/
+.identity{color: var(--black);}
+.identity img{
+   width: 6rem;
+   height: 6rem;
+   border-radius: 50%;
+}
+
+.profPop{
+   background-color: var(--light-bg);
+   width: max-content;
+   max-width: 20%;
+   word-wrap: break-word;
+   border-radius: 2rem;
+   padding: 1rem 1.4rem;
+}
+
+.courses{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 2rem;
+   max-height: 75vh;
+}
+
+.module{
+   flex-direction: column;
+   max-width: 45%;
+   width: max-content;
+   background-color: var(--light-bg);
+   color: var(--black);
+   word-wrap: break-word;
+   padding: 1.2rem 3.5rem;
+   border-radius: 2rem;
+}
+
+/*------------------ popUp style ------------------*/
+
+.popUp{
+   position: fixed;
+   top: 0;left: 0;
+   width: 100vw;
+   height: 98vh;
+   background-color: var(--under-black);
+   z-index: 999999;
+}
+
+.popUp .content{
+   position: relative;
+   width: 50%;
+   height: 40%;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: var(--light-bg);
+   border-radius: 2rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 2rem .5rem;
+}
+
+.popUp .content button{
+   border-radius: 1.5rem;
+   padding: 1.2rem 6rem;
+   text-align: center;
+   font-size: 1.6rem;
+}
+
+.popUp .content span{
+   font-size: 1.8rem;
+   color: var(--black);
+   margin-bottom: 1.2rem;
+   text-align: center;
+   padding: 0rem 1.5rem;
+}
+
+/*------------------ message style ------------------*/
+.message{
+   width: 95%;
+   background-color: var(--light-bg);
+   color: var(--black);
+   font-size: 1.5rem;
+   padding: 1.2rem 1.6rem;
+   margin: 0.6rem 0rem;
+   border-radius: 2rem;
+   position: relative;
+}
+
+.message span:last-child{
+   position: absolute;
+   bottom: 1.2rem; right: 1.6rem;
+   text-decoration: underline;
+   font-size: 1.7rem;
+   cursor: pointer;
+}
+
+.contentBox{
+   font-size: 1.4rem;
+   color: var(--black);
+   margin: .5rem 1.4rem;
+   padding: .6rem 1rem;
+   position: relative;
+   max-width: 90%;
+   width: fit-content;
+}
+
+.content{
+   width: max-content;
+   max-width: 90%;
+   word-wrap: break-word;
+   background-color: var(--light-bg);
+   padding: 1.2rem 1.5rem;
+   border-radius: 2rem;
+}
+.action{
+   position: absolute;
+   right: 2rem;
+}
+ 
+
 /* 
 .inline-btn,
 .inline-option-btn,
@@ -540,7 +595,7 @@ section {
 
 .side-bar {
    position: fixed;
-   top: 10.70%;
+   top: 10%;
    left: 0;
    width: 30rem;
    height: 100vh;
@@ -673,6 +728,8 @@ section {
    gap: 10px;
    padding: 10px 6px;
    background-color:var(--white);
+   border-radius:10px;
+   margin-left:1%;
 }
 
 .course-item-image {
@@ -726,6 +783,7 @@ section {
    text-transform: capitalize;
    color: var(--white);
 }
+
 .right-content .pro_table tbody tr:nth-child(even){
   background-color: var(--under-black);
 }
@@ -1513,7 +1571,7 @@ section {
 
 .user-profile .info .user p {
    font-size: 1.7rem;
-   color: var(--black);
+   color: var(--light-color);
    padding: .3rem 0;
 }
 
@@ -1522,10 +1580,7 @@ section {
    flex-wrap: wrap;
    gap: 1.5rem;
 }
-.center{
-  display: flex;
-  justify-content: center;
-}
+
 .user-profile .info .box-container .box {
    background-color: var(--light-bg);
    border-radius: .5rem;
@@ -1688,10 +1743,6 @@ section {
 }
 
 
-
-
-/* modifier profile */
-
 .footer {
    background-color: var(--white);
    border-top: var(--border);
@@ -1711,45 +1762,6 @@ section {
 .footer span {
    color: var(--main-color);
 }
-/* ///////style pour gestion des messages */
-
-.container {
-   width: 800px;
-   max-width: 800px;
-   margin: 20px auto;
-   background-color: var(--white);
-   padding: 20px;
-   border-radius: 5px;
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-h1 {
-   text-align: center;
-}
-.message {
-   padding: 10px;
-   width: calc(100% - 10px);
-   background-color: var(--light-color);
-   border-radius: 9px;
-}
-.message:last-child {
-   border-bottom: none;
-}
-.message .sender {
-   font-size: 22px;
-   font-weight: bold;
-   color: #007bff;
-   margin-right: 10px;
-}
-.message .timestamp {
-   font-size: 12px;
-   color: #999;
-}
-.message .content {
-   margin-top: 5px;
-   font-size: 15px;
-   color: var(--black);
-}
-
 
 @media (max-width:1200px) {
 
@@ -1773,28 +1785,6 @@ h1 {
    }
 
 }
-/* Styles pour la mise en page des étudiants par cours */
-.students-by-course {
-   padding: 50px 0;
-   text-align: center; /* Centrage du contenu */
-}
-
-.course-title {
-   font-size: 24px; /* Taille du titre du cours */
-   font-weight: bold; /* Mise en gras */
-   margin-bottom: 15px;
-   color: #333;
-}
-
-.students-list {
-   font-size: 18px;
-   color: #555;
-}
-
-.students-list p {
-   margin-bottom: 10px;
-}
-
 
 @media (max-width:991px) {
 
@@ -1850,4 +1840,54 @@ h1 {
       height: 25rem;
    }
 
+}
+.cookie-banner {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   background-color: #f1f1f1;
+   padding: 10px;
+   text-align: center;
+   font-weight:bold;
+   font-size:15px;
+}
+
+.cookie-btn {
+   background-color: #fc8021;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   cursor: pointer;
+   border-radius: 5px;
+}
+
+.cookie-btn:hover {
+   background-color: #e66000;
+}
+/* ---*/
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom:20%;
+   color: var(--black);
+}
+
+th, td {
+   padding: 8px;
+   text-align: center;
+   border-bottom: 1px solid  #e66000;
+   color:var(--black);
+   white-space: nowrap;
+   justify-content: center;
+}
+
+th {
+   background-color:  #e66000;
+}
+
+tbody tr:hover {
+   background-color:  #e66000;
+   
 }

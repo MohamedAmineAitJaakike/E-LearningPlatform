@@ -1,7 +1,15 @@
 <?php if(session_status() === PHP_SESSION_NONE) session_start(); 
+ if(isset($_SESSION['userID'])) include('etudiants_messages.php');
 $is_lecture_page = basename($_SERVER['PHP_SELF']) === 'lecture.php';
 $is_index_page = basename($_SERVER['PHP_SELF']) === 'index.php';
 $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
+$is_register_page = basename($_SERVER['PHP_SELF']) === 'register.php';
+$is_lectureP_page = basename($_SERVER['PHP_SELF']) === 'lectureProgressif.php';
+$is_admin_dashBoard = basename($_SERVER['PHP_SELF']) === 'adminDashboard.php';
+$is_adminLogin = basename($_SERVER['PHP_SELF']) === 'adminLogin.php';
+$is_admin_register = basename($_SERVER['PHP_SELF']) === 'admin_register.php';
+
+$workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
 
 ?>
 <!DOCTYPE html>
@@ -17,8 +25,9 @@ $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
     rel="stylesheet"
    />
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
-   <script defer src="../js/script.js"></script>
+   <link rel="stylesheet" href="<?= $workdir ?>/css/style.css">
+   <script defer src="<?= $workdir ?>/js/script.js"></script>
+   <script defer src="<?= $workdir ?>/js/admin_script.js"></script>
 </head>
 <body>
 
@@ -26,16 +35,18 @@ $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
    <section class="flex">
       
       <div class="left-content">
-         <img src="./logo/logo.png" class='logo' width='50' alt="">
+         <a href="../logout.php" class="logo">
+            <img src="<?= $workdir ?>/logo/logo.png" class='logo' width='50' alt="">
+         </a>
       </div>
 
-      <?php if(isset($_SESSION['userID']) && !$is_lecture_page && !$is_index_page && !$is_login_page){ ?>
+      <?php if(isset($_SESSION['userID']) && !$is_lecture_page && !$is_index_page && !$is_register_page && !$is_login_page && !$is_lectureP_page){ ?>
             <form action="search.php" method="post" class="search-form">
                <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
                <button type="submit" ><i class="ri-search-line"></i></i></button>
             </form>
          <?php } ?>
-      <?php if(isset($_SESSION['userID']) && !$is_index_page && !$is_login_page){ ?>
+      <?php if(isset($_SESSION['userID']) && !$is_index_page && !$is_login_page && !$is_admin_dashBoard && !$is_register_page && isset($_SESSION['user']) && $_SESSION['user'] != "administrateur"){ ?>
          
             <nav class="navbar">
                <a href="<?php echo (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:NULL?>"><i class="ri-home-4-fill"></i></i><span>home</span></a>
@@ -45,13 +56,85 @@ $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
             </nav>
          
       <?php } ?>
+      <!-- Pour l'icone message: affichage message-->
+      <div class="popUp" style="display: none;" id="msg">
+         <div class="content" style="width:90%;height:90%;">
+            <input type="number" name="userId" id="userId" value="" hidden>
+            <input type="text" name="userRole" id="userRole" value="" hidden>
+            <div>
 
+               <div class="sub-title">
+                  <div class="title-content">
+                     <span>Boîte de réception</span>
+                  </div> 
+               </div>
+            </div>
+            <br>
+          <table>
+               <thead>
+                  <tr>
+                     <th>ID Message</th>
+                     <th>Contenu</th>
+                     <th>Date réception</th>
+                     <th>Reçu de </th>
+                     <th>Cours</th>
+                     <th>Statut</th>
+                  </tr> 
+               </thead>
+            <tbody>
+               <?php $mesgIDs=[];
+               while ($mesg = $messagesRecus->fetch_assoc()) {
+                  $sql="SELECT nom,prenom,role from utilisateurs where id=?";
+                  $stmt= $conn->prepare($sql);
+                  $stmt->bind_param('i',$mesg['idExpediteur']);
+                  $stmt->execute();
+                  $result = $stmt->get_result();
+                  $senderInfo = $result->fetch_assoc();
+                  //cours
+                  $sqlC="SELECT titre FROM module WHERE id=?";
+                  $stmtC= $conn->prepare($sqlC);
+                  $stmtC->bind_param('i',$mesg['idCours']);
+                  $stmtC->execute();
+                  $resultC = $stmtC->get_result();
+                  $mesgIDs[]=$mesg['id'];
+                  echo '<tr>';
+                  echo '<td>' . $mesg['id'] . '</td>';
+                  echo '<td>' . $mesg['contenu'] . '</td>';
+                  echo '<td>' . $mesg['date_envoi'] . '</td>';
+                  echo '<td>' . $senderInfo['role'].'. '.$senderInfo['nom'].' '.$senderInfo['prenom'] .'</td>';
+                  if ($resultC->num_rows > 0) {
+                     // Fetch the course title
+                     $cours = $resultC->fetch_assoc();
+                     echo '<td>' . $cours['titre'] . '</td>';
+                  } else {
+                     echo '<td> Pas de cours </td>';
+                  }
+                  if($mesg['est_lu']) echo '<td> <button style="padding:0;background-color:transparent;color:var(--black);"><i class="ri-mail-open-fill"></i></button> </td>';
+                  else echo '<td> <button style="padding:0;background-color:transparent;color:var(--black);"><i class="ri-mail-fill"></i></button> </td>';
+                  echo '</tr>';
+                  }
+               ?>
+           </tbody>
+         </table>
+            <div>
+               <?php $mesgIDsString = implode(',', $mesgIDs); ?>
+               <button class="delete-btn" onclick="window.location.href='/etudiants_messages.php?mesgID=<?= $mesgIDsString?>';">Marquer le tout comme lu</button>
+               <button class="main-btn" onclick="hidePopUp();document.querySelector('.side-bar').style.display='flex'">Fermer</button>
+            </div>
+         </div>
+      </div>
+         <!--Fin affichage -->
       <div class="icons">
-         
-         <a href="etudiants_messages.php" > <div id="menu-btn" class="ri-chat-1-line"></div></a>
+         <?php if(!$is_index_page && !$is_login_page &&!$is_admin_dashBoard && isset($_SESSION['user']) && $_SESSION['user'] != "administrateur"){ ?>
+            <button style="background-color:transparent" onclick="document.getElementById('msg').style.display='flex';document.querySelector('.side-bar').style.display='none';" > 
+               <div id="menu-btn" class="ri-chat-1-line">              
+                  <?php if(isset($_SESSION['userID'])) echo ($nb_non_lu > 0)? "<span style=\"background-color:red;border-radius:100%;padding:3%;padding-right:4%;padding-left:4%\">".$nb_non_lu."</span>" : "<span style=\"background-color:red;border-radius:100%;padding:3%;padding-right:4%;padding-left:4%\">0</span>" ?>
+               </div>
+            </button>
+         <?php }?>
          <div id="toggle-btn" class="ri-sun-line"></div>
       </div>
-
+      
    </section>
 
-</header>   
+</header>
