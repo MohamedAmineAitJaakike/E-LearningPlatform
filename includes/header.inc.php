@@ -55,7 +55,7 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                <a href="contact.php"><i class="ri-mail-fill"></i><span>contact</span></a>
             </nav>
          
-      <?php } ?>
+     
       <!-- Pour l'icone message: affichage message-->
       <div class="popUp" style="display: none;" id="msg">
          <div class="content" style="width:90%;height:90%;">
@@ -123,6 +123,7 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
             </div>
          </div>
       </div>
+      <?php } ?>
          <!--Fin affichage -->
       <div class="icons">
          <?php if(!$is_index_page && !$is_login_page &&!$is_admin_dashBoard && isset($_SESSION['user']) && $_SESSION['user'] != "administrateur"){ ?>
