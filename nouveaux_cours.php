@@ -32,7 +32,7 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
             </div>
             <?php if (!empty($cours)) { ?>
                 <?php foreach ($cours as $cour) {?>
-                    <?php if (!estDejaInscrit($conn, $_SESSION['userID'],1)){?>
+                    <?php if (!estDejaInscrit($conn, $_SESSION['userID'],$cour['id'])){?>
                         <!--apres mettre $_SESSION['id_cours'] a la place de 1-->
                         <div class="box">
                             <div class="course-item">

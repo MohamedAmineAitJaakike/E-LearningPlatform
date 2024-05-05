@@ -6,7 +6,10 @@ if (isset($_POST['send'])) {
     session_start();
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $user = login_user($conn, $email, $password);
+    
+    $user = (isset($_POST['isAdmin']) && $_POST['isAdmin'] == "on")? 
+                login_user($conn, $email, $password, true) : login_user($conn, $email, $password);
+
     if (!empty($user)) {
         $_SESSION['userID'] = $user['id'];
         $_SESSION['email'] = $user['mail'];
@@ -16,7 +19,11 @@ if (isset($_POST['send'])) {
         if ($user['role'] == 'professeur') {
             header('Location: ../home_professeur.php');
             exit;
-        } else {
+        } elseif ($user['role'] == 'administrateur'){
+            header('Location: ../adminDashboard.php');
+            exit;
+        } 
+        else {
             header('Location: ../home_etudiant.php');
             exit;
         }

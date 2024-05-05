@@ -16,7 +16,7 @@ session_destroy();
 </head>
 <body>
    <div class="form-container">
-      <form action="/process/process_login.php" method="POST">
+      <form action="process/process_login.php" method="POST">
          <h3>SE CONNECTER</h3>
          <p>VOTRE EMAIL <span>*</span></p>
          <input type="email" name="email" placeholder="ENTREZ VOTRE EMAIL..." required maxlength="50" class="box">

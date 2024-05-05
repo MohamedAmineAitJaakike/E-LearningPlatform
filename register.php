@@ -1,8 +1,12 @@
 <?php
+//to make the difference between register and register_admin
+$is_admin_register = basename($_SERVER['PHP_SELF']) === 'admin_register.php';
 //for connect
-include("./includes/connection.inc.php");
-include("./includes/header.inc.php");
-include("./includes/fn.inc.php");
+   if(!$is_admin_register)
+      include("./includes/header.inc.php");
+
+   include("$workdir/includes/connection.inc.php");
+   include("$workdir/includes/fn.inc.php");
 //for signup
 if(session_status()==PHP_SESSION_NONE) session_start();
 if (isset($_POST['send'])) {
@@ -11,28 +15,32 @@ if (isset($_POST['send'])) {
    $email=$_POST['email'];
    $password=$_POST['password'];
    $c_password=$_POST['c_password'];
-   $userType=$_POST['user_type'];
+   $userType=(isset($_POST['user_type']))? $_POST['user_type'] : "administrateur";
    $image_name=$_FILES['image']['name'];
    $tmp_name=$_FILES['image']['tmp_name'];
    $direction='./users_images';
    if($password === $c_password){
-      $user_id=rand(10,10000000);
+        $userID=rand(10,1000000);
         $_SESSION['name']=$name;
-        $_SESSION['userID']=$user_id;
         $_SESSION['prenom']=$prenom;
         $_SESSION['email']=$email;
+        $_SESSION['userID']=$userID;
         $_SESSION['image']=$image_name;
         $_SESSION['user']=$userType;
-        if(!check_user_exist($conn, $name, $prenom, $email, $password)){
+        var_dump('userID');
+        
+        if(!check_user_exist($conn, $name, $prenom, $email, $password, $userType)){
          $result = register($conn, $name, $prenom, $email, $password, $image_name, $userType);
-
          if($result){
             move_uploaded_file($tmp_name,"$direction/$image_name");
             if($userType === 'etudiant'){
                header('Location: home_etudiant.php');
             } 
-            else{
+            elseif ($userType === 'professeur'){
                header('Location: home_professeur.php');
+            }
+            else{
+               header('Location: ../adminDashboard.php');
             }
          }
       }else{ echo "<center><h1 style=\"color:red;bottom:10%;\">Utilisateur existe Deja!<h1></center>";
@@ -73,12 +81,17 @@ if (isset($_POST['send'])) {
       <input type="password" name="password" placeholder="enter your password" required  class="box">
       <p>confirm password <span>*</span></p>
       <input type="password" name="c_password" placeholder="confirm your password" required  class="box">
-      <p>le type d'utilisateur <span>*</span></p>
-       <select name="user_type" class='box'>
-         <option value="professeur">professeur</option>
-         <option value="etudiant">etudiant</option>
-         <option value="etudiant">administrateur</option>
-       </select>
+
+      <?php if(!$is_admin_register){ ?>
+
+         <p>le type d'utilisateur <span>*</span></p>
+          <select name="user_type" class='box'>
+            <option value="professeur">professeur</option>
+            <option value="etudiant">etudiant</option>
+          </select>
+
+      <?php } ?>
+
       <p>select profile <span>*</span></p>
       <input type="file" name='image'  required class="box">
       <center><button type='submit' name='send' class='btn main-btn'>submit</button></center>
