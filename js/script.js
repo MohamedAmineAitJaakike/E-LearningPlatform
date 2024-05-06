@@ -147,5 +147,14 @@ function closeDetails() {
    var url = window.location.href.split('?')[0]; // Obtenir l'URL sans les paramètres
    window.location.href = url; // Rediriger vers l'URL sans le paramètre 'details'
 }
-
+function markAllAsRead() {
+   // Make an AJAX request to update the message status
+   var xhr = new XMLHttpRequest();
+   xhr.open('POST', '/etudiants_messages.php', true);
+   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   // Send additional data to indicate the action
+   var formData = new FormData();
+   formData.append('action', 'markAllAsRead');
+   xhr.send(formData);
+}
 /*----------------------------- ADMIN FUNCTIONS ---------------------------- */

@@ -1,8 +1,9 @@
 <?php
+if(session_status()==PHP_SESSION_NONE) session_start();
 // Inclure le fichier de connexion à la base de données
 include('../includes/connection.inc.php');
 include('../includes/fn.inc.php');
-if(session_status()==PHP_SESSION_NONE) session_start();
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si les données du formulaire sont présentes
@@ -17,9 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($codeCoursCorrect) {
             // Inscrire l'utilisateur au cours dans la base de données
             //checker si deja inscrit (a implementer)
-            $stmt = $conn->prepare("INSERT INTO courssuivis (idEtudiant, idCours) VALUES (?, ?)");
+            $stmt = $conn->prepare("INSERT INTO courssuivis (id,idEtudiant, idCours) VALUES (NULL,?, ?)");
             $stmt->bind_param("ii", $_SESSION["userID"], $idCours);
-
+            var_dump($_SESSION['userID']);
+            var_dump($idCours);
+            //var_dump($stmt->execute());
             if ($stmt->execute()) {
                 // Redirection vers une page de succès
                 header("Location: ../home_etudiant.php");

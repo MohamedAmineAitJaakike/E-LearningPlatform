@@ -291,8 +291,8 @@ hr{
 
 .popUp .content{
    position: relative;
-   width: 40%;
-   height: 20%;
+   width: 50%;
+   height: 40%;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
@@ -1845,4 +1845,54 @@ hr{
       height: 25rem;
    }
 
+}
+.cookie-banner {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   background-color: #f1f1f1;
+   padding: 10px;
+   text-align: center;
+   font-weight:bold;
+   font-size:15px;
+}
+
+.cookie-btn {
+   background-color: #fc8021;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   cursor: pointer;
+   border-radius: 5px;
+}
+
+.cookie-btn:hover {
+   background-color: #e66000;
+}
+/* ---*/
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom:20%;
+   color: var(--black);
+}
+
+th, td {
+   padding: 8px;
+   text-align: center;
+   border-bottom: 1px solid  #e66000;
+   color:var(--black);
+   white-space: nowrap;
+   justify-content: center;
+}
+
+th {
+   background-color:  #e66000;
+}
+
+tbody tr:hover {
+   background-color:  #e66000;
+   
 }

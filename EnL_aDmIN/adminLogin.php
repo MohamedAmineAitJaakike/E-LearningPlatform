@@ -1,6 +1,8 @@
-<?php include("../includes/header.inc.php");
+<?php 
+session_start();
 session_unset();
 session_destroy();
+include("../includes/header.inc.php");
 ?><!-- si le remember me token n'est pas selectionne-->
 
 <div class="form-container">

@@ -1,13 +1,18 @@
  <?php
  //for connect
- include('./includes/connection.inc.php');
  include('./includes/fn.inc.php');
+ include('./includes/connection.inc.php');
  require_once'./includes/header.inc.php';
  include('./includes/side_profile.inc.php');
+
  if(session_status() === PHP_SESSION_NONE) session_start(); 
- if(!$_SESSION['userID']){
-   header('Location: login.php');
+
+ //vérifie la session si c'est vraiment un user (prof ou etudiant) et rediriger vers login
+ $condition = !$_SESSION['userID'] || (isset($_SESSION['userID']) && !isUser($conn, $_SESSION['userID']));
+ if($condition){
+     header('Location: ./login.php');
  }
+
  if (isset($_POST['ajouter_course'])) {
  if(!empty($_POST['cour_name']) && !empty($_POST['cour_password'])){
    $cour_name=$_POST['cour_name'];

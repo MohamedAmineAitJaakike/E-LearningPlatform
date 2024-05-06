@@ -112,7 +112,11 @@ function getChapter($conn,$courID){
     $stmt->execute();
     return  $stmt->get_result();
 }
-function actif($conn){
-
+//vérifier si c'est un user et le rediriger vers login
+function isUser($conn, $userID){
+    $stmt = $conn->query("select count(*) as nb from utilisateurs where id = ".$userID);
+    $res = $stmt->fetch_assoc();
+    echo $res['nb'];
+    return ($res['nb'] > 0)? true : false ;
 }
 ?>

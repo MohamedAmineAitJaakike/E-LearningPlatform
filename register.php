@@ -20,22 +20,22 @@ if (isset($_POST['send'])) {
    $tmp_name=$_FILES['image']['tmp_name'];
    $direction="$workdir/users_images";
    if($password === $c_password){
-        $userID=rand(10,1000000);
+      //   $userID=rand(10,1000000);
+      //   $_SESSION['userID']=$userID;
         $_SESSION['name']=$name;
         $_SESSION['prenom']=$prenom;
         $_SESSION['email']=$email;
-        $_SESSION['userID']=$userID;
         $_SESSION['image']=$image_name;
         $_SESSION['user']=$userType;
         if(!check_user_exist($conn, $name, $prenom, $email, $password, $userType)){
          $result = register($conn, $name, $prenom, $email, $password, $image_name, $userType);
          if($result){
             move_uploaded_file($tmp_name,"$direction/$image_name");
-            if($userType === 'etudiant'){
-               header('Location: home_etudiant.php');
-            } 
-            elseif ($userType === 'professeur'){
-               header('Location: home_professeur.php');
+            if($userType != 'administrateur'){
+               header('Location: login.php');
+            // } 
+            // elseif ($userType === 'professeur'){
+            //    header('Location: home_professeur.php');
             }
             else{
                header('Location: ../adminDashboard.php');

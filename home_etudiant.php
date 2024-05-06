@@ -3,9 +3,12 @@ include('./includes/connection.inc.php');
 include('./includes/fn.inc.php');
 require_once('./includes/header.inc.php');
 include('./includes/side_profile.inc.php');
+
 if(session_status() === PHP_SESSION_NONE) session_start(); 
-if(!$_SESSION['userID']){
-    header('Location: login.php');
+
+$condition = !$_SESSION['userID'] || (isset($_SESSION['userID']) && !isUser($conn, $_SESSION['userID']));
+if($condition){
+    header('Location: ./login.php');
 }
 
 // Récupérer les cours depuis la base de données
@@ -19,7 +22,6 @@ $stmt->bind_param("i", $_SESSION["userID"]);
 $stmt->execute();
 $result = $stmt->get_result();
 $cours = $result->fetch_all(MYSQLI_ASSOC);
-///###########
 
 ?>
 <!DOCTYPE html>
