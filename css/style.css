@@ -1770,12 +1770,12 @@ hr{
 
 @media (max-width:1200px) {
 
-   body {
+   section {
       padding-left: 0;
    }
 
    .side-bar {
-      left: -30rem;
+      left: -40rem;
       transition: .2s linear;
    }
 

@@ -18,7 +18,7 @@ if (isset($_POST['send'])) {
    $userType=(isset($_POST['user_type']))? $_POST['user_type'] : "administrateur";
    $image_name=$_FILES['image']['name'];
    $tmp_name=$_FILES['image']['tmp_name'];
-   $direction='./users_images';
+   $direction="$workdir/users_images";
    if($password === $c_password){
         $userID=rand(10,1000000);
         $_SESSION['name']=$name;
