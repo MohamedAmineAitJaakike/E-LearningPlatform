@@ -16,6 +16,7 @@ if (isset($_POST['send'])) {
         $_SESSION['user'] = $user['role'];
         $_SESSION['image'] = $user['image'];
         $_SESSION['name'] = $user['nom'];
+        $_SESSION['prenom'] = $user['prenom'];
         if ($user['role'] == 'professeur') {
             header('Location: ../home_professeur.php');
             exit;

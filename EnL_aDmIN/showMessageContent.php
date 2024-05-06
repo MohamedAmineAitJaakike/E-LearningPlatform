@@ -15,6 +15,7 @@
         <h2 class="name"><?= $nomComplet = $userInfo[0]['nom'].' '.$userInfo[0]['prenom'] ?></h2>
     </center>
 </div>
+<div class="sub-title"><h3 class='title-content' style="font-size: initial;">Demande de <span>suppression de compte<span></h3></div>
 <div class="contentBox">
     <span class="dateEnvoie"><?= $_GET['date_envoie'] ?></span>
     <div class="content">

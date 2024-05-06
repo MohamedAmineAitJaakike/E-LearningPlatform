@@ -12,7 +12,7 @@
     $nbCourse = $queryOnModule->fetch_assoc();
 
     //fetching total number of admin's message
-    $queryOnMessage = $conn->query("SELECT count(*) as nbMsg, est_lu FROM message WHERE idRecepteur = '".$_SESSION['userID']."' group by est_lu");
+    $queryOnMessage = $conn->query("SELECT count(*) as nbMsg, est_lu FROM message WHERE idRecepteur is null and idCours is null group by est_lu");
     $nbMessage = $queryOnMessage->fetch_all(MYSQLI_ASSOC);
    
     $nb_lu = 0; $nb_non_lu = 0;

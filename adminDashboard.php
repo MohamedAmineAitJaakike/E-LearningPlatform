@@ -96,5 +96,5 @@
     </div>
 </div>
 
-<script src="./js//admin_script.js"></script>
+<script src="./js/admin_script.js"></script>
 <?php include('./includes/footer.inc.php'); ?>

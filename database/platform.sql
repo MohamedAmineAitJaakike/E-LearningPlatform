@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS courssuivis (
 DROP TABLE IF EXISTS message;
 CREATE TABLE IF NOT EXISTS message (
   id int NOT NULL AUTO_INCREMENT,
-  idCours int NOT NULL,
+  idCours int DEFAULT NULL,
   idExpediteur int NOT NULL,
-  idRecepteur int NOT NULL,
+  idRecepteur int DEFAULT NULL,
   contenu text COLLATE utf8mb4_general_ci NOT NULL,
   date_envoi timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   est_annonce int DEFAULT NULL,

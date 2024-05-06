@@ -29,8 +29,7 @@
 </div>
 
 <?php
-$userID = $_SESSION['userID'];
-$sql = "SELECT * FROM message WHERE idRecepteur = '$userID'";
+$sql = "SELECT * FROM message WHERE idRecepteur is null and idCours is null order by date_envoi desc";
 $result = $conn->query($sql);
 // Afficher les messages
 if ($result->num_rows > 0) {
