@@ -1,5 +1,5 @@
 <?php if(session_status() === PHP_SESSION_NONE) session_start(); 
- if(isset($_SESSION['userID'])) include('etudiants_messages.php');
+if(isset($_SESSION['userID']) &&  $_SESSION['user']!="administrateur") include('etudiants_messages.php');
 $is_lecture_page = basename($_SERVER['PHP_SELF']) === 'lecture.php';
 $is_index_page = basename($_SERVER['PHP_SELF']) === 'index.php';
 $is_login_page = basename($_SERVER['PHP_SELF']) === 'login.php';
