@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$port = "3306";
-$password = "Hf_MySQl_root+2684";
+$port = "3308";
+$password = "";
 $dbname = "platform";
 
 // Creer une connexion

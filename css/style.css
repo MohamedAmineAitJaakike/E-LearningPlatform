@@ -219,6 +219,7 @@ section {
    color: var(--black);
    font-size: 1.4rem;
    font-weight: bold;
+   background-color: transparent;
 }
 .liste table tbody tr td{ color: var(--black); }
 .liste table tbody tr:hover td{ 
@@ -1817,9 +1818,9 @@ th, td {
    justify-content: center;
 }
 
-/* th {
+th {
    background-color:  #e66000;
-} */
+}
 
 tbody tr:hover{
    background-color:  var(--main-color); 
