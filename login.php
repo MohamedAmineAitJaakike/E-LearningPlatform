@@ -1,4 +1,5 @@
-<?php include("./includes/header.inc.php");
+<?php
+include("./includes/header.inc.php");
 session_unset();
 session_destroy();
 ?><!-- si le remember me token n'est pas selectionne-->
@@ -15,23 +16,27 @@ session_destroy();
    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-   <div class="form-container">
-      <form action="process/process_login.php" method="POST">
-         <h3>SE CONNECTER</h3>
-         <p>VOTRE EMAIL <span>*</span></p>
-         <input type="email" name="email" placeholder="ENTREZ VOTRE EMAIL..." required maxlength="50" class="box">
-         <p>VOTRE MOT DE PASSE <span>*</span></p>
-         <input type="password" name="password" placeholder="ENTREZ VOTRE MOT DE PASSE..." required maxlength="20" class="box">
 
-         <label for="remember_me"><input type="checkbox" name="remember_me" id="remember_me"> Se souvenir de moi</label>
-         <!-- a implementer-->
+   <?php include('./includes/navAccueil.php') ?>
+   <div class="home">
+      <div class="homeContent">
+         <div class="form-container" style="margin-top: 12rem;">
+            <form action="process/process_login.php" method="POST">
+               <h3>SE CONNECTER</h3>
+               <label for="mail">VOTRE EMAIL <span>*</span></label>
+               <input id="mail" type="email" name="email" placeholder="Entrez votre email..." required maxlength="50" class="box">
+               <label for="password">VOTRE MOT DE PASSE <span>*</span></label>
+               <input id="password" type="password" name="password" placeholder="Entrez votre mot de passe..." required maxlength="20" class="box">
 
-         <center><input type="submit" value="SE CONNECTER" name="send" class="btn main-btn"></center>
-
-         <center><a href="./Oublie_mdp/mot_de_passe_oublie.php">Mot de passe oublié ?</a></center><!-- a implementer-->
-      </form>
-
+               <input type="submit" value="SE CONNECTER" name="send" class="btn main-btn" style="margin-left: 24%; margin-top: 4rem;">
+            </form>
+         </div>
+      </div>
+      <div class="image">
+         <img src="images/online.png" alt="home-image">
+      </div>
    </div>
+    
    <!-- custom js file link  -->
    <script src="js/script.js"></script>
 </body>

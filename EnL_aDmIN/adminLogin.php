@@ -2,24 +2,61 @@
 session_start();
 session_unset();
 session_destroy();
-include("../includes/header.inc.php");
-?><!-- si le remember me token n'est pas selectionne-->
+// include("../includes/header.inc.php");
+?>
 
-<div class="form-container">
-   <form action="../process/process_login.php" method="POST">
-      <h3>Se connecter en tant qu'Administrateur</h3>
-      <input type="checkbox" name="isAdmin" id="isAdmin" checked hidden>
-      <p>VOTRE EMAIL <span>*</span></p>
-      <input type="email" name="email" placeholder="ENTREZ VOTRE EMAIL..." required maxlength="50" class="box">
-      <p>VOTRE MOT DE PASSE <span>*</span></p>
-      <input type="password" name="password" placeholder="ENTREZ VOTRE MOT DE PASSE..." required maxlength="20" class="box">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>register</title>
 
-      <label for="remember_me"><input type="checkbox" name="remember_me" id="remember_me"> Se souvenir de moi</label>
-      <!-- a implementer-->
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
-      <center><input type="submit" value="SE CONNECTER" name="send" class="btn main-btn"></center>
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="../css/style.css">
 
-      <center><a href="../Oublie_mdp/mot_de_passe_oublie.php">Mot de passe oublié ?</a></center><!-- a implementer-->
-   </form>
+</head>
+<body>
+   <header class="headerHome">   
+         <div class="left-content">
+               <a href="#" class="logo">
+                  <img src="../logo/logo.png" class='logo' width='50' alt="">
+               </a>
+         </div>
+         <div class="rightContent">
+               <nav class="navbar">
+                  <a href="#" role="button" aria-pressed="true" class="home-navbar-btn">Connexion</a>
+               </nav>
+               
+               <div class="icons" >
+                  <div id="toggle-btn" class="ri-sun-line"></div>
+               </div>
+         </div>
+   </header>
+   <div class="home">
+      <div class="homeContent" style="margin-top: 10rem;">
+         <div class="form-container">
+            <form action="../process/process_login.php" method="POST">
+               <h3>Se connecter en tant qu'Administrateur</h3>
+               <input type="checkbox" name="isAdmin" id="isAdmin" checked hidden> <br> <br>
+               <label for="mail">VOTRE EMAIL <span>*</span></label>
+               <input id="mail" type="email" name="email" placeholder="ENTREZ VOTRE EMAIL..." required maxlength="50" class="box">
+               <label for="password" >VOTRE MOT DE PASSE <span>*</span></label>
+               <input id="password" type="password" name="password" placeholder="ENTREZ VOTRE MOT DE PASSE..." required maxlength="20" class="box">
 
-</div>
+               <input type="submit" value="SE CONNECTER" name="send" class="btn main-btn" style="margin-left: 24%; margin-top: 4rem;">
+
+            </form>
+         </div>
+      </div>
+      <div class="image">
+         <img src="../images/online.png" alt="home-image">
+      </div>
+   </div>
+  
+<script src="../js/script.js"></script>
+</body>
+</html>

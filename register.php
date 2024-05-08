@@ -66,34 +66,42 @@ if (isset($_POST['send'])) {
 
 </head>
 <body>
-<div class="form-container">
-   <form  method="POST" enctype="multipart/form-data">
-      <h3>register now</h3>
-      <p>Votre nom <span>*</span></p>
-      <input type="text" name="name" placeholder="enter your name" required  class="box">
-      <p>Votre prenom <span>*</span></p>
-      <input type="text" name="prenom" placeholder="entrez votre prenom" required  class="box">
-      <p>your email <span>*</span></p>
-      <input type="email" name="email" placeholder="enter your email" required  class="box">
-      <p>your password <span>*</span></p>
-      <input type="password" name="password" placeholder="enter your password" required  class="box">
-      <p>confirm password <span>*</span></p>
-      <input type="password" name="c_password" placeholder="confirm your password" required  class="box">
+<div class="home">
+   <?php include('./includes/navAccueil.php') ?>
+   <div class="homeContent" style="margin-top: 10rem;">
+      <div class="form-container">
+         <form  method="POST" enctype="multipart/form-data">
+            <h3>register now</h3>
+            <label for="nom">Votre nom <span>*</span></label>
+            <input id="nom" type="text" name="name" placeholder="enter your name" required  class="box">
+            <label for="prenom">Votre prenom <span>*</span></label>
+            <input prenom type="text" name="prenom" placeholder="entrez votre prenom" required  class="box">
+            <label for="mail">your email <span>*</span></label>
+            <input id="mail" type="email" name="email" placeholder="enter your email" required  class="box">
+            <label for="password">your password <span>*</span></label>
+            <input id="password" type="password" name="password" placeholder="enter your password" required  class="box">
+            <label for="c_password">confirm password <span>*</span></label>
+            <input id="c_password" type="password" name="c_password" placeholder="confirm your password" required  class="box">
 
-      <?php if(!$is_admin_register){ ?>
+            <?php if(!$is_admin_register){ ?>
 
-         <p>le type d'utilisateur <span>*</span></p>
-          <select name="user_type" class='box'>
-            <option value="professeur">professeur</option>
-            <option value="etudiant">etudiant</option>
-          </select>
+               <label for="role">le type d'utilisateur <span>*</span></label>
+               <select id="role" name="user_type" class='box'>
+                  <option value="professeur">professeur</option>
+                  <option value="etudiant">etudiant</option>
+               </select>
 
-      <?php } ?>
+            <?php } ?>
 
-      <p>select profile <span>*</span></p>
-      <input type="file" name='image'  required class="box">
-      <center><button type='submit' name='send' class='btn main-btn'>submit</button></center>
-   </form>
+            <label for="photo">select profile <span>*</span></label>
+            <input id="photo" type="file" name='image'  required class="box">
+            <center><button type='submit' name='send' class='btn main-btn'>submit</button></center>
+         </form>
+      </div>
+   </div>
+   <div class="image">
+      <img src="images/online.png" alt="home-image">
+   </div>
 </div>
 <!-- custom js file link  -->
 <script src="js/script.js"></script>

@@ -1,11 +1,12 @@
-<?php include('./includes/header.inc.php'); ?>
 <?php include('./includes/connection.inc.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page D'acceuil</title>
+   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>EnL home</title>
 </head>
 <body>
     <!-- Cookieee-->
@@ -20,21 +21,28 @@
         </div>';
     }
     ?>
+                
 
-
-    <div class="form-container" style="display:flex;flex-direction:column">
-        <div class="sub-title">
-            <h1 class='title-content'>Bienvenue sur votre plateforme d'apprentissage <span style="color:#fc8021;">"EnL"</span></h1>
+    <?php include('./includes/navAccueil.php') ?>
+    <div class="home">
+        <div class="homeContent">
+            <div class="welcome">
+                <h2>Explorez l'éducation en ligne sur <span>"EnL"</span> : des cours passionnants, des instructeurs experts. Développez vos compétences dès maintenant !</h2>
+                <blockquote class="citation">
+                    « L'éducation est l'arme la plus puissante que l'on puisse utiliser pour changer le monde » 
+                    <span>-Nelson Mandela.</span>
+                </blockquote>
+                <div class="option">
+                    <a href="register.php" role="button" aria-pressed="true" class="btn-getStarted">Commencer maintenant</a>
+                </div>
+            </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <div class="sub-title" style="display:flex;flex-direction:column">
-            <a href="login.php" class="title-content" role="button" aria-pressed="true"><center><button class="btn main-btn">Connexion</button></center></a>
-            <a href="register.php" class="title-content" role="button" aria-pressed="true"><center><button class="btn main-btn">Inscription</button></center></a>
+        <div class="image">
+            <img src="images/online.png" alt="home-image">
         </div>
     </div>
 
+    <script src="js/script.js"></script>
     <!-- Script pour gérer l'acceptation des cookies -->
     <script>
         function acceptCookies() {
