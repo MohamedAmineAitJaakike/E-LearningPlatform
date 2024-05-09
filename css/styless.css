@@ -641,7 +641,7 @@ hr{
    border-right: var(--border);
    padding-inline: 12px;
    padding-top: 29px;
-   z-index: 1200;
+   z-index: 120;
 }
 
 .side-bar #close-btn {
@@ -1894,7 +1894,7 @@ hr{
    bottom: 0;
    left: 0;
    width: 100%;
-   background-color: #f1f1f1;
+   background-color: var(--black);
    padding: 10px;
    text-align: center;
    font-weight:bold;
@@ -1903,7 +1903,7 @@ hr{
 
 .cookie-btn {
    background-color: #fc8021;
-   color: white;
+   color: var(--black);
    padding: 10px 20px;
    border: none;
    cursor: pointer;
@@ -1938,4 +1938,42 @@ th {
 tbody tr:hover {
    background-color:  #e66000;
    
+}
+.dropdown-search-bar {
+   position: absolute;
+   top: 100%;
+   width: 35rem;
+   min-height:50px;
+   left:15%;
+   background-color: var(--white);
+   border: 1px solid #ccc;
+   border-top: none;
+   border-radius: 0 0 5px 5px;
+   z-index: 10000;
+   display: none; /* Par défaut, le menu déroulant est caché */
+   flex-direction:column;
+   max-height: 500px; /* Hauteur maximale du menu déroulant */
+   overflow-y: auto; /* Activer le défilement si nécessaire */
+}
+
+/* Style pour les éléments de la liste déroulante */
+.dropdown-search-bar ul {
+list-style-type: none;
+padding: 0;
+margin: 0;
+font-weight:bold;
+font-size:medium;
+color:var(--black);
+
+}
+
+.dropdown-search-bar li {
+padding: 10px;
+cursor: pointer;
+text-align: left;
+text-wrap:nowrap;
+}
+
+.dropdown-search-bar li:hover {
+background-color: #808080;
 }
