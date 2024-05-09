@@ -158,3 +158,48 @@ function markAllAsRead() {
    xhr.send(formData);
 }
 /*----------------------------- ADMIN FUNCTIONS ---------------------------- */
+
+
+
+// messages
+
+// Fonction pour valider le formulaire d'annonce avant soumission
+function validateAnnouncementForm() {
+   var contenu_annonce = document.getElementById('contenu_annonce').value;
+
+   // Vérifier que le contenu de l'annonce n'est pas vide
+   if (contenu_annonce.trim() === '') {
+       var errorMessage = document.getElementById('error-message');
+       errorMessage.textContent = "Veuillez entrer le contenu de l'annonce.";
+       return false; // Empêcher la soumission du formulaire
+   }
+
+   return true; // Autoriser la soumission du formulaire
+}
+
+// Fonction pour envoyer un message
+function sendMessage() {
+   // Get the message content from the input field
+   var messageContent = document.getElementById('messageContent').value;
+
+   // Check if the message content is not empty
+   if (messageContent.trim() !== '') {
+       // Create a new message element
+       var messageElement = document.createElement('div');
+       messageElement.className = 'message';
+       messageElement.textContent = messageContent;
+
+       // Append the message to the messages container
+       var messagesContainer = document.getElementById('messagesContainer');
+       messagesContainer.appendChild(messageElement);
+
+       // Clear the input field after sending the message
+       document.getElementById('messageContent').value = '';
+   } else {
+       alert('Please enter a message.');
+   }
+}
+
+// Event listener for the send button
+document.getElementById('btnSend').addEventListener('click', sendMessage);
+

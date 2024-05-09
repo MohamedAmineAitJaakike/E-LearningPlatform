@@ -1896,3 +1896,113 @@ tbody tr:hover {
    background-color:  #e66000;
    
 }
+
+/* Style pour le conteneur des icônes */
+.icon-container {
+   display: flex; /* Utiliser flexbox */
+   justify-content: center; /* Centrer horizontalement */
+}
+/* Styles messages */
+body {
+   font-family: Arial, sans-serif;
+}
+
+h1 {
+   color: #f0ad4e; /* Couleur orange */
+}
+
+/* Styles pour les zones de formulaire */
+form {
+   margin-top: 20px;
+}
+
+label {
+   font-weight: bold;
+   color: #f0ad4e; /* Couleur orange */
+}
+
+textarea {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #f0ad4e; /* Bordure orange */
+   border-radius: 5px;
+}
+
+input[type="submit"] {
+   background-color: #e79e3c; /* Couleur orange foncé */
+   color: #fff;
+   padding: 8px 16px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+input[type="submit"]:hover {
+   background: linear-gradient(to right, #f0ad4e, #e79e3c); /* Dégradé de orange */
+}
+
+
+/* Styles pour les messages d'erreur */
+.error-message {
+   color: red;
+   font-style: italic;
+}
+
+/* Styles pour les messages */
+.message {
+   background-color: #f0ad4e; /* Couleur orange */
+   padding: 20px;
+   border: 1px solid #e79e3c; /* Bordure légèrement plus foncée */
+   border-radius: 5px;
+   margin-bottom: 15px;
+   color: #fff; /* Texte blanc pour contraste */
+}
+
+/* Dégradé de couleur pour les messages au survol */
+.message:hover {
+   background: linear-gradient(to right, #f0ad4e, #e79e3c); /* Dégradé de orange */
+}
+
+/* Styles pour les boutons d'envoi */
+.btn-send {
+   background-color: #e79e3c; /* Couleur orange foncé */
+   color: #fff;
+   padding: 8px 16px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+/* Styles pour les icônes */
+.icon {
+   font-size: 24px;
+   margin-right: 5px;
+}
+
+/* Style pour le conteneur de la bulle */
+.bubble-container {
+   margin-bottom: 10px; /* Marge inférieure pour séparer les bulles */
+}
+
+/* Style pour la bulle */
+.bubble {
+   max-width: 150px; /* Modifier la largeur selon vos besoins */
+   background-color: #fc3434;
+   padding: 10px;
+   border-radius: 10px;
+   margin-bottom: 15px;
+   text-align: center;
+   font-weight: bold;
+}
+
+/* Style pour la liste déroulante */
+#destinataire {
+   width: 200px; /* Largeur de la liste déroulante */
+}
+
+/* Style pour la textarea */
+#contenu {
+   width: 200px; /* Largeur de la textarea */
+   height: 100px; /* Hauteur de la textarea */
+}
+ 
