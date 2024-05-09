@@ -25,7 +25,7 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
     rel="stylesheet"
    />
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="<?= $workdir ?>/css/style.css">
+   <link rel="stylesheet" href="<?= $workdir ?>/css/styless.css">
    <script defer src="<?= $workdir ?>/js/script.js"></script>
    <script defer src="<?= $workdir ?>/js/admin_script.js"></script>
 </head>

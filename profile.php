@@ -41,11 +41,6 @@ if(session_status() === PHP_SESSION_NONE) session_start(); ?>
 </section>
 
 
-<footer class="footer">
-
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
-
-</footer>
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>

@@ -2,12 +2,13 @@
  //for connect
  include('./includes/connection.inc.php');
  include('./includes/fn.inc.php');
- require_once'./includes/header.inc.php';
+ require_once './includes/headerProf.inc.php';
  include('./includes/side_profile.inc.php');
  if(session_status() === PHP_SESSION_NONE) session_start(); 
  if(!$_SESSION['userID']){
    header('Location: login.php');
  }
+ $userID=$_SESSION['userID'];
  if (isset($_POST['ajouter_course'])) {
  if(!empty($_POST['cour_name']) && !empty($_POST['cour_password'])){
    $cour_name=$_POST['cour_name'];
@@ -25,38 +26,84 @@
    
  }
 }
-//ajouter cour item
-if (isset($_POST['ajouter_cousre_item'])) {
-   if(!empty($_POST['item_name']) && !empty($_FILES['item_content']['name'])){
-     $cour_item_name=$_POST['item_name'];
-     $cour_item_content=$_FILES['item_content']['name'];
-     $courParentName=$_POST['parent_name'];
-     $cour_itemID=rand(10,1000);
-     $select_parent="SELECT * FROM cours WHERE name='$courParentName'";
-     $query=mysqli_query($db,$select_parent);
-     $row=mysqli_fetch_object($query);
-     $courParentID=$row->courID;
-     $sql="INSERT INTO cour(courID, courParentID, courName, content)
-           VALUES('$cour_itemID', $courParentID, '$cour_item_name', '$cour_item_content')";
-  
-     $query=mysqli_query($db,$sql) ;
-        if($query){
-          echo 'cour item a ete ajoute avec succes';
-     }
-     
-   }
-  }
-  //get all cours from db
-    $userID = $_SESSION['userID'];
+//ajouter module
+if (isset($_POST['ajouter_module'])) {
+    if (!empty($_POST['titre']) && !empty($_POST['Code_Cours'])) {
+        $titre = $_POST['titre'];
+        $presentation = $_POST['presentation'];
+        $mots_cles = $_POST['mots_cles'];
+        $cible = $_POST['cible'];
+        $prerequis = $_POST['prerequis'];
+        $code_cours = $_POST['Code_Cours'];
+        $proprietaire = $_SESSION['userID'];
+        $userID=$_SESSION['userID'];
+        // Vérification de la visibilité progressive
+        $est_progressif = isset($_POST['progressif']) && $_POST['progressif'] === 'progressif' ? 1 : 0;
 
-    $sql_cours = "SELECT * FROM module WHERE id = ?";
+        // Génération d'un ID de cours aléatoire (modifié pour éviter les doublons)
+        $courID = uniqid();
+
+        $sql = "INSERT INTO module(IdParent, titre, presentation, mots_cles, Code_Cours, cible, prerequis, est_progressif, proprietaire)
+                VALUES($userID, '$titre', '$presentation', '$mots_cles', '$code_cours', '$cible', '$prerequis', $est_progressif, $proprietaire)";
+
+        $query = mysqli_query($conn, $sql);
+
+        if ($query) {
+            echo 'Le cours a été ajouté avec succès';
+        } else {
+            echo 'Erreur lors de l\'ajout du cours';
+        }
+    }
+}
+
+  //get all modules from db
+
+    $sql_cours = "SELECT * FROM module WHERE IdParent = ?";
 
     $stmt = mysqli_prepare($conn, $sql_cours);
     mysqli_stmt_bind_param($stmt, "i", $userID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $cours = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  
+    //suprimer un module
+    if (isset($_POST['suprimer_module']) && $_SERVER["REQUEST_METHOD"] == "POST" ) {
+        // Récupérer l'ID du module à supprimer
+        $moduleID = $_POST['moduleID'];
+    
+        // Requête de suppression
+        $requete = "DELETE FROM module WHERE id = ?";
+    
+        // Préparation de la requête
+        $statement = $conn->prepare($requete);
+    
+        // Liaison des paramètres
+        $statement->bind_param("i", $moduleID);
+    
+        // Exécution de la requête
+        $resultat = $statement->execute();
+    }    
+    //ajouter un chapitre
+    if (isset($_POST['ajouter_cousre_item'])) {
+        if(!empty($_POST['chapitre_nom']) && !empty($_FILES['contenu']['name'])){
+          $chapitre_content_nom=$_FILES['contenu']['name'];
+          $chapitre_content_tmp=$_FILES['contenu']['tmp_name'];
+          $module_nom=$_POST['module_nom'];
+          $destination='./ressources_cours';
+          $select_parent="SELECT * FROM module WHERE titre='$module_nom'";
+          $query=mysqli_query($conn,$select_parent);
+          $row=mysqli_fetch_object($query);
+          $ParentID=$row->IdParent;
+          $est_accessible=1;
+          $sqlChapitre="INSERT INTO chapitre(IdModule, contenu, accessible) VALUES($ParentID, '$chapitre_content_nom','$est_accessible')";
+       
+          $query=mysqli_query($conn,$sqlChapitre) ;
+             if($query){
+                move_uploaded_file($chapitre_content_tmp,$destination.$chapitre_content_nom);
+               echo 'cour item a ete ajoute avec succes';
+          }
+          
+        }
+       }
 ?>
 <!-- head included in php file -->
 
@@ -66,11 +113,10 @@ if (isset($_POST['ajouter_cousre_item'])) {
         <div class="statistics-content">
             <div class="statics-box">
                 <div class="icon">
-               <i class="ri-graduation-cap-fill"></i>
+                <i class="ri-book-fill"></i>
                 </div>
                 <div class="static-name">
-                    <h4>cours</h4>
-                    <p class="static-value">+13</p>
+                   <a href="cours_de_professeur.php" class='btn main-btn'>mes cours</a>
                 </div>
             </div>
 
@@ -78,9 +124,9 @@ if (isset($_POST['ajouter_cousre_item'])) {
                 <div class="icon">
                 <i class="ri-graduation-cap-fill"></i>
                 </div>
+                
                 <div class="static-text">
-                    <h4 class='static-name'>cours</h4>
-                    <p class="static-value">+13</p>
+                <a href="afficher_etudiants.php" class='btn main-btn'>mes héritiers</a>
                 </div>
             </div>
         </div>
@@ -120,7 +166,7 @@ if (isset($_POST['ajouter_cousre_item'])) {
                 </div>
             </div>
 
-             <center><button type='submit' name='ajouter_course' class='btn main-btn'>ajouter</button><center>
+             <center><button type='submit' name='ajouter_module' class='btn main-btn'>ajouter</button><center>
          </form>
      </div>
      <div class="separator"></div>
@@ -128,15 +174,15 @@ if (isset($_POST['ajouter_cousre_item'])) {
         <div class="sub-title">
               <h4 class="title-content">Ajouter <span>cour composant</span></h4>
          </div>
-          <form method="POST" class="myform" enctype="multipart/form-data">
+         <form method="POST" class="myform" enctype="multipart/form-data">
              <div class="input-pass">
-                 <input type="text" name='item_name' class="box" placeholder='Entrer le nom de cour...'>
+                 <input type="text" name='chapitre_nom' class="box" placeholder='Entrer le nom de chapitre...'>
              </div>    
              <div class="input-pass">
-                 <input type="file" name='item_content' class="box" >
+                 <input type="file" name='contenu' class="box" >
              </div>
              <div class="input-pass">
-                 <input type="text" name='parent_name' class="box" placeholder='Entrer le nom de cour...'>
+                 <input type="text" name='module_nom' class="box" placeholder='Entrer le nom de module...'>
              </div> 
              <button type='submit' name='ajouter_cousre_item' class='btn main-btn'>ajouter</button>
           </form>
@@ -147,8 +193,7 @@ if (isset($_POST['ajouter_cousre_item'])) {
         <thead>
            <tr>
              <th>id</th>
-             <th>nom</th>
-             <th>visiter</th>
+             <th>titre</th>
              <th>modifier</th>
              <th>suprimer</th>
            </tr>
@@ -156,11 +201,15 @@ if (isset($_POST['ajouter_cousre_item'])) {
         <tbody>
          <?php foreach ($cours as $cour ) { ?>
               <tr>
-                   <td><?php echo $cour[0] ?></td>
-                   <td><?php echo $cour[2] ?></td>
-                   <td><a href="cour_details.php?courID=<?php echo $cour[0] ?>"><div class="table_icon visit"><i class="ri-eye-fill"></i></div></a></td>
-                   <td><div class="table_icon modify"><i class="ri-loop-left-line"></i></div></td>
-                   <td><div class="table_icon delete"><i class="ri-delete-bin-fill"></i></div></td>
+                   <td><?php echo $cour['id'] ?></td>
+                   <td><?php echo $cour['titre'] ?></td>
+                   <td><a href="modifier_cours.php?courID=<?php echo $cour['id'] ?>"><div class="table_icon modify"><i class="ri-loop-left-line"></i></div></a></td>
+                   <td>
+                    <form  method="post">
+                    <input type="hidden" name="moduleID" value="<?php echo $cour['id'] ?>">
+                    <button type="submit" name='suprimer_module'><div class="table_icon delete"><i class="ri-delete-bin-fill"></i></div></button>
+                   </form>
+                   </td>
               </tr>
            <?php }?>
         </tbody>

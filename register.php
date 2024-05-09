@@ -32,6 +32,11 @@ if (isset($_POST['send'])) {
         if(!check_user_exist($conn, $name, $prenom, $email, $password, $userType)){
          $result = register($conn, $name, $prenom, $email, $password, $image_name, $userType);
          if($result){
+            //select utilisateur id base au email
+            $sqlion = "SELECT id FROM utilisateurs WHERE mail = '$email'";
+            $execution=mysqli_query($conn,$sqlion);
+            $row=mysqli_fetch_assoc($execution);
+            $_SESSION['userID']=$row['id'];
             move_uploaded_file($tmp_name,"$direction/$image_name");
             if($userType === 'etudiant'){
                header('Location: home_etudiant.php');
