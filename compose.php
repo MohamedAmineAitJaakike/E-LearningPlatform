@@ -33,7 +33,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
     <!-- Conteneur principal pour centrer le contenu -->
     <div class="center-content">
         <!-- Formulaire de composition de message -->
-        <form action="traitement.php" method="POST" id="formComposeMessage" style="display: none;">
+        <form action="traitement.php" method="POST" id="formComposeMessage" style="display: flex;">
             <div class="bubble-container">
                 <div class="bubble">Destinataire:</div>
                 <select id="destinataire" name="destinataire">
