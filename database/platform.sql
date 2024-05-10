@@ -102,7 +102,6 @@ CREATE TABLE IF NOT EXISTS message (
 DROP TABLE IF EXISTS module;
 CREATE TABLE IF NOT EXISTS module (
   id int NOT NULL AUTO_INCREMENT,
-  IdParent int DEFAULT NULL,
   titre varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   presentation varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   mots_cles varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -113,7 +112,7 @@ CREATE TABLE IF NOT EXISTS module (
   proprietaire int DEFAULT NULL,
   PRIMARY KEY (id),
   KEY proprietaire (proprietaire),
-  KEY idx_IdParent (IdParent)
+  KEY idx_id (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -142,13 +141,13 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
 -- Constraints for table chapitre
 --
 ALTER TABLE chapitre
-  ADD CONSTRAINT FK_chapitre_IdModule FOREIGN KEY (IdModule) REFERENCES module (IdParent) ON DELETE CASCADE;
+  ADD CONSTRAINT FK_chapitre_IdModule FOREIGN KEY (IdModule) REFERENCES module (id) ON DELETE CASCADE;
 
 --
 -- Constraints for table courssuivis
 --
 ALTER TABLE courssuivis
-  ADD CONSTRAINT FK_courssuivis_idCours FOREIGN KEY (idCours) REFERENCES module (IdParent) ON DELETE CASCADE,
+  ADD CONSTRAINT FK_courssuivis_idCours FOREIGN KEY (idCours) REFERENCES module (id) ON DELETE CASCADE,
   ADD CONSTRAINT FK_courssuivis_idEtudiant FOREIGN KEY (idEtudiant) REFERENCES utilisateurs (id) ON DELETE CASCADE;
 
 --

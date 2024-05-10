@@ -15,7 +15,7 @@
          <div class="out">
             <form method="GET" action="./nouveaux_cours.php">
                   <div class="btn-container">
-                     <button type='submit' name='nouveaux_cours' class="btn main-btn">Inscriptions Cours</button>
+                     <button type='submit' class="btn main-btn">Inscriptions Cours</button>
                   </div> 
             </form>
          </div>

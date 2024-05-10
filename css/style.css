@@ -764,7 +764,20 @@ hr{
 .myform .input-pass input{
    background-color: var(--light-bg);
    border: 1px solid var(--under-black);
- }
+}
+.myform .isProgBox{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   color: var(--bleu);
+   font-size: 1.5rem;
+   margin: 3rem 0rem;
+}
+
+.myform .isProgBox span input{
+   width: 1.8rem;
+   height: 1.8rem;
+}
   
 /* separatooooooooooooooor */
 /* .box {
@@ -1631,7 +1644,7 @@ hr{
 
 .user-profile .info .user p {
    font-size: 1.7rem;
-   color: var(--black) !important;
+   color: var(--black);
    padding: .3rem 0;
 }
 
@@ -2022,7 +2035,6 @@ hr{
    to{
       right: 0px;
    }
-
 }
 
 .cookie-banner {

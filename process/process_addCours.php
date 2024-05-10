@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($codeCoursCorrect) {
             // Inscrire l'utilisateur au cours dans la base de données
             //checker si deja inscrit (a implementer)
-            $stmt = $conn->prepare("INSERT INTO courssuivis (id,idEtudiant, idCours) VALUES (NULL,?, ?)");
+            $stmt = $conn->prepare("INSERT INTO courssuivis (idEtudiant, idCours) VALUES (?, ?)");
             $stmt->bind_param("ii", $_SESSION["userID"], $idCours);
             var_dump($_SESSION['userID']);
             var_dump($idCours);

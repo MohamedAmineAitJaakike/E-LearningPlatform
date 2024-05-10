@@ -36,7 +36,7 @@
                     <h2><?= $module['titre']?></h2> 
                     <h4><?= $module['mots_cles']?></h4>
                     <?php 
-                        $stmtChap = $conn->query("select count(*) as nbchap from module as m join chapitre as chap on m.idParent = chap.idModule where m.idParent=".$module['IdParent']);
+                        $stmtChap = $conn->query("select count(*) as nbchap from module as m join chapitre as chap on m.id = chap.idModule where m.id=".$module['id']);
                         $nbChap = $stmtChap->fetch_assoc();
                         echo $module['cible']. ' (Progressif: '; 
                         echo ($module['est_progressif']==1) ? 'Oui )' : 'Non )';

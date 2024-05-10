@@ -2,11 +2,11 @@
 
 <?php
     $sql = "
-        select m.IdParent as IdParent, m.titre as titre, concat(p.nom,' ',p.prenom) as prof 
+        select m.id as id, m.titre as titre, concat(p.nom,' ',p.prenom) as prof 
         from
             utilisateurs as e
             join courssuivis as cs on cs.idEtudiant = e.id
-            join module as m on m.idParent = cs.idCours
+            join module as m on m.id = cs.idCours
             join utilisateurs as p on p.id = m.proprietaire
         where cs.idEtudiant = ?";
     $stmtOnCours_suivis = $conn->prepare($sql);
@@ -40,7 +40,7 @@
             ?>
                     <tr>
                         <?php
-                            $stmtChap = $conn->query("select count(*) as nbchap from module as m join chapitre as chap on m.idParent = chap.idModule where m.idParent=".$course['IdParent']);
+                            $stmtChap = $conn->query("select count(*) as nbchap from module as m join chapitre as chap on m.id = chap.idModule where m.id=".$course['id']);
                             $nbChap = $stmtChap->fetch_assoc();
                         ?>
                         <td><?= $course['titre'] ?></td>

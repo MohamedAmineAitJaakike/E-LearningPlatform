@@ -1,7 +1,8 @@
  <?php
  //for connect
+ include('./includes/connection.inc.php');
  include('./includes/fn.inc.php');
- require_once './includes/headerProf.inc.php';
+ require_once './includes/header.inc.php';
  include('./includes/side_profile.inc.php');
 
  if(session_status() === PHP_SESSION_NONE) session_start(); 
@@ -12,23 +13,7 @@
      header('Location: ./login.php');
  }
  $userID=$_SESSION['userID'];
- if (isset($_POST['ajouter_course'])) {
- if(!empty($_POST['cour_name']) && !empty($_POST['cour_password'])){
-   $cour_name=$_POST['cour_name'];
-   $cour_password=$_POST['cour_password'];
-   $courID=rand(10,1000);
-   $user_id=$_SESSION['userID'];
-   
-   $sql="INSERT INTO module(courID, userID, name, password)
-         VALUES('$courID', $user_id, '$cour_name', '$cour_password')";
 
-   $query=mysqli_query($conn,$sql) ;
-      if($query){
-        echo 'cour a ete ajoute avec succes';
-   }
-   
- }
-}
 //ajouter module
 if (isset($_POST['ajouter_module'])) {
     if (!empty($_POST['titre']) && !empty($_POST['Code_Cours'])) {
@@ -46,8 +31,8 @@ if (isset($_POST['ajouter_module'])) {
         // Génération d'un ID de cours aléatoire (modifié pour éviter les doublons)
         $courID = uniqid();
 
-        $sql = "INSERT INTO module(IdParent, titre, presentation, mots_cles, Code_Cours, cible, prerequis, est_progressif, proprietaire)
-                VALUES($userID, '$titre', '$presentation', '$mots_cles', '$code_cours', '$cible', '$prerequis', $est_progressif, $proprietaire)";
+        $sql = "INSERT INTO module(titre, presentation, mots_cles, Code_Cours, cible, prerequis, est_progressif, proprietaire)
+                VALUES('$titre', '$presentation', '$mots_cles', '$code_cours', '$cible', '$prerequis', $est_progressif, $proprietaire)";
 
         $query = mysqli_query($conn, $sql);
 
@@ -61,13 +46,14 @@ if (isset($_POST['ajouter_module'])) {
 
   //get all modules from db
 
-    $sql_cours = "SELECT * FROM module WHERE IdParent = ?";
+    $sql_cours = "SELECT * FROM module WHERE proprietaire = ?";
 
     $stmt = mysqli_prepare($conn, $sql_cours);
     mysqli_stmt_bind_param($stmt, "i", $userID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $cours = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
     //suprimer un module
     if (isset($_POST['suprimer_module']) && $_SERVER["REQUEST_METHOD"] == "POST" ) {
         // Récupérer l'ID du module à supprimer
@@ -87,23 +73,33 @@ if (isset($_POST['ajouter_module'])) {
     }    
     //ajouter un chapitre
     if (isset($_POST['ajouter_cousre_item'])) {
-        if(!empty($_POST['chapitre_nom']) && !empty($_FILES['contenu']['name'])){
+        if(!empty($_POST['chapitre_nom']) && !empty($_FILES['contenu']['name']) && !empty($_POST['module_nom'])){
           $chapitre_content_nom=$_FILES['contenu']['name'];
           $chapitre_content_tmp=$_FILES['contenu']['tmp_name'];
           $module_nom=$_POST['module_nom'];
-          $destination='./ressources_cours';
+          $destination='./ressources_cours/';
           $select_parent="SELECT * FROM module WHERE titre='$module_nom'";
-          $query=mysqli_query($conn,$select_parent);
-          $row=mysqli_fetch_object($query);
-          $ParentID=$row->IdParent;
-          $est_accessible=1;
-          $sqlChapitre="INSERT INTO chapitre(IdModule, contenu, accessible) VALUES($ParentID, '$chapitre_content_nom','$est_accessible')";
+          $stmtOnModule = $conn->query($select_parent);
+          $moduleParent = $stmtOnModule->fetch_all(MYSQLI_ASSOC);
+
+            foreach ($moduleParent as $module) {
+                if($module['proprietaire'] == $_SESSION['userID']){
+
+                    $stmtChap = $conn->prepare("insert into chapitre(IdModule, contenu, `accessible`) VALUES(?, ?, ?)");
+                    $stmtChap->bind_param("isi", $module['id'], $chapitre_content_nom, $est_accessible);
+                }
+            }
        
-          $query=mysqli_query($conn,$sqlChapitre) ;
-             if($query){
-                move_uploaded_file($chapitre_content_tmp,$destination.$chapitre_content_nom);
-               echo 'cour item a ete ajoute avec succes';
-          }
+            $succes = 0;
+            if($stmtChap->execute() != false){
+            move_uploaded_file($chapitre_content_tmp,$destination.$chapitre_content_nom);
+                $succes = 1;
+            $message = 'Le chapitre a été ajoute avec succes';
+            }
+            else{
+                $succes = 1;
+                $message = 'Echec d\'ajout...';
+            }
           
         }
        }
@@ -119,7 +115,7 @@ if (isset($_POST['ajouter_module'])) {
                 <i class="ri-book-fill"></i>
                 </div>
                 <div class="static-name">
-                   <a href="cours_de_professeur.php" class='btn main-btn'>mes cours</a>
+                   <a href="cours_de_professeur.php" class='btn main-btn'>mes Cours</a>
                 </div>
             </div>
 
@@ -129,7 +125,7 @@ if (isset($_POST['ajouter_module'])) {
                 </div>
                 
                 <div class="static-text">
-                <a href="afficher_etudiants.php" class='btn main-btn'>mes héritiers</a>
+                <a href="afficher_etudiants.php" class='btn main-btn'>Mes Etudiants</a>
                 </div>
             </div>
         </div>
@@ -139,7 +135,7 @@ if (isset($_POST['ajouter_module'])) {
   <div class="left-content">
      <div class="add-course">
       <div class="sub-title">
-         <h4 class="title-content">Ajouter <span>cour</span></h4>
+         <h4 class="title-content">Ajouter <span>cours</span></h4>
       </div>
           <form method="POST" class="myform">
              <div class="input-pass">
@@ -160,13 +156,13 @@ if (isset($_POST['ajouter_module'])) {
              <div class="input-pass">
                  <input type="text" name='Code_Cours' class="box" placeholder='Entrez le mot de pass du cours...'>
              </div>
-             <div class="input-pass" style="display: flex; flex-direction: row;column-gap:30%;margin-left:15%;">
-                <div style="display: flex; align-items: center;">
-                    <label style="margin-right: 5px;"><input type="radio" name="progressif" value="progressif" style="transform: scale(0.4); margin-right: 5px;"> Visibilité Progressive</label>
-                </div>
-                <div style="display: flex; align-items: center;">
-                    <label style="margin-right: 5px;"><input type="radio" name="progressif" value="non_progressif" style="transform: scale(0.4); margin-right: 5px;"> Visibilité Non Progressive</label>
-                </div>
+             <div class="isProgBox">
+                <span>
+                    <input type="radio" name="progressif" value="progressif" id="oui"><label id="oui">Visibilité Progressive</label>
+                </span>
+                <span>
+                    <input type="radio" name="progressif" value="non_progressif" id="non"><label id="non">Visibilité Non Progressive</label>
+                </span>
             </div>
 
              <center><button type='submit' name='ajouter_module' class='btn main-btn'>ajouter</button><center>
@@ -175,7 +171,7 @@ if (isset($_POST['ajouter_module'])) {
      <div class="separator"></div>
      <div class="add-course-item">
         <div class="sub-title">
-              <h4 class="title-content">Ajouter <span>cour composant</span></h4>
+              <h4 class="title-content">Ajouter <span>chapitre</span></h4>
          </div>
          <form method="POST" class="myform" enctype="multipart/form-data">
              <div class="input-pass">
@@ -189,6 +185,13 @@ if (isset($_POST['ajouter_module'])) {
              </div> 
              <button type='submit' name='ajouter_cousre_item' class='btn main-btn'>ajouter</button>
           </form>
+          <div class="message">
+            <?php 
+                if($succes != 0){
+                        echo "$message";
+                }
+            ?>
+          </div>
      </div>
   </div>
   <div class="right-content">

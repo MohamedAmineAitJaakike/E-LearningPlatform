@@ -94,7 +94,7 @@ if(isset($_POST['modifier_profil'])) {
         <input type="text" id="titre" name='email' class="box" placeholder='email...' value="<?php if(!empty($user)){echo $user['mail'];}   ?>">
     </div><div class="input-pass">
         <label for="titre" style="font-weight: 500; font-size: 20px;">password:</label>
-        <input type="text" id="titre" name='password' class="box" placeholder='password...' value="<?php if(!empty($user)){echo $user['password'];}   ?>">
+        <input type="password" id="titre" name='password' class="box" placeholder='password...' value="<?php if(!empty($user)){echo $user['password'];}   ?>">
     <button type='submit' name='modifier_profil' class='btn main-btn'>Modifier</button>
 </form>
 
