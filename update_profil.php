@@ -10,12 +10,12 @@ if (!isset($_SESSION['userID'])) {
     exit; // Assurez-vous de terminer le script après la redirection//////////////////////////////////////
 }
 $user=array();
-if (isset($_GET['ID'])) {
-    $userID = $_GET['ID'];
-    $sql = "SELECT * FROM utilisateurs WHERE id = '$user_ID'";
+
+    $userID=$_SESSION['userID'];
+    $sql = "SELECT * FROM utilisateurs WHERE id = $userID";
     $query = mysqli_query($conn, $sql);
     $user = mysqli_fetch_assoc($query);
-}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['modifier_profil'])) {
     $nom = $_POST['nom'];
@@ -24,7 +24,7 @@ if(isset($_POST['modifier_profil'])) {
     $password = $_POST['password'];
     $userID = $_SESSION['userID']; 
     
-    $sql = "UPDATE utilisateurs SET nom='$nom', prenom='$prenom', email='$email', password='$password' WHERE id='$userID'";
+    $sql = "UPDATE utilisateurs SET nom='$nom', prenom='$prenom', mail='$email', password='$password' WHERE id=$userID";
     $query = mysqli_query($conn, $sql);
 }
 
@@ -91,7 +91,7 @@ if(isset($_POST['modifier_profil'])) {
         <input type="text" id="titre" name='prenom' class="box" placeholder='prenom...' value="<?php if(!empty($user)){echo $user['prenom'];}   ?>">
     </div><div class="input-pass">
         <label for="titre" style="font-weight: 500; font-size: 20px;">email:</label>
-        <input type="text" id="titre" name='email' class="box" placeholder='email...' value="<?php if(!empty($user)){echo $user['email'];}   ?>">
+        <input type="text" id="titre" name='email' class="box" placeholder='email...' value="<?php if(!empty($user)){echo $user['mail'];}   ?>">
     </div><div class="input-pass">
         <label for="titre" style="font-weight: 500; font-size: 20px;">password:</label>
         <input type="text" id="titre" name='password' class="box" placeholder='password...' value="<?php if(!empty($user)){echo $user['password'];}   ?>">

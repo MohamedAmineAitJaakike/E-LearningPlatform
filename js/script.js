@@ -158,3 +158,36 @@ function markAllAsRead() {
    xhr.send(formData);
 }
 /*----------------------------- ADMIN FUNCTIONS ---------------------------- */
+function search_bar(entree){
+   var xhr= new XMLHttpRequest();
+   xhr.open("POST","search.php",true);
+   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   xhr.onreadystatechange = function () {
+   if (xhr.readyState === XMLHttpRequest.DONE) {
+       if (xhr.status === 200) {
+           // La requête a réussi, nous recevons la réponse de la requête ici
+           // Mettre à jour la dropdown-search-bar avec les résultats de la recherche
+           document.getElementById("searchResults").innerHTML = xhr.responseText;
+       } else {
+           console.error("Erreur lors de la requête : " + xhr.status);
+       }
+   }
+};
+   var params ="data=" + encodeURIComponent(entree); 
+   xhr.send(params);
+}
+function afficherContenuMessage(contenu, id) {
+   // Mettez à jour le contenu de la popup avec le contenu du message
+   document.getElementById('contenuMessage').innerText = contenu;
+   // Affichez la popup
+   document.getElementById('affichage').style.display = 'flex';
+
+   document.getElementById('id').innerText = id;
+
+}
+function markAsRead(id) {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET', '../etudiants_messages.php?action=markAsRead&message_id=' + id, true);
+   
+   xhr.send();
+}

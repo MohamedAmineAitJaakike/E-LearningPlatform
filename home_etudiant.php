@@ -10,7 +10,7 @@ $condition = !$_SESSION['userID'] || (isset($_SESSION['userID']) && !isUser($con
 if($condition){
     header('Location: ./login.php');
 }
-
+//var_dump($_SESSION['userID']);
 // Récupérer les cours depuis la base de données
 $sql = "SELECT module.titre AS titre_cours,utilisateurs.image ,utilisateurs.nom AS nom_proprietaire,courssuivis.idCours
 FROM courssuivis

@@ -5,9 +5,17 @@ require_once './includes/header.inc.php';
 include('./includes/side_profile.inc.php');
 
 // Récupération de tous les cours
+$cours=array();
+$userID = $_SESSION['userID'];
 $sql = "SELECT * FROM module";
 $result = mysqli_query($conn, $sql);
-$cours = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+if ($result) {
+    $cours = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    // Further processing of the fetched data
+} else {
+    echo "Error: " . mysqli_error($conn); // Output the specific MySQL error
+}
 ?>
 
 <!-- Code HTML pour afficher tous les cours -->
@@ -19,12 +27,12 @@ $cours = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <div class="course-card">
                 <h3 class="course-title"><?php echo $cour['titre']; ?></h3>
                 <p class="course-details">
-                    <strong>Mots clés :</strong> <?php echo $cour['mots_cles']; ?><br>
-                    <strong>Code du cours :</strong> <?php echo $cour['Code_Cours']; ?><br>
-                    <strong>Cible :</strong> <?php echo $cour['cible']; ?><br>
-                    <strong>Prérequis :</strong> <?php echo $cour['prerequis']; ?><br>
-                    <strong>Propriétaire :</strong> <?php echo $cour['proprietaire']; ?><br>
-                    <strong>Progressif :</strong> <?php echo $cour['est_progressif'] ? 'Oui' : 'Non'; ?>
+                    <strong>Mots clés :</strong> <span><?php echo $cour['mots_cles']; ?></span><br>
+                    <strong>Code du cours :</strong> <span><?php echo $cour['Code_Cours']; ?></span><br>
+                    <strong>Cible :</strong> <span><?php echo $cour['cible']; ?></span><br>
+                    <strong>Prérequis :</strong> <span><?php echo $cour['prerequis']; ?></span><br>
+                    <strong>Propriétaire :</strong> <span><?php echo $cour['proprietaire']; ?></span><br>
+                    <strong>Progressif :</strong> <span><?php echo $cour['est_progressif'] ? 'Oui' : 'Non'; ?></span>
                 </p>
             </div>
             <?php } ?>

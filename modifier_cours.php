@@ -33,9 +33,6 @@ if (isset($_POST['modifier_course'])) {
 
     if ($query) {
         echo 'Le cours a été modifié avec succès';
-        // Redirection vers la page home_professeur.php après la modification
-        header('Location: home_professeur.php');
-        exit; // Assurez-vous de terminer le script après la redirection
     } else {
         echo 'Erreur lors de la modification du cours';
     }
