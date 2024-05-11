@@ -30,7 +30,7 @@ if(!est_progressif($conn,$courID,$nomCours)){
                                         </a>
                                     </div> 
                                     <div class=\"center_div\" >
-                                        <button class=\"btn delete-btn\" onclick=\"alert('hey,good job!!')\">Done</button>
+                                        <button class=\"btn delete-btn\" onclick=\"alert('hey, good job!')\">Done</button>
                                     </div> 
                                 </div>
                             </div>
@@ -118,6 +118,7 @@ if(!est_progressif($conn,$courID,$nomCours)){
                     <br>
                     <div class="dropdown-content" id="ressourcesDropdown" style="overflow-y: auto; max-height: 400px;">
                         <?php 
+                    if(!est_progressif($conn,$courID,$nomCours)){
                         if($result->num_rows > 0) {
                             mysqli_data_seek($result, 0);
                             while($row = $result->fetch_assoc()) {
@@ -134,11 +135,35 @@ if(!est_progressif($conn,$courID,$nomCours)){
                                 </div>
                                 </center>
                                 </div>";
+
                             }
-                        } else {
+                        }
+                    else {
                             echo "<h4 class='title-content' style=\"font-size:100%;\">Auccune <span>ressource</span> disponible pour ce cours.</h4>";
                         } 
-                        ?>
+                    }else{
+                        if($result->num_rows > 0) {
+                            mysqli_data_seek($result, 0);
+                            
+                            $chapitrePrecedentDone = true; 
+                            while($row = $result->fetch_assoc()) {
+                                echo "
+                                <div class=\"course-item-text\">
+                                <center><div class=\"cour-nom\">
+                                <a style=\"color:white;font-weight:bold;display:".($chapitrePrecedentDone ? "":'none')."\" href=\"ressources_cours/$row[contenu].pdf\" ><h4 class=\"button-text title-content\">". $row['contenu']."
+                                <svg style=\"display:".($chapitrePrecedentDone ? "":'none')."\"; width=\"74\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 -2 25 24\" xmlns=\"http://www.w3.org/2000/svg\">
+                                    <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"></path>
+                                    <path d=\"m7 10 5 5 5-5\"></path>
+                                    <path d=\"M12 15V3\"></path>
+                                </svg>
+                                " ."</h4></a>
+                                </div>
+                                </center>
+                                </div>";
+                                $chapitrePrecedentDone = $row['accessible'] == 1;
+                            }
+                    }
+                 } ?>
                     </div>
                 </div>
             </div>

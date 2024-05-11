@@ -51,8 +51,8 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
       <?php if(isset($_SESSION['userID']) && !$is_index_page && !$is_login_page && !$is_admin_dashBoard && !$is_register_page && isset($_SESSION['user']) && $_SESSION['user'] != "administrateur"){ ?>
          
             <nav class="navbar">
-               <a href="<?php echo (isset($_SERVER['HTTP_REFERER']))?$_SERVER['HTTP_REFERER']:NULL?>"><i class="ri-home-4-fill"></i></i><span>home</span></a>
-               <a href="devoir.php"><i class="ri-briefcase-fill"></i><span>devoirs</span></a>
+               <a href="<?php echo ($_SESSION['user'] == 'etudiant')? "./home_etudiant.php": "./home_professeur.php" ?>"><i class="ri-home-4-fill"></i></i><span>home</span></a>
+               <a href="profile.php"><i class="ri-profile-line"></i><span>Profile</span></a>
                <a href="about.php"><i class="ri-question-mark"></i><span>a propos</span></a>
                <a href="contact.php"><i class="ri-mail-fill"></i><span>contact</span></a>
             </nav>
@@ -90,7 +90,7 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                   </div> 
                </div>
                <!-- start-->
-               <?php if($_SERVER['PHP_SELF']=='/home_etudiant.php'){?>
+               <?php if(basename($_SERVER['PHP_SELF']) === 'home_etudiant.php'){?>
                <div class="center-content">
                   <!-- Formulaire de composition de message -->
                   <form action="traitement.php" method="POST" id="formComposeMessage" style="display: flex;">
@@ -125,7 +125,7 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                         <input type="submit" value="Envoyer">
                   </form>
                </div>
-               <?php }else if ($_SERVER['PHP_SELF']=='/home_professeur.php'){?>
+               <?php }else if(basename($_SERVER['PHP_SELF']) ==='home_professeur.php'){?>
                   <div class="center-content">
                   <!-- Formulaire de composition de message -->
                   <form action="traitement.php" method="POST" id="formComposeMessagee" style="display: flex;">

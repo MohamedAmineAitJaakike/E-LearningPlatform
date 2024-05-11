@@ -36,7 +36,9 @@ if(!$_SESSION['name']){
 
       <div class="content">
          <h3>pourquoi choisir nous?</h3>
-         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut dolorum quasi illo? Distinctio expedita commodi, nemo a quam error repellendus sint, fugiat quis numquam eum eveniet sequi aspernatur quaerat tenetur.</p>
+         <p>
+            Choisir notre plateforme d'éducation en ligne est une décision éclairée pour plusieurs raisons. Tout d'abord, nous offrons une vaste gamme de cours dans divers domaines, adaptés à tous les niveaux d'apprentissage. Que vous soyez un débutant cherchant à acquérir de nouvelles compétences ou un professionnel désireux de se perfectionner, notre plateforme propose des cours pertinents et de qualité pour répondre à vos besoins. De plus, notre approche pédagogique interactive et engageante vous permet d'apprendre à votre propre rythme, où que vous soyez et quand vous le souhaitez. Enfin, notre équipe d'instructeurs qualifiés et notre soutien technique dévoué sont là pour vous accompagner à chaque étape de votre parcours d'apprentissage. Rejoignez-nous dès aujourd'hui et commencez à réaliser vos objectifs éducatifs avec confiance et succès.
+         </p>
       </div>
 
    </div>
@@ -47,7 +49,7 @@ if(!$_SESSION['name']){
          <i class="fas fa-graduation-cap"></i>
          <div>
             <h3>+10k</h3>
-            <p>online courses</p>
+            <p>Cours</p>
          </div>
       </div>
 
@@ -55,7 +57,7 @@ if(!$_SESSION['name']){
          <i class="fas fa-user-graduate"></i>
          <div>
             <h3>+40k</h3>
-            <p>brilliant students</p>
+            <p>Etudiants</p>
          </div>
       </div>
 
@@ -63,7 +65,7 @@ if(!$_SESSION['name']){
          <i class="fas fa-chalkboard-user"></i>
          <div>
             <h3>+2k</h3>
-            <p>expert tutors</p>
+            <p>Professeurs</p>
          </div>
       </div>
    </div>
