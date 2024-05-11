@@ -51,6 +51,14 @@ function check_user_pseudo($conn, $username) {
     $results = $stmt->get_result();
     return $results->num_rows > 0;
 }
+function check_user_email($conn, $email) {
+    $sql = "SELECT * FROM UTILISATEURS WHERE mail = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $results = $stmt->get_result();
+    return $results->num_rows > 0;
+}
 function check_user_exist($conn, $name, $prenom, $email, $password, $userType) {
     $table = ($userType == "administrateur")? "admin" : "UTILISATEURS";
     $sql = "SELECT * FROM ". $table." WHERE MAIL = ? AND NOM = ? AND PRENOM = ? AND PASSWORD = ?";
@@ -83,18 +91,7 @@ function login_user($conn, $username, $password, $isAdmin = false)
     $results = $stmt->get_result();
     return $results->fetch_assoc();
 }
-function save_remember_token($conn,$user_id,$token) {
-    $sql = "UPDATE USERS SET remember_token = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si",$token,$user_id);
-    return $stmt->execute();
-}
-function save_reset_token($conn,$user_id,$token) {
-    $sql = "UPDATE USERS SET reset_token = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si",$token,$user_id);
-    return $stmt->execute();
-}
+
 function est_progressif($conn,$idCours,$nomCours){
     $sql="SELECT est_progressif FROM module where id=? AND titre=?";
     $stmt=$conn->prepare($sql);
