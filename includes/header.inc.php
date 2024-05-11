@@ -90,7 +90,7 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                   </div> 
                </div>
                <!-- start-->
-               <?php if(basename($_SERVER['PHP_SELF']) === 'home_etudiant.php'){?>
+               <?php if(basename($_SERVER['PHP_SELF'])=='home_etudiant.php'){?>
                <div class="center-content">
                   <!-- Formulaire de composition de message -->
                   <form action="traitement.php" method="POST" id="formComposeMessage" style="display: flex;">
@@ -125,7 +125,7 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                         <input type="submit" value="Envoyer">
                   </form>
                </div>
-               <?php }else if(basename($_SERVER['PHP_SELF']) ==='home_professeur.php'){?>
+               <?php }else if (basename($_SERVER['PHP_SELF'])=='home_professeur.php'){?>
                   <div class="center-content">
                   <!-- Formulaire de composition de message -->
                   <form action="traitement.php" method="POST" id="formComposeMessagee" style="display: flex;">
