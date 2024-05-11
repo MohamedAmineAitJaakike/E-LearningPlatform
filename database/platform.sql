@@ -163,7 +163,7 @@ ALTER TABLE message
 --
 ALTER TABLE module
   ADD CONSTRAINT FK_module_proprietaire FOREIGN KEY (proprietaire) REFERENCES utilisateurs (id) ON DELETE CASCADE;
-INSERT INTO `admin` (`id`, `nom`, `prenom`, `mail`, `password`, `image`, `role`) VALUES (NULL, 'admin', 'admin', 'admin@gmail.com', 'admin', 'me.png', 'administrateur')
+INSERT INTO `admin` (`id`, `nom`, `prenom`, `mail`, `password`, `image`, `role`) VALUES (NULL, 'admin', 'admin', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'me.png', 'administrateur')
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
