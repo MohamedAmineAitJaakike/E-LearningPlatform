@@ -1,4 +1,4 @@
- <?php
+<?php
  //for connect
  include('./includes/connection.inc.php');
  include('./includes/fn.inc.php');
@@ -187,9 +187,10 @@ if (isset($_POST['ajouter_module'])) {
           </form>
           <div class="message">
             <?php 
-                if($succes != 0){
+               if(isset($success)) {
+               if($succes != 0){
                         echo "$message";
-                }
+                }}
             ?>
           </div>
      </div>

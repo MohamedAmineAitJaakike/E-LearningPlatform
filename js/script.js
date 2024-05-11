@@ -183,6 +183,7 @@ function afficherContenuMessage(contenu, id) {
    document.getElementById('affichage').style.display = 'flex';
 
    document.getElementById('id').innerText = id;
+   document.getElementById('id').value = id;
 
 }
 function markAsRead(id) {
@@ -190,4 +191,8 @@ function markAsRead(id) {
    xhr.open('GET', '../etudiants_messages.php?action=markAsRead&message_id=' + id, true);
    
    xhr.send();
+}
+function prepareMsg() {
+   var contenu = document.getElementById('contenu').value;
+   document.getElementById('contenuMsg').value = contenu;
 }

@@ -25,7 +25,7 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
    <!-- Mettez ici vos balises meta et titre -->
 </head>
 <body>
-    <?php if(!isset($_GET["data"])){?>
+<?php if(!isset($_GET["data"])){?>
     <div <?php if(isset($_GET['details'])) echo 'class="blurred"'; ?>>
         <section class="home-grid">
             <div class="sub-title">
@@ -77,13 +77,11 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
                                 </div>
                             </div>
                         </div>
-                        
                     <?php }?>
                 <?php }?>
             <?php } else { ?>
                 <div class="sub-title"><center><p class='title-content'>Pas de cours disponibles pour le moment.</p></center></div>
             <?php } ?>
-            
         </section>
     </div>
     
@@ -119,6 +117,7 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
                     <div class="sub-title">
                     <?php mysqli_data_seek($result,0);
                     foreach ($cours as $cour) {?>
+                        <?php if (!estDejaInscrit($conn, $_SESSION['userID'],$cour['id'])){?>
                         <div class="box" >
                             <div class="course-item">
                                 
@@ -162,7 +161,7 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
                             </div>
                         </div>
                         </div>
-
+            <?php }?>
         <?php
             }
         }

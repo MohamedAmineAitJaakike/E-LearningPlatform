@@ -652,7 +652,7 @@ hr{
    border-right: var(--border);
    padding-inline: 12px;
    padding-top: 29px;
-   z-index: 1200;
+   z-index: 120;
    animation: leftToRight 1s ease-in-out;
 }
 
@@ -2124,4 +2124,24 @@ text-wrap:nowrap;
 
 .dropdown-search-bar li:hover {
 background-color: #808080;
+}
+.bubble {
+   max-width: 150px; /* Modifier la largeur selon vos besoins */
+   background-color: #fc3434;
+   padding: 10px;
+   border-radius: 10px;
+   margin-bottom: 15px;
+   text-align: center;
+   font-weight: bold;
+}
+
+/* Style pour la liste déroulante */
+#destinataire {
+   width: 200px; /* Largeur de la liste déroulante */
+}
+
+/* Style pour la textarea */
+#contenu {
+   width: 200px; /* Largeur de la textarea */
+   height: 100px; /* Hauteur de la textarea */
 }

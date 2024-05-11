@@ -40,7 +40,7 @@ if (isset($_POST['afficher_etudiants'])) {
             echo "<p>{$row['etudiants']}</p>";
         }
     } else {
-        echo "<p>Aucun étudiant trouvé.</p>";
+        echo "<center><p>Aucun étudiant trouvé.</p></center>";
     }
 }
 
@@ -93,7 +93,7 @@ if ($stmt) {
            `;
         }
     } else {
-        echo $etus="Aucun étudiant suivi votre cours.";
+        echo $etus="<center><p>Aucun étudiant ne suit votre cours.</p></center>";
     }
 }
 ?>
