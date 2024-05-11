@@ -90,13 +90,13 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                   </div> 
                </div>
                <!-- start-->
-               <?php if(basename($_SERVER['PHP_SELF'])=='home_etudiant.php'){?>
+               <?php if($_SESSION['user'] == "etudiant"){?>
                <div class="center-content">
                   <!-- Formulaire de composition de message -->
-                  <form action="traitement.php" method="POST" id="formComposeMessage" style="display: flex;">
-                        <div class="bubble-container">
-                           <div class="bubble">Destinataire:</div>
-                           <select id="destinataire" name="destinataire">
+                  <form action="traitement.php" method="POST" id="formComposeMessage">
+                        <span>
+                           <label for="destinataire">Destinataire:</label>
+                           <select id="destinataire" name="destinataire" required>
                               <?php
                               // Récupérer la liste des professeurs depuis la base de données
                               $sql = "SELECT u.id, u.nom, u.prenom ,m.titre
@@ -114,24 +114,23 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                               }
                               ?>
                            </select>
-                        </div>
+                        </span> 
+                        <br> <br>
 
-                        <div class="spacer"></div> <!-- Ajout d'un espace entre les deux bulles -->
-
-                        <div class="bubble-container">
-                           <div class="bubble">Contenu:</div>
-                           <textarea id="contenu" name="contenu" rows="4" cols="50"></textarea>
-                        </div>
-                        <input type="submit" value="Envoyer">
+                        <span>
+                           <label for="contenu">Contenu:</label> <br>
+                           <textarea id="contenu" name="contenu" rows="4" cols="50" required></textarea>
+                        </span>
+                        <label for="send" style="background-color: transparent;"><img src="./images/send.png" alt="send" width="28rem"></label><input type="submit" id="send" hidden>
                   </form>
                </div>
-               <?php }else if (basename($_SERVER['PHP_SELF'])=='home_professeur.php'){?>
+               <?php }else if ($_SESSION['user'] == "professeur"){?>
                   <div class="center-content">
                   <!-- Formulaire de composition de message -->
-                  <form action="traitement.php" method="POST" id="formComposeMessagee" style="display: flex;">
-                        <div class="bubble-container">
-                           <div class="bubble">Destinataire:</div>
-                           <select id="destinataire" name="destinataire">
+                  <form action="traitement.php" method="POST" id="formComposeMessagee">
+                        <span>
+                           <label for="destinataire">Destinataire:</label>
+                           <select id="destinataire" name="destinataire" required>
                               <?php
                               // Récupérer la liste des professeurs depuis la base de données
                               $sql = "SELECT  u.id, u.nom, u.prenom,m.titre
@@ -151,15 +150,15 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
                               }
                               ?>
                            </select>
-                        </div>
+                        </span>
 
-                        <div class="spacer"></div> <!-- Ajout d'un espace entre les deux bulles -->
+                        <br> <br>
 
-                        <div class="bubble-container">
-                           <div class="bubble">Contenu:</div>
-                           <textarea id="contenu" name="contenu" rows="4" cols="50"></textarea>
-                        </div>
-                        <input type="submit" value="Envoyer">
+                        <span>
+                           <label id="contenu">Contenu:</label> <br>
+                           <textarea id="contenu" name="contenu" rows="4" cols="50" required></textarea>
+                        </span>
+                        <label for="send" style="background-color: transparent;"><img src="./images/send.png" alt="send" width="28rem"></label><input type="submit" id="send" hidden>
                   </form>
                </div>
 

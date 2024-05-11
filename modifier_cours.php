@@ -32,9 +32,9 @@ if (isset($_POST['modifier_course'])) {
     $query = mysqli_query($conn, $sql);
 
     if ($query) {
-        echo 'Le cours a été modifié avec succès';
+        $message = 1;
     } else {
-        echo 'Erreur lors de la modification du cours';
+        $message = 0;
     }
 }
 ?>
@@ -78,7 +78,7 @@ if (isset($_POST['modifier_course'])) {
     .input-pass label {
         font-size: 20px;
         font-weight: 700;
-        color: white;
+        color: var(--black);
     }
 
     .main-btn {
@@ -93,34 +93,45 @@ if (isset($_POST['modifier_course'])) {
 
 
 <form method="POST" class="myform">
+    <?php
+        if(isset($message)){
+            echo ($message == 1)? "<span style=\"color: var(--bleu);\">Le cours a été modifié avec succès.</span>" :
+                                  "<span style=\"color: var(--red);\">Erreur lors de la modification du cours</span>";
+        }
+    ?>
     <div class="input-pass">
-        <label for="titre" style="font-weight: 500; font-size: 20px; color: white;">Intitule du cours:</label>
-        <input type="text" id="titre" name='titre' class="box" placeholder='Intitule du cours...' value="<?php echo $cour['titre']; ?>">
-    </div>
-    <div class="input-pass">
-        <label for="presentation" style="font-weight: 500; font-size: 20px; color: white;">Presentation du cours:</label>
-        <input type="text" id="presentation" name='presentation' class="box" placeholder='Presentation du cours...' value="<?php echo $cour['presentation']; ?>">
-    </div>
-    <div class="input-pass">
-        <label for="mots_cles" style="font-weight: 500; font-size: 20px; color: white;">Mots cles se rapportant au cours:</label>
-        <input type="text" id="mots_cles" name='mots_cles' class="box" placeholder='Mots cles se rapportant au cours...' value="<?php echo $cour['mots_cles']; ?>">
+        <label for="titre">Intitule du cours:</label>
+        <input type="text" id="titre" name='titre' class="box" value="<?php echo $cour['titre']; ?>">
     </div>
     <div class="input-pass">
-        <label for="cible" style="font-weight: 500; font-size: 20px; color: white;">Public vise:</label>
-        <input type="text" id="cible" name='cible' class="box" placeholder='Public vise...' value="<?php echo $cour['cible']; ?>">
+        <label for="presentation">Presentation du cours:</label>
+        <input type="text" id="presentation" name='presentation' class="box" value="<?php echo $cour['presentation']; ?>">
     </div>
     <div class="input-pass">
-        <label for="prerequis" style="font-weight: 500; font-size: 20px; color: white;">Prerequis:</label>
-        <input type="text" id="prerequis" name='prerequis' class="box" placeholder='Prerequis...' value="<?php echo $cour['prerequis']; ?>">
+        <label for="mots_cles" >Mots cles se rapportant au cours:</label>
+        <input type="text" id="mots_cles" name='mots_cles' class="box" value="<?php echo $cour['mots_cles']; ?>">
     </div>
     <div class="input-pass">
-        <label for="Code_Cours" style="font-weight: 500; font-size: 20px; color: white;">Entrez le mot de pass du cours:</label>
-        <input type="text" id="Code_Cours" name='Code_Cours' class="box" placeholder='Entrez le mot de pass du cours...' value="<?php echo $cour['Code_Cours']; ?>">
+        <label for="cible" >Public vise:</label>
+        <input type="text" id="cible" name='cible' class="box" value="<?php echo $cour['cible']; ?>">
     </div>
-    <div class="input-pass" style="display: flex; flex-direction: row; justify-content: center;">
-        <label style="margin-right: 5px; font-weight: 500; font-size: 20px; color: white;"><input type="radio" name="progressif" value="progressif" style="transform: scale(0.8); margin-right: 5px;" <?php if ($cour['est_progressif']) echo "checked"; ?>> Visibilité Progressive</label>
-        <label style="margin-right: 5px; font-weight: 500; font-size: 20px; color: white;"><input type="radio" name="progressif" value="non_progressif" style="transform: scale(0.8); margin-right: 5px;" <?php if (!$cour['est_progressif']) echo "checked"; ?>> Visibilité Non Progressive</label>
+    <div class="input-pass">
+        <label for="prerequis" >Prerequis:</label>
+        <input type="text" id="prerequis" name='prerequis' class="box" value="<?php echo $cour['prerequis']; ?>">
     </div>
+    <div class="input-pass">
+        <label for="Code_Cours" >Entrez le mot de pass du cours:</label>
+        <input type="text" id="Code_Cours" name='Code_Cours' class="box" value="<?php echo $cour['Code_Cours']; ?>">
+    </div>
+    <div class="isProgBox">
+        <span>
+            <input type="radio" name="progressif" value="progressif" id="oui" <?php if ($cour['est_progressif']) echo "checked"; ?>><label id="oui">Visibilité Progressive</label>
+        </span>
+        <span>
+            <input type="radio" name="progressif" value="non_progressif" id="non" <?php if (!$cour['est_progressif']) echo "checked"; ?>><label id="non">Visibilité Non Progressive</label>
+        </span>
+    </div>
+
 
     <!-- Ajoutez un champ hidden pour envoyer l'ID du cours -->
     <input type="hidden" name="courID" value="<?php echo $courID; ?>">

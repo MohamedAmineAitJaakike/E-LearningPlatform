@@ -22,7 +22,7 @@ if ($result) {
 <!-- Code HTML pour afficher tous les cours -->
   <section class="all-courses">
     <div class="container">
-        <h2 style="text-align: center; font-size: 80px; color:#fc8021; box-shadow:0 0 11px black ;margin:50px;margin-left:80px">mes cours</h2>
+        <h2 style="text-align: center; font-size: 4rem; color:var(--main-color); margin:50px;">Mes Cours</h2>
         <div class="course-list">
             <?php foreach ($cours as $cour) { ?>
             <div class="course-card">

@@ -29,7 +29,8 @@ if (isset($_POST['send'])) {
             exit;
         }
     } else {
-        echo 'Email ou mot de passe incorrect !';
+        header('Location: ../login.php?error=1');
+        exit;
     }
 }
 ?>

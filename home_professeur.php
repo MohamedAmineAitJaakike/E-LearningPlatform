@@ -139,22 +139,22 @@ if (isset($_POST['ajouter_module'])) {
       </div>
           <form method="POST" class="myform">
              <div class="input-pass">
-                 <input type="text" name='titre' class="box" placeholder='Intitule du cours...'>
+                 <input type="text" name='titre' class="box" placeholder='Intitule du cours...' required>
              </div>
              <div class="input-pass">
-                 <input type="text" name='presentation' class="box" placeholder='Presentation du cours...'>
+                 <input type="text" name='presentation' class="box" placeholder='Presentation du cours...' required>
              </div>
              <div class="input-pass">
-                 <input type="text" name='mots_cles' class="box" placeholder='Mots cles se rapportant au cours...'>
+                 <input type="text" name='mots_cles' class="box" placeholder='Mots cles se rapportant au cours...' required>
              </div>
              <div class="input-pass">
-                 <input type="text" name='cible' class="box" placeholder='Public vise...'>
+                 <input type="text" name='cible' class="box" placeholder='Public vise...' required>
              </div>
              <div class="input-pass">
-                 <input type="text" name='prerequis' class="box" placeholder='Prerequis...'>
+                 <input type="text" name='prerequis' class="box" placeholder='Prerequis...' required>
              </div>
              <div class="input-pass">
-                 <input type="text" name='Code_Cours' class="box" placeholder='Entrez le mot de pass du cours...'>
+                 <input type="text" name='Code_Cours' class="box" placeholder='Entrez le mot de pass du cours...' required>
              </div>
              <div class="isProgBox">
                 <span>
@@ -175,13 +175,13 @@ if (isset($_POST['ajouter_module'])) {
          </div>
          <form method="POST" class="myform" enctype="multipart/form-data">
              <div class="input-pass">
-                 <input type="text" name='chapitre_nom' class="box" placeholder='Entrer le nom de chapitre...'>
+                 <input type="text" name='chapitre_nom' class="box" placeholder='Entrer le nom de chapitre...' required>
              </div>    
              <div class="input-pass">
-                 <input type="file" name='contenu' class="box" >
+                 <input type="file" name='contenu' class="box" required>
              </div>
              <div class="input-pass">
-                 <input type="text" name='module_nom' class="box" placeholder='Entrer le nom de module...'>
+                 <input type="text" name='module_nom' class="box" placeholder='Entrer le nom de module...' required>
              </div> 
              <button type='submit' name='ajouter_cousre_item' class='btn main-btn'>ajouter</button>
           </form>

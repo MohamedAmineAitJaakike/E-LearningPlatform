@@ -21,11 +21,11 @@ function openTab(event, tabName)
         let boiteRecep = document.querySelector('.boite_recep');
         event.currentTarget.innerHTML = "Message";
 
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
+        const xhttp = new XMLHttpRequest(); // c'est pour créer un nouveau requête en arrière plan sans charger l'image
+        xhttp.onload = function() { // et on va prendre ici le résultat du chargement de la page passé en header
             boiteRecep.innerHTML = this.response;        
         }
-        xhttp.open("GET", "admin_message.php");
+        xhttp.open("GET", "admin_message.php"); // on envoie ce header vers cette page
         xhttp.send(); 
    }
    else if(event.currentTarget.innerText != "Générales")

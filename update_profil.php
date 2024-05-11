@@ -51,7 +51,7 @@ if(isset($_POST['modifier_profil'])) {
         transition: all 0.3s; /* Transition pour le survol */
         font-size: 10px; /* Taille de police */
     }
-    .input-pass input[type="text"] {
+    .input-pass input[type="text"], .input-pass input[type="password"] {
         width: 300px; /* Ajustez la largeur selon vos besoins */
         padding: 8px;
         border: 1px solid #ccc;

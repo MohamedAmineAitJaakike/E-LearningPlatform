@@ -28,6 +28,7 @@ session_destroy();
                <label for="password">VOTRE MOT DE PASSE <span>*</span></label>
                <input id="password" type="password" name="password" placeholder="Entrez votre mot de passe..." required maxlength="20" class="box">
 
+               <?php echo isset($_GET['error'])? "<span style=\"color: var(--red);\">E-mail ou mot de passe invalide.</span>" : ""; ?>
                <input type="submit" value="SE CONNECTER" name="send" class="btn main-btn" style="margin-left: 24%; margin-top: 4rem;">
             </form>
          </div>
