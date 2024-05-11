@@ -124,7 +124,7 @@ if(!est_progressif($conn,$courID,$nomCours)){
                                 echo "
                                 <div class=\"course-item-text\">
                                 <center><div class=\"cour-nom\">
-                                <a style=\"color:white;font-weight:bold;\" href=\"ressources_cours/$row[contenu].pdf\" ><h4 class=\"button-text title-content\">". $row['contenu']."
+                                <a style=\"color:white;font-weight:bold;\" href=\"/ressources_cours/$row[contenu].pdf\" ><h4 class=\"button-text title-content\">". $row['contenu']."
                                 <svg width=\"74\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 -2 25 24\" xmlns=\"http://www.w3.org/2000/svg\">
                                     <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"></path>
                                     <path d=\"m7 10 5 5 5-5\"></path>
