@@ -29,7 +29,7 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
     <div <?php if(isset($_GET['details'])) echo 'class="blurred"'; ?>>
         <section class="home-grid">
             <div class="sub-title">
-                <h4 class='title-content'>Nouveaux <span>cours</span></h4>
+                <h4 class='title-content'>Cours <span>disponibles</span></h4>
             </div>
             <?php if (!empty($cours)) { ?>
                 <?php foreach ($cours as $cour) {?>
@@ -77,7 +77,37 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
                                 </div>
                             </div>
                         </div>
-                    <?php }?>
+                    <?php }else{?>
+                        <div class="box">
+                            <div class="course-item">
+                                
+                                <div class="course-item-image">
+                                    <img src="./users_images/<?php echo $cour['prof_image']; ?>" width='100' alt="">
+                                </div>
+                                <div class="course-item-text">
+                                    <div class="cour-infos">
+                                        <div class="cour-nom" style="margin-bottom:3%;margin-left:3%;">
+                                            <h4><?php echo $cour['titre_cours'] ?></h4>
+                                            <div class="cour-prof">
+                                                <h4 class="prof-nom">Prof. &nbsp;<?php echo $cour['nom_proprietaire'] ?></h4>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="display:flex;flex-direction:row;column-gap:2%;">
+                                            <span style="color:var(--bleu);white-space:nowrap;margin-right:2%;margin-top:2%;font-size:2rem"><em>Deja inscrit!</em></span>
+                                            <form  method="GET">
+                                                <div class="btn-incri">
+                                                    <button class="btn delete-btn" name="details">Details</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
+                        <?php }?>
                 <?php }?>
             <?php } else { ?>
                 <div class="sub-title"><center><p class='title-content'>Pas de cours disponibles pour le moment.</p></center></div>
@@ -161,7 +191,39 @@ $cours = $result->fetch_all(MYSQLI_ASSOC);
                             </div>
                         </div>
                         </div>
-            <?php }?>
+            <?php }else{?>
+                <div class="box">
+                            <div class="course-item">
+                                
+                                <div class="course-item-image">
+                                    <img src="./users_images/<?php echo $cour['prof_image']; ?>" width='100' alt="">
+                                </div>
+                                <div class="course-item-text">
+                                    <div class="cour-infos">
+                                        <div class="cour-nom" style="margin-bottom:3%;margin-left:3%;">
+                                            <h4><?php echo $cour['titre_cours'] ?></h4>
+                                            <div class="cour-prof">
+                                                <h4 class="prof-nom">Prof. &nbsp;<?php echo $cour['nom_proprietaire'] ?></h4>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="display:flex;flex-direction:row;column-gap:2%;">
+                                            <span style="color:var(--bleu);white-space:nowrap;margin-right:2%;margin-top:2%;font-size:2rem"><em>Deja inscrit!</em></span>
+                                            <form  method="GET">
+                                                <div class="btn-incri">
+                                                    <button class="btn delete-btn" name="details">Details</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+
+
+
+                <?php }?>
         <?php
             }
         }
