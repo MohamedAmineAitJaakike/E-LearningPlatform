@@ -14,7 +14,7 @@ if($condition){
 // Récupérer les cours depuis la base de données
 $sql = "SELECT module.titre AS titre_cours,utilisateurs.image ,utilisateurs.nom AS nom_proprietaire,courssuivis.idCours
 FROM courssuivis
-JOIN module ON courssuivis.idCours = module.IdParent
+JOIN module ON courssuivis.idCours = module.id
 JOIN utilisateurs ON module.proprietaire = utilisateurs.id
 WHERE courssuivis.idEtudiant = ?;";
 $stmt = $conn->prepare($sql);

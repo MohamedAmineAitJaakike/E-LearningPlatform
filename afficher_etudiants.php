@@ -22,7 +22,7 @@ if (isset($_POST['afficher_etudiants'])) {
         JOIN 
             courssuivis cs ON u.id = cs.idEtudiant
         JOIN 
-            module m ON cs.idCours = m.IdParent
+            module m ON cs.idCours = m.id
         WHERE 
             u.role = 'etudiant'
         GROUP BY 
@@ -40,7 +40,7 @@ if (isset($_POST['afficher_etudiants'])) {
             echo "<p>{$row['etudiants']}</p>";
         }
     } else {
-        echo "<p>Aucun étudiant trouvé.</p>";
+        echo "<center><p>Aucun étudiant trouvé.</p></center>";
     }
 }
 
@@ -48,7 +48,7 @@ if (isset($_POST['afficher_etudiants'])) {
 //sql code pour appliquer la requete
 $sql = "SELECT u.nom, u.prenom, u.mail FROM utilisateurs u
         INNER JOIN courssuivis cs ON u.id = cs.idEtudiant
-        INNER JOIN module m ON cs.idCours = m.IdParent
+        INNER JOIN module m ON cs.idCours = m.id
         WHERE m.proprietaire = ?";
 
 // Préparation de la requête
@@ -93,7 +93,7 @@ if ($stmt) {
            `;
         }
     } else {
-        echo $etus="Aucun étudiant suivi votre cours.";
+        echo $etus="<center><p>Aucun étudiant ne suit votre cours.</p></center>";
     }
 }
 ?>

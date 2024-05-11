@@ -423,6 +423,44 @@ hr{
    background-color: var(--black);
    color: var(--white);
 } */
+/* ------------------------cours style----------------------- */
+.course-list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   gap: 20px; /* Espace entre les cartes de cours */
+}
+
+.course-card {
+   background-color: #f9f9f9;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   padding: 20px;
+   width: calc(33.33% - 20px); /* Largeur de la carte de cours (3 cartes par ligne) */
+}
+
+.course-title {
+   font-size: 2em;
+   margin-bottom: 10px;
+   color: var(--main-color);
+}
+
+.course-details {
+   font-size: 0.9em;
+}
+
+.course-details strong {
+   font-size: 2.2rem;
+   font-weight: bold;
+   margin-right: 5px;
+   color: var(--black);
+}
+.course-details span {
+   font-size: 2.1rem;
+   color: var(--under-black);
+   
+}
+ 
 .sub-title{
    text-align: center;
    margin-bottom: 2rem;
@@ -614,7 +652,7 @@ hr{
    border-right: var(--border);
    padding-inline: 12px;
    padding-top: 29px;
-   z-index: 1200;
+   z-index: 120;
    animation: leftToRight 1s ease-in-out;
 }
 
@@ -726,7 +764,20 @@ hr{
 .myform .input-pass input{
    background-color: var(--light-bg);
    border: 1px solid var(--under-black);
- }
+}
+.myform .isProgBox{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   color: var(--bleu);
+   font-size: 1.5rem;
+   margin: 3rem 0rem;
+}
+
+.myform .isProgBox span input{
+   width: 1.8rem;
+   height: 1.8rem;
+}
   
 /* separatooooooooooooooor */
 /* .box {
@@ -734,14 +785,19 @@ hr{
    padding: 4px 8px;
    border-radius: 5px;
 } */
-
+.center{
+   display: flex;
+   justify-content: center;
+}
 .course-item {
    display: flex;
+   align-items: center;
    gap: 10px;
    padding: 10px 6px;
    background-color:var(--white);
    border-radius:10px;
    margin-left:1%;
+   margin-bottom: 1rem;
 }
 
 .course-item-image {
@@ -892,6 +948,11 @@ hr{
    width: 100%;
    height: 50rem;
 }
+.etudiants_container{
+    width: 50%;
+   margin-inline: auto;
+}
+ 
 
 .about .row .content {
    flex: 1 1 40rem;
@@ -1777,57 +1838,6 @@ hr{
    color: var(--main-color);
 }
 
-.cookie-banner {
-   position: fixed;
-   bottom: 0;
-   left: 0;
-   width: 100%;
-   background-color: #f1f1f1;
-   padding: 10px;
-   text-align: center;
-   font-weight:bold;
-   font-size:15px;
-}
-
-.cookie-btn {
-   background-color: #fc8021;
-   color: white;
-   padding: 10px 20px;
-   border: none;
-   cursor: pointer;
-   border-radius: 5px;
-}
-
-.cookie-btn:hover {
-   background-color: #e66000;
-}
-/* ---*/
-
-table {
-   width: 100%;
-   border-collapse: collapse;
-   color: var(--black);
-}
-
-th, td {
-   padding: 8px;
-   text-align: center;
-   border-bottom: 1px solid  #e66000;
-   color:var(--black);
-   white-space: nowrap;
-   justify-content: center;
-}
-
-th {
-   background-color:  #e66000;
-}
-
-tbody tr:hover{
-   background-color:  var(--main-color); 
-   color: white;
-   transition: background-color 3s ease;
-}
-
 @media (max-width:1200px) {
 
    section {
@@ -2025,4 +2035,113 @@ tbody tr:hover{
    to{
       right: 0px;
    }
+}
+
+.cookie-banner {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   background-color: var(--black);
+   padding: 10px;
+   text-align: center;
+   font-weight:bold;
+   font-size:15px;
+}
+
+.cookie-btn {
+   background-color: #fc8021;
+   color: var(--black);
+   padding: 10px 20px;
+   border: none;
+   cursor: pointer;
+   border-radius: 5px;
+}
+
+.cookie-btn:hover {
+   background-color: #e66000;
+}
+/* ---*/
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom:20%;
+   color: var(--black);
+}
+
+th, td {
+   padding: 8px;
+   text-align: center;
+   border-bottom: 1px solid  #e66000;
+   color:var(--black);
+   white-space: nowrap;
+   justify-content: center;
+}
+
+th {
+   background-color:  #e66000;
+}
+
+tbody tr:hover {
+   background-color:  #e66000;
+   
+}
+.dropdown-search-bar {
+   position: absolute;
+   top: 100%;
+   width: 35rem;
+   min-height:50px;
+   left:15%;
+   background-color: var(--white);
+   border: 1px solid #ccc;
+   border-top: none;
+   border-radius: 0 0 5px 5px;
+   z-index: 10000;
+   display: none; /* Par défaut, le menu déroulant est caché */
+   flex-direction:column;
+   max-height: 500px; /* Hauteur maximale du menu déroulant */
+   overflow-y: auto; /* Activer le défilement si nécessaire */
+}
+
+/* Style pour les éléments de la liste déroulante */
+.dropdown-search-bar ul {
+list-style-type: none;
+padding: 0;
+margin: 0;
+font-weight:bold;
+font-size:medium;
+color:var(--black);
+
+}
+
+.dropdown-search-bar li {
+padding: 10px;
+cursor: pointer;
+text-align: left;
+text-wrap:nowrap;
+}
+
+.dropdown-search-bar li:hover {
+background-color: #808080;
+}
+.bubble {
+   max-width: 150px; /* Modifier la largeur selon vos besoins */
+   background-color: #fc3434;
+   padding: 10px;
+   border-radius: 10px;
+   margin-bottom: 15px;
+   text-align: center;
+   font-weight: bold;
+}
+
+/* Style pour la liste déroulante */
+#destinataire {
+   width: 200px; /* Largeur de la liste déroulante */
+}
+
+/* Style pour la textarea */
+#contenu {
+   width: 200px; /* Largeur de la textarea */
+   height: 100px; /* Hauteur de la textarea */
 }

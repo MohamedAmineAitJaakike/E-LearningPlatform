@@ -46,5 +46,14 @@
         exit();
     
     }
-
+?>
+<?php 
+ if(isset($_GET['action']) && isset($_GET['message_id'])){
+    header("Location: home_etudiant.php");
+    $id = $_GET['message_id'];
+    $q = $conn->prepare("UPDATE message SET est_lu = 1 WHERE id = ?");
+    $q->bind_param("i", $id);
+    $q->execute();
+    header("Location: home_etudiant.php");
+}
 ?>
