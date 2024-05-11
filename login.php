@@ -20,6 +20,7 @@ session_destroy();
    <?php include('./includes/navAccueil.php') ?>
    <div class="home">
       <div class="homeContent">
+      <div id="incorrect" style="display:none;position:relative;color:red;white-space:nowrap;top:30%;left:24%;font-size:large">Mot de passe ou email Incorrect !  Veuillez réessayer...</div>
          <div class="form-container" style="margin-top: 12rem;">
             <form action="process/process_login.php" method="POST">
                <h3>SE CONNECTER</h3>
@@ -35,9 +36,14 @@ session_destroy();
       <div class="image">
          <img src="images/online.png" alt="home-image">
       </div>
-   </div>
-    
+  
+    <?php if(isset($_GET['incorrect'])){?>
+      <script>
+         document.getElementById('incorrect').style.display='flex';
+      </script>
+       <?php }?>
    <!-- custom js file link  -->
+   </div>
    <script src="js/script.js"></script>
 </body>
 </html>
