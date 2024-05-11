@@ -96,6 +96,38 @@ section {
    z-index: 1000;
    
 }
+
+/* Styles pour le bouton "Envoyer" */
+.envoyer-btn {
+   padding: 3px 6px; /* Réduisez la marge intérieure pour un bouton plus petit */
+   background-color: #FF5733; /* Couleur orange foncé */
+   border: 2px solid #FF5733; /* Bordure orange foncé */
+   color: white; /* Texte blanc */
+   border-radius: 5px; /* Coins arrondis */
+   font-size: 12px; /* Taille de police réduite */
+   margin-top: 5px; /* Espacement entre la zone de texte et le bouton */
+ }
+
+ .custom-label {
+   font-family: Arial, sans-serif;
+   font-size: 16px;
+   color: white; /* Couleur du texte en blanc */
+   font-weight: bold; /* Gras */
+}
+
+.title-content span {
+   font-family: Arial, sans-serif;
+   font-size: 18px;
+   font-weight: bold;
+   color: #333; /* Couleur du texte */
+}
+
+.space-between {
+   margin-bottom: 20px;  
+}
+
+ 
+ 
 .message-container input{
    background-color: transparent;
    font-size: 1.6rem;
@@ -368,6 +400,7 @@ hr{
    position: absolute;
    right: 2rem;
 }
+
  
 
 /* 
@@ -2127,9 +2160,9 @@ background-color: #808080;
 }
 .bubble {
    max-width: 150px; /* Modifier la largeur selon vos besoins */
-   background-color: #fc3434;
+   background-color: #f57208;
    padding: 10px;
-   border-radius: 10px;
+   border-radius: 10px;s
    margin-bottom: 15px;
    text-align: center;
    font-weight: bold;

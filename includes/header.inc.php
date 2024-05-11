@@ -86,88 +86,98 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
             <div>
                <div class="sub-title">
                   <div class="title-content">
-                     <span>Boite D'envoi</span>
+                     <span>Laissez votre message</span>
                   </div> 
                </div>
                <!-- start-->
                <?php if(basename($_SERVER['PHP_SELF'])=='home_etudiant.php'){?>
                <div class="center-content">
                   <!-- Formulaire de composition de message -->
-                  <form action="traitement.php" method="POST" id="formComposeMessage" style="display: flex;">
-                        <div class="bubble-container">
-                           <div class="bubble">Destinataire:</div>
-                           <select id="destinataire" name="destinataire">
-                              <?php
-                              // Récupérer la liste des professeurs depuis la base de données
-                              $sql = "SELECT u.id, u.nom, u.prenom ,m.titre
-                                    FROM utilisateurs u
-                                    INNER JOIN module m ON u.id = m.proprietaire
-                                    WHERE u.role = 'professeur'";
+<form action="traitement.php" method="POST" id="formComposeMessage">
+      <div class="bubble-container space-between">
+    <div class="bubble custom-label">Destinataire</div>
+        <select id="destinataire" name="destinataire">
+            <?php
+            // Récupérer la liste des professeurs depuis la base de données
+            $sql = "SELECT u.id, u.nom, u.prenom ,m.titre
+                    FROM utilisateurs u
+                    INNER JOIN module m ON u.id = m.proprietaire
+                    WHERE u.role = 'professeur'";
 
-                              $result = $conn->query($sql);
+            $result = $conn->query($sql);
 
-                              // Afficher les options de la liste déroulante
-                              if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                       echo "<option value='" . $row['id'] . "'>" . $row['prenom'] . " " . $row['nom'] ."  De : [ ".$row['titre']." ]". "</option>";
-                                    }
-                              }
-                              ?>
-                           </select>
-                        </div>
+            // Afficher les options de la liste déroulante
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['id'] . "'>" . $row['prenom'] . " " . $row['nom'] ."  De : [ ".$row['titre']." ]". "</option>";
+                }
+            }
+            ?>
+        </select>
+    </div>
 
-                        <div class="spacer"></div> <!-- Ajout d'un espace entre les deux bulles -->
+    <div class="spacer"></div> <!-- Ajout d'un espace entre les deux bulles -->
 
-                        <div class="bubble-container">
-                           <div class="bubble">Contenu:</div>
-                           <textarea id="contenu" name="contenu" rows="4" cols="50"></textarea>
-                        </div>
-                        <input type="submit" value="Envoyer">
-                  </form>
+    <div class="bubble-container space-between">
+      <div class="bubble custom-label">Contenu</div>
+        <textarea id="contenu" name="contenu" rows="4" cols="50"></textarea>
+    </div>
+    
+    <div class="bubble-container space-between">
+        <input type="submit" value="Envoyer" class="envoyer-btn"> <!-- Bouton "Envoyer" -->
+    </div>
+</form>
+
                </div>
                <?php }else if (basename($_SERVER['PHP_SELF'])=='home_professeur.php'){?>
                   <div class="center-content">
                   <!-- Formulaire de composition de message -->
-                  <form action="traitement.php" method="POST" id="formComposeMessagee" style="display: flex;">
-                        <div class="bubble-container">
-                           <div class="bubble">Destinataire:</div>
-                           <select id="destinataire" name="destinataire">
-                              <?php
-                              // Récupérer la liste des professeurs depuis la base de données
-                              $sql = "SELECT  u.id, u.nom, u.prenom,m.titre
-                                       FROM utilisateurs u
-                                       INNER JOIN courssuivis cs ON u.id = cs.idEtudiant
-                                       INNER JOIN module m ON cs.idCours = m.id
-                                       WHERE m.proprietaire = $_SESSION[userID]";
+<form action="traitement.php" method="POST" id="formComposeMessage">
+     <div class="bubble-container space-between">
+     <div class="bubble custom-label">Destinataire</div>
+        <select id="destinataire" name="destinataire">
+            <?php
+            // Récupérer la liste des professeurs depuis la base de données
+            $sql = "SELECT u.id, u.nom, u.prenom ,m.titre
+                    FROM utilisateurs u
+                    INNER JOIN module m ON u.id = m.proprietaire
+                    WHERE u.role = 'professeur'";
 
-                              $result = $conn->query($sql);
+            $result = $conn->query($sql);
 
-                              // Afficher les options de la liste déroulante
-                              if ($result->num_rows > 0) {
-                                    echo "<option value=0>Faire un Broadcast</option>";
-                                    while ($row = $result->fetch_assoc()) {
-                                       echo "<option value='" . $row['id'] . "'>" . $row['prenom'] . " " . $row['nom'] ."[ De : ".$row['titre']."]"."</option>";
-                                    }
-                              }
-                              ?>
-                           </select>
-                        </div>
+            // Afficher les options de la liste déroulante
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['id'] . "'>" . $row['prenom'] . " " . $row['nom'] ."  De : [ ".$row['titre']." ]". "</option>";
+                }
+            }
+            ?>
+        </select>
+    </div>
 
-                        <div class="spacer"></div> <!-- Ajout d'un espace entre les deux bulles -->
+    <div class="spacer"></div> <!-- Ajout d'un espace entre les deux bulles -->
 
-                        <div class="bubble-container">
-                           <div class="bubble">Contenu:</div>
-                           <textarea id="contenu" name="contenu" rows="4" cols="50"></textarea>
-                        </div>
-                        <input type="submit" value="Envoyer">
-                  </form>
+    <div class="bubble-container space-between">
+    <div class="bubble custom-label">Contenu</div>
+        <textarea id="contenu" name="contenu" rows="4" cols="50"></textarea>
+    </div>
+    
+    <div class="bubble-container space-between">
+        <input type="submit" value="Envoyer" class="envoyer-btn"> <!-- Bouton "Envoyer" -->
+    </div>
+</form>
+
                </div>
 
                   <?php }?>
                <!-- end -->
             </div>
+
+            <div class="space-between">
                <button class="main-btn" onclick="hidePopUp();document.getElementById('boiteEnvoi').style.display='none';document.getElementById('msg1').style.display='flex';">Fermer</button>
-         </div>
+            </div>
+
+            </div>
       </div>
       <!-- Pour l'icone message: affichage message-->
       <div class="popUp" style="display: none;z-index:9999999;" id="affichage">
@@ -193,7 +203,11 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
             <br>
             <br>
             <div>
+               
+            <div class="space-between">
                <button class="main-btn" onclick="hidePopUp();document.getElementById('affichage').style.display='none';document.getElementById('msg1').style.display='flex';markAsRead(document.getElementById('id').value)">Fermer</button>
+               </div>
+
             </div>
          </div>
          
@@ -264,7 +278,11 @@ $workdir = (!$is_admin_register && !$is_adminLogin)? "." : "..";
             <div>
                <?php $mesgIDsString = implode(',', $mesgIDs); ?>
                <button class="delete-btn" onclick="window.location.href='/etudiants_messages.php?mesgID=<?= $mesgIDsString?>';">Marquer le tout comme lu</button>
-               <button class="main-btn" onclick="hidePopUp();document.getElementById('msg').style.display='none';document.getElementById('msg1').style.display='flex';">Fermer</button>
+               
+               <div class="space-between">
+                 <button class="main-btn" onclick="hidePopUp();document.getElementById('msg').style.display='none';document.getElementById('msg1').style.display='flex';">Fermer</button>
+               </div>
+
             </div>
          </div>
       </div>
