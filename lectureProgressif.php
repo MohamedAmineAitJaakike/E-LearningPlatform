@@ -31,6 +31,7 @@ include('./includes/side_profile.inc.php');
 
 </div>
 <div id="pdfContainer" style="margin-left:25%"></div>
+<!-- Pour la bibliotheque pdf.js qui permettra la lecture personnalisee sans option de telechargement-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
 
 <script>
@@ -67,7 +68,7 @@ include('./includes/side_profile.inc.php');
     const contenu = urlParams.get('contenu');
 
     // Construire le chemin vers le fichier PDF en fonction du nom du contenu
-    const pdfPath = `./ressources_cours/${contenu}.pdf`;
+    const pdfPath = `./ressources_cours/${contenu}`;
 
     // Charger le fichier PDF
     pdfjsLib.getDocument(pdfPath).promise.then(function(pdf) {

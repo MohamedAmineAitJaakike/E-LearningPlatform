@@ -11,7 +11,7 @@ if(isset($_GET['courID'])) {
     $stmt->bind_param("i", $courID);
     $stmt->execute();
     $result = $stmt->get_result();
-if(est_progressif($conn,$courID,$nomCours)){
+if(!est_progressif($conn,$courID,$nomCours)){
     if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             echo "
@@ -25,11 +25,12 @@ if(est_progressif($conn,$courID,$nomCours)){
                                 </div>
                                 <div class=\"cour-infos\" style=\"column-gap:2%;\">
                                     <div class=\"center_div\">
-                                            <button class=\"btn main-btn\">Lecture</button>
+                                        <button class=\"btn main-btn\" onclick=\"window.open('/ressources_cours/$row[contenu]', '_blank')\">Lecture</button>
+
                                         </a>
                                     </div> 
                                     <div class=\"center_div\" >
-                                        <button class=\"btn delete-btn\" onclick=\"alert('hey')\">Done</button>
+                                        <button class=\"btn delete-btn\" onclick=\"alert('hey,good job!!')\">Done</button>
                                     </div> 
                                 </div>
                             </div>
@@ -123,7 +124,7 @@ if(est_progressif($conn,$courID,$nomCours)){
                                 echo "
                                 <div class=\"course-item-text\">
                                 <center><div class=\"cour-nom\">
-                                <a style=\"color:white;font-weight:bold;\" href=\"ressources_cours/$row[contenu].pdf\" ><h4 class=\"button-text title-content\">". $row['contenu']."
+                                <a style=\"color:white;font-weight:bold;\" href=\"ressources_cours/$row[contenu]\" ><h4 class=\"button-text title-content\">". $row['contenu']."
                                 <svg width=\"74\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" viewBox=\"0 -2 25 24\" xmlns=\"http://www.w3.org/2000/svg\">
                                     <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"></path>
                                     <path d=\"m7 10 5 5 5-5\"></path>
