@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://media.giphy.com/media/2gtoSIzdrSMFO/giphy.gif" width="200"/>
+  <img src="https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg" width="600"/>
   <h1>📚 Plateforme d'Apprentissage en Ligne 📚</h1>
   <p>
     <img src="https://img.shields.io/badge/Language-PHP%2C%20HTML%2C%20CSS%2C%20JavaScript-blue" alt="Language">
