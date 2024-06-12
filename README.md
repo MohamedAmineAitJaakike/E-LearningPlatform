@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://images.unsplash.com/photo-1602440252480-5d2c37291437" width="600"/>
+  <img src="[https://images.unsplash.com/photo-1602440252480-5d2c37291437](https://www.bing.com/images/search?view=detailV2&ccid=tQWfOXWe&id=D0C45B8FBD5FE4602C797D8391CEB63879ACF090&thid=OIP.tQWfOXWe0ZGT913v4OC4bAHaD8&mediaurl=https%3a%2f%2fmedia.licdn.com%2fdms%2fimage%2fD4D12AQEwYz74Mf7XKA%2farticle-cover_image-shrink_600_2000%2f0%2f1677431973169%3fe%3d2147483647%26v%3dbeta%26t%3dXAXpJxyem6V0COVr2qwSxPLctoigzjSXhAa4PSHczMI&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.b5059f39759ed19193f75defe0e0b86c%3frik%3dkPCseTi2zpGDfQ%26pid%3dImgRaw%26r%3d0&exph=400&expw=750&q=gif+dynamique+d%27un+site+d+education&simid=608052621246136899&FORM=IRPRST&ck=3DCADBF06397E7A21C6389C83EB41CD9&selectedIndex=5&itb=0)" width="600"/>
   <h1>📚 Plateforme d'Apprentissage en Ligne 📚</h1>
   <p>
     <img src="https://img.shields.io/badge/Language-PHP%2C%20HTML%2C%20CSS%2C%20JavaScript-blue" alt="Language">
